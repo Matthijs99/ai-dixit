@@ -103,6 +103,20 @@ def test_openai_adapter_returns_card_id_on_valid_response():
     assert chosen in {11, 22}
 
 
+def test_grok_adapter_returns_card_id_on_valid_response():
+    from dixit_ai.players.grok import GrokPlayer
+
+    hand = [Card(id=11), Card(id=22)]
+    fake_choice = MagicMock(message=MagicMock(content='{"card": "A"}'))
+    fake_resp = MagicMock(choices=[fake_choice])
+    fake_client = MagicMock()
+    fake_client.chat.completions.create.return_value = fake_resp
+
+    player = GrokPlayer(client=fake_client)
+    chosen = player.pick_for_clue(hand, "x")
+    assert chosen in {11, 22}
+
+
 def test_gemini_adapter_returns_card_id_on_valid_response(monkeypatch):
     import sys
     from dixit_ai.players.gemini import GeminiPlayer
