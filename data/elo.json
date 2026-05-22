@@ -1,0 +1,10 @@
+{
+  "updated_at": "2026-05-22T00:00:00Z",
+  "models": {
+    "claude-opus-4-7":  {"display_name": "Claude Opus 4.7",  "org": "Anthropic", "rating": 1500, "games": 0, "wins": 0},
+    "gpt-5":            {"display_name": "GPT-5",            "org": "OpenAI",    "rating": 1500, "games": 0, "wins": 0},
+    "gemini-2.5-pro":   {"display_name": "Gemini 2.5 Pro",   "org": "Google",    "rating": 1500, "games": 0, "wins": 0},
+    "grok-4":           {"display_name": "Grok 4",           "org": "xAI",       "rating": 1500, "games": 0, "wins": 0},
+    "pixtral-large":    {"display_name": "Pixtral Large",    "org": "Mistral",   "rating": 1500, "games": 0, "wins": 0}
+  }
+}
