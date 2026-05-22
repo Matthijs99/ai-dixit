@@ -47,7 +47,6 @@ class PickMove(BaseModel):
 
 class VoteMove(BaseModel):
     card: str
-    reasoning: str | None = Field(default=None, max_length=200)
 
 
 # ----- Labeling -----
@@ -294,13 +293,26 @@ def _schema_for_vote(labels: list[str], own_label: str) -> dict:
     allowed = [L for L in labels if L != own_label]
     return {
         "type": "object",
-        "properties": {
-            "card": {"type": "string", "enum": allowed},
-            "reasoning": {"type": "string", "maxLength": 200},
-        },
+        "properties": {"card": {"type": "string", "enum": allowed}},
         "required": ["card"],
         "additionalProperties": False,
     }
+
+
+def strip_for_gemini(value):
+    """Gemini's response_schema doesn't accept `additionalProperties`.
+
+    Recursively remove the field so the schema is accepted.
+    """
+    if isinstance(value, dict):
+        return {
+            k: strip_for_gemini(v)
+            for k, v in value.items()
+            if k != "additionalProperties"
+        }
+    if isinstance(value, list):
+        return [strip_for_gemini(x) for x in value]
+    return value
 
 
 def _loose_parse(raw: str) -> dict:

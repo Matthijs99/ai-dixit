@@ -38,5 +38,5 @@ def voter_user(labels: list[str], clue: str, own_label: str) -> str:
         f"Here are the face-up cards:\n{label_lines}\n\n"
         f"You may NOT vote for label {own_label} — that is your own card. "
         f"Vote for the card you think is the storyteller's.\n\n"
-        f"Respond with JSON: {{\"card\": \"<label>\", \"reasoning\": \"<optional short text>\"}}"
+        f"Respond with JSON: {{\"card\": \"<label>\"}}"
     )

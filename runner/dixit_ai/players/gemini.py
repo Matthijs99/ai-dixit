@@ -7,7 +7,7 @@ from typing import Any
 
 from google import genai
 
-from dixit_ai.players.base import BaseAdapter
+from dixit_ai.players.base import BaseAdapter, strip_for_gemini
 
 MODEL = "gemini-2.5-pro"
 
@@ -41,7 +41,7 @@ class GeminiPlayer(BaseAdapter):
         config = GenerateContentConfig(
             system_instruction=system,
             response_mime_type="application/json",
-            response_schema=schema,
+            response_schema=strip_for_gemini(schema),
         )
 
         resp = self.client.models.generate_content(
