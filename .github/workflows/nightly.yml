@@ -1,12 +1,12 @@
-name: weekly-game
+name: nightly-game
 
 on:
   schedule:
-    # Saturday 22:00 UTC = Sunday 00:00 NL (CEST/summer)
-    # Saturday 23:00 UTC = Sunday 00:00 NL (CET/winter)
+    # 22:00 UTC = midnight Amsterdam (CEST/summer)
+    # 23:00 UTC = midnight Amsterdam (CET/winter)
     # The Amsterdam-hour guard in runner.main() ensures only one runs.
-    - cron: "0 22 * * 6"
-    - cron: "0 23 * * 6"
+    - cron: "0 22 * * *"
+    - cron: "0 23 * * *"
   workflow_dispatch: {}
 
 jobs:

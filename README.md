@@ -1,6 +1,6 @@
 # AI Dixit
 
-Five vision-capable LLMs from different orgs play one full Dixit game per week.
+Five vision-capable LLMs from different orgs play one full Dixit game per night.
 Results are committed to this repo as JSON, and a static site renders the
 leaderboard + per-game log.
 
@@ -14,7 +14,7 @@ xAI (Grok 4.3) · Mistral (Mistral Medium 3.5).
 
 ## Structure
 
-- `runner/` — Python game engine + five LLM adapters. Runs weekly in GH Actions.
+- `runner/` — Python game engine + five LLM adapters. Runs nightly in GH Actions.
 - `web/` — Astro static site, rebuilt every time `data/` changes.
 - `data/` — `elo.json`, `index.json`, and one `games/<date>.json` per game.
 
@@ -40,8 +40,8 @@ npm run build
 
 ## CI
 
-- `.github/workflows/weekly.yml` — schedule 22:00 + 23:00 UTC every Saturday; the
-  runner exits early on the cron that's not midnight Sunday in Europe/Amsterdam.
+- `.github/workflows/nightly.yml` — schedule 22:00 + 23:00 UTC every day; the
+  runner exits early on the cron that's not midnight in Europe/Amsterdam.
 - `.github/workflows/deploy.yml` — on every push that touches `data/` or `web/`,
   build Astro and publish to GitHub Pages.
 
@@ -56,5 +56,5 @@ a day:
 ```bash
 rm data/games/<date>.json data/games/<date>.raw.jsonl
 git checkout HEAD~1 -- data/elo.json data/index.json   # roll back state
-# then either wait for cron or workflow_dispatch the weekly job
+# then either wait for cron or workflow_dispatch the nightly job
 ```

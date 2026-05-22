@@ -1,6 +1,12 @@
 # brainstorm companion (Superpowers)
 .superpowers/
 
+# playwright-cli scratch (per-session snapshots, screenshots, console logs)
+.playwright-cli/
+
+# project-local Claude Code config (not shared across machines)
+.claude/
+
 # Python
 __pycache__/
 *.py[cod]
