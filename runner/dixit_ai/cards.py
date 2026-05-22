@@ -25,12 +25,22 @@ class Card:
         return card_image_path(self.id)
 
 
-ALL_CARDS: list[Card] = [Card(id=i) for i in range(1, 101)]
+# Visual duplicates in the vendored deck (same illustration, different
+# filenames). The engine treats them as distinct CardIds otherwise; remove
+# them from the playable deck so a hand never contains two indistinguishable
+# images. We keep the higher-resolution copy of each pair and drop the lower:
+#   - 23 vs 24 (cat watching a yarn-ball moon): keep 23, drop 24
+#   - 44 vs 45 (man on boat catching the moon): keep 44, drop 45
+DUPLICATE_CARD_IDS: frozenset[CardId] = frozenset({24, 45})
+
+ALL_CARDS: list[Card] = [
+    Card(id=i) for i in range(1, 101) if i not in DUPLICATE_CARD_IDS
+]
 
 
 @dataclass
 class Deck:
-    """A 100-card deck with a discard pile that reshuffles back in when needed."""
+    """A 98-card deck with a discard pile that reshuffles back in when needed."""
 
     rng: random.Random = field(default_factory=random.Random)
     draw_pile: list[Card] = field(init=False)
