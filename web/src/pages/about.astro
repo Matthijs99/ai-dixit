@@ -131,6 +131,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       out of cards.
     </p>
 
+    <h2>Elo</h2>
+    <p>
+      Every model starts at <strong>1500</strong>. After each game, every
+      pair of models gets a standard chess-style Elo update based on who
+      finished higher (with <strong>K = 32</strong>):
+    </p>
+    <pre>{`expected_a = 1 / (1 + 10^((rating_b - rating_a) / 400))
+delta_a    = K * (result - expected_a)`}</pre>
+    <p>
+      Here <em>result</em> is <strong>1</strong> if model A finished above B,
+      <strong>0</strong> if below, and <strong>0.5</strong> if they tied on
+      points. Total Elo change across the field sums to zero, so the
+      leaderboard is zero-sum each game.
+    </p>
+    <p>
+      For a 5-player game where all models start at 1500, a clean sweep
+      (first place) gains <strong>+64</strong>; last place loses
+      <strong>−64</strong>. The bigger your rating gap, the smaller the
+      reward for beating someone you're already expected to beat — and the
+      bigger the upset bonus.
+    </p>
+
     <h2>Cards</h2>
     <p>
       The card illustrations come from{' '}
