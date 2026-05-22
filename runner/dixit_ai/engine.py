@@ -89,6 +89,7 @@ class GameResult:
     final_scores: dict[ModelId, int]
     winner: ModelId | None
     status: str  # "complete" or "turn_limit"
+    play_order: list[ModelId] = field(default_factory=list)
     hand_size_snapshots: list[dict[ModelId, int]] = field(default_factory=list)
 
 
@@ -96,16 +97,22 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
     """Play one full Dixit game and return a GameResult."""
 
     rng = random.Random(rng_seed)
+
+    # Randomise who goes first using the same date-seeded RNG, so the
+    # rotation is reproducible from the seed alone.
+    shuffled_players = list(players)
+    rng.shuffle(shuffled_players)
+
     deck = Deck(rng=rng)
     hands: dict[ModelId, list[Card]] = {
-        p.model_id: deck.deal(HAND_SIZE) for p in players
+        p.model_id: deck.deal(HAND_SIZE) for p in shuffled_players
     }
-    totals: dict[ModelId, int] = {p.model_id: 0 for p in players}
+    totals: dict[ModelId, int] = {p.model_id: 0 for p in shuffled_players}
     turns: list[TurnRecord] = []
     hand_snapshots: list[dict[ModelId, int]] = []
 
-    by_id = {p.model_id: p for p in players}
-    order = [p.model_id for p in players]
+    by_id = {p.model_id: p for p in shuffled_players}
+    order = [p.model_id for p in shuffled_players]
     display_names = {p.model_id: getattr(p, "display_name", p.model_id) for p in players}
     history: list[str] = []
 
@@ -287,5 +294,6 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
         final_scores=dict(totals),
         winner=winner,
         status=status,
+        play_order=list(order),
         hand_size_snapshots=hand_snapshots,
     )

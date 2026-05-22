@@ -175,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
         "started_at": started,
         "ended_at": ended,
         "seed": game_id,
-        "players": [p.model_id for p in players],
+        "players": result.play_order,
         "turns": [dataclasses.asdict(t) for t in result.turns],
         "final_scores": result.final_scores,
         "elo_before": elo_before,

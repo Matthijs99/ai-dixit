@@ -114,11 +114,32 @@ def test_hands_stay_at_size_six():
 
 
 def test_storyteller_rotates():
-    players = make_random_players(3)  # 3 players, easier to verify rotation
+    players = make_random_players(3)
     result = play_game(players, rng_seed="test")
-    expected_storytellers = [players[i % 3].model_id for i in range(len(result.turns))]
+    n = len(players)
+    expected = [result.play_order[i % n] for i in range(len(result.turns))]
     actual = [t.storyteller for t in result.turns]
-    assert actual == expected_storytellers
+    assert actual == expected
+
+
+def test_play_order_is_shuffle_of_input():
+    players = make_random_players(5)
+    result = play_game(players, rng_seed="shuffle-test")
+    assert set(result.play_order) == {p.model_id for p in players}
+    assert len(result.play_order) == len(players)
+
+
+def test_play_order_is_deterministic_with_seed():
+    a = play_game(make_random_players(5), rng_seed="x").play_order
+    b = play_game(make_random_players(5), rng_seed="x").play_order
+    assert a == b
+
+
+def test_play_order_changes_with_seed():
+    # Two seeds should very likely produce different orderings.
+    a = play_game(make_random_players(5), rng_seed="seed-a").play_order
+    b = play_game(make_random_players(5), rng_seed="seed-b").play_order
+    assert a != b
 
 
 def test_face_up_order_includes_storyteller_card():
