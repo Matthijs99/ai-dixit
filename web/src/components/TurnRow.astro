@@ -26,11 +26,18 @@ const isSkipped = turn.clue === null;
         const isStoryteller = cid === turn.storyteller_card;
         return (
           <div class="card" data-storyteller={isStoryteller}>
-            <CardImage cardId={cid} />
-            <div class="meta">
-              <div class="owner">{owner}</div>
-              {votes.length > 0 && <div class="votes">votes: {votes.join(', ')}</div>}
-              {isStoryteller && <div class="badge">STORYTELLER</div>}
+            {isStoryteller && <div class="badge">STORYTELLER</div>}
+            <CardImage cardId={cid} size={160} />
+            <div class="owner">{owner}</div>
+            <div class="votes-block">
+              <div class="votes-label">{votes.length === 0 ? 'no votes' : 'voted by'}</div>
+              {votes.length > 0 && (
+                <div class="pills">
+                  {votes.map(v => (
+                    <span class="pill" data-correct={isStoryteller}>{v}</span>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
         );
@@ -58,19 +65,83 @@ const isSkipped = turn.clue === null;
 </article>
 
 <style>
-article { border-bottom: 1px solid #1d2128; padding: 14px 0; }
+article { border-bottom: 1px solid #1d2128; padding: 18px 0; }
 header { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
 .turn-no { color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
 .clue { color: #f0d680; font-style: italic; }
 .skipped { color: var(--muted); }
-.cards { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
-.card { display: flex; gap: 6px; align-items: flex-start; }
-.card[data-storyteller='true'] { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 4px; }
-.meta { font-size: 11px; line-height: 1.4; }
-.owner { color: var(--fg); }
-.votes { color: var(--muted); }
-.badge { color: #f0d680; font-weight: 600; letter-spacing: .12em; font-size: 10px; }
-.scores { display: flex; gap: 12px; font-size: 12px; flex-wrap: wrap; margin-top: 4px; }
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 176px);
+  gap: 14px;
+  margin: 14px 0;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 176px;
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #1d2128;
+  background: #131620;
+  position: relative;
+}
+.card[data-storyteller='true'] {
+  border-color: #f0d680;
+  background: rgba(240, 214, 128, 0.06);
+  box-shadow: 0 0 0 1px rgba(240, 214, 128, 0.18);
+}
+
+.badge {
+  position: absolute;
+  top: -10px;
+  left: 8px;
+  background: #f0d680;
+  color: #0f1115;
+  font-weight: 700;
+  font-size: 10px;
+  letter-spacing: .14em;
+  padding: 2px 8px;
+  border-radius: 4px;
+}
+
+.owner {
+  color: var(--fg);
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.votes-block {
+  margin-top: 6px;
+}
+.votes-label {
+  color: var(--muted);
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+.pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+.pill {
+  font-size: 11px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: #1d2128;
+  color: var(--muted);
+}
+.pill[data-correct='true'] {
+  background: rgba(111, 207, 151, 0.18);
+  color: var(--pos);
+}
+
+.scores { display: flex; gap: 12px; font-size: 12px; flex-wrap: wrap; margin-top: 8px; }
 .pos { color: var(--pos); }
 .neg { color: var(--neg); }
 .degraded { color: var(--neg); font-size: 12px; margin-top: 6px; }
