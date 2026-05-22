@@ -1,5 +1,6 @@
 from dixit_ai.engine import score_turn, play_game, GameResult
 from dixit_ai.players.random_player import RandomPlayer
+from dixit_ai.players.base import MoveError
 
 # Each test specifies:
 #   storyteller: model_id
@@ -126,3 +127,74 @@ def test_face_up_order_includes_storyteller_card():
     for t in result.turns:
         if t.face_up_order:
             assert t.storyteller_card in t.face_up_order
+
+
+class ForfeitingStoryteller:
+    model_id = "F"
+    display_name = "F"
+    org = "test"
+
+    def __init__(self, forfeit_phase: str):
+        self.phase = forfeit_phase
+
+    def storytell(self, hand):
+        if self.phase == "storytell":
+            raise MoveError("nope")
+        return hand[0].id, "clue"
+
+    def pick_for_clue(self, hand, clue):
+        if self.phase == "pick":
+            raise MoveError("nope")
+        return hand[0].id
+
+    def vote(self, face_up_cards, clue, own_card_id):
+        if self.phase == "vote":
+            raise MoveError("nope")
+        choices = [c for c in face_up_cards if c.id != own_card_id]
+        return choices[0].id
+
+
+def make_mixed_players(forfeit_phase: str):
+    # F always forfeits at the given phase. Others are RandomPlayers.
+    return [
+        ForfeitingStoryteller(forfeit_phase),
+        RandomPlayer(model_id="a", seed=1),
+        RandomPlayer(model_id="b", seed=2),
+        RandomPlayer(model_id="c", seed=3),
+        RandomPlayer(model_id="d", seed=4),
+    ]
+
+
+def test_storyteller_forfeit_skips_turn():
+    players = make_mixed_players("storytell")
+    result = play_game(players, rng_seed="seed1")
+    # Every turn where F was storyteller should have degraded contain
+    # "F:storytell:forfeit" and have empty submissions/votes.
+    forfeits = [t for t in result.turns if "F:storytell:forfeit" in t.degraded]
+    assert forfeits, "expected at least one storyteller forfeit"
+    for t in forfeits:
+        assert t.submissions == {}
+        assert t.votes == {}
+        assert t.clue is None
+        assert all(d == 0 for d in t.scores_delta.values())
+
+
+def test_pick_forfeit_removes_from_submissions_and_votes():
+    players = make_mixed_players("pick")
+    result = play_game(players, rng_seed="seed2")
+    # Find any turn where F was NOT storyteller (i.e. F was supposed to pick).
+    f_pick_turns = [t for t in result.turns if t.storyteller != "F" and "F:pick:forfeit" in t.degraded]
+    assert f_pick_turns
+    for t in f_pick_turns:
+        assert "F" not in t.submissions
+        assert "F" not in t.votes
+
+
+def test_vote_forfeit_keeps_submission_omits_vote():
+    players = make_mixed_players("vote")
+    result = play_game(players, rng_seed="seed3")
+    f_vote_turns = [t for t in result.turns if t.storyteller != "F" and "F:vote:forfeit" in t.degraded]
+    assert f_vote_turns
+    for t in f_vote_turns:
+        assert "F" in t.submissions
+        assert "F" not in t.votes
