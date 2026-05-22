@@ -40,5 +40,47 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       {game.turns.map(t => <TurnRow turn={t} players={game.players} />)}
     </section>
   </main>
+
+  <dialog id="card-modal">
+    <img id="card-modal-img" alt="" />
+  </dialog>
+
+  <style is:global>
+    #card-modal {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      max-width: min(90vw, 600px);
+      max-height: 90vh;
+    }
+    #card-modal::backdrop {
+      background: rgba(0, 0, 0, 0.72);
+      backdrop-filter: blur(2px);
+    }
+    #card-modal img {
+      display: block;
+      max-width: 100%;
+      max-height: 90vh;
+      border-radius: 8px;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+
+  <script is:inline>
+    (() => {
+      const dlg = document.getElementById('card-modal');
+      const img = document.getElementById('card-modal-img');
+      document.body.addEventListener('click', (e) => {
+        const btn = e.target.closest('.card-thumb');
+        if (btn) {
+          img.src = btn.dataset.fullsize;
+          dlg.showModal();
+          return;
+        }
+        // Click outside the image (i.e. on the backdrop) closes the dialog.
+        if (e.target === dlg) dlg.close();
+      });
+    })();
+  </script>
 </body>
 </html>

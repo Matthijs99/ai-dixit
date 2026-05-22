@@ -5,5 +5,26 @@ const padded = String(cardId).padStart(5, '0');
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 const src = `${base}/cards/card_${padded}.jpg`;
 ---
-<img src={src} alt={`Card ${cardId}`} width={size} height={size}
-     style="border-radius:6px; object-fit:cover; display:inline-block; margin-right:4px;" />
+<button class="card-thumb" data-fullsize={src} aria-label={`Open card ${cardId}`}>
+  <img src={src} alt={`Card ${cardId}`} width={size} height={size} />
+</button>
+
+<style>
+  .card-thumb {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: none;
+    cursor: zoom-in;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .card-thumb img {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 80ms ease;
+  }
+  .card-thumb:hover img { transform: scale(1.02); }
+</style>
