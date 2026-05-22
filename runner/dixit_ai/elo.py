@@ -15,21 +15,29 @@ def expected_score(rating_a: float, rating_b: float) -> float:
 def update_ratings(
     ratings: Mapping[str, float],
     placements: Sequence[str],
+    *,
+    scores: Mapping[str, int] | None = None,
 ) -> dict[str, float]:
-    """Apply pairwise Elo updates over all pairs (i, j) where i finished above j.
+    """Apply pairwise Elo updates over all pairs.
 
-    `placements` is the ordering from 1st place to last.
-    Per-pair updates use the pre-game ratings (frozen), so update order
-    doesn't affect the result.
-    Returns a new dict with updated ratings; the input is not mutated.
+    `placements` is the ordering from 1st place to last. `scores`, if
+    provided, is the final score map; pairs with equal scores are treated
+    as draws (result 0.5/0.5). If `scores` is omitted, placement order
+    decides the pairwise result (1 for the earlier-placed player).
+    Per-pair updates use the pre-game ratings (frozen) so update order
+    doesn't affect the result. The input is not mutated.
     """
     new = {m: float(r) for m, r in ratings.items()}
-    base = dict(new)   # snapshot of pre-game ratings
+    base = dict(new)  # snapshot of pre-game ratings
     n = len(placements)
     for i in range(n):
         for j in range(i + 1, n):
             a, b = placements[i], placements[j]
+            if scores is not None and scores.get(a, 0) == scores.get(b, 0):
+                result_a = 0.5
+            else:
+                result_a = 1.0
             e_a = expected_score(base[a], base[b])
-            new[a] += K * (1 - e_a)
-            new[b] += K * (0 - (1 - e_a))
+            new[a] += K * (result_a - e_a)
+            new[b] += K * ((1 - result_a) - (1 - e_a))
     return new

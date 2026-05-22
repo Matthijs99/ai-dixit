@@ -155,7 +155,9 @@ def main(argv: list[str] | None = None) -> int:
     current_ratings = {
         m: elo["models"][m]["rating"] for m in result.final_scores
     }
-    new_ratings = update_ratings(current_ratings, placements)
+    new_ratings = update_ratings(
+        current_ratings, placements, scores=result.final_scores
+    )
     elo_before = dict(current_ratings)
     elo_after = {m: round(new_ratings[m], 2) for m in new_ratings}
 

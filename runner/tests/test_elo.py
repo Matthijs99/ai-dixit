@@ -35,6 +35,24 @@ def test_five_player_sweep_top_gains_about_50():
     assert round(new["p0"] - 1500) == 64
     assert round(1500 - new["p4"]) == 64
 
+def test_ties_in_score_treated_as_draws():
+    # Two players tied at the same final score should get the same Elo delta.
+    ratings = {"A": 1500, "B": 1500, "C": 1500, "D": 1500, "E": 1500}
+    scores = {"A": 32, "B": 29, "C": 29, "D": 21, "E": 19}
+    # Placement order between B and C is arbitrary; result should be symmetric.
+    placements = ["A", "B", "C", "D", "E"]
+    new = update_ratings(ratings, placements, scores=scores)
+    # B and C should end with identical ratings — the tie removes any bias.
+    assert abs(new["B"] - new["C"]) < 1e-9
+    # Sanity: top beats both ties; ties beat the bottom two.
+    assert new["A"] > new["B"] > new["D"] > new["E"]
+    # With equal pre-game ratings, the B-vs-C draw contributes zero, so
+    # B and C each only differ from 1500 by their other three pair results:
+    # lose to A (-16), beat D (+16), beat E (+16) → net +16.
+    assert round(new["B"] - 1500) == 16
+    assert round(new["C"] - 1500) == 16
+
+
 def test_symmetry_same_rating_same_placement():
     # Two players with identical ratings and identical placement (a tie) get identical updates.
     # Our model has no ties — the caller breaks them — so we instead test that

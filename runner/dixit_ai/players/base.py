@@ -18,6 +18,13 @@ from dixit_ai.cards import Card, CardId, card_image_path
 log = logging.getLogger(__name__)
 
 
+# Per-call retry budget. SDK errors (rate limits, transient network) sleep
+# SDK_ERROR_BACKOFF_SECONDS between attempts; validation/parse errors retry
+# immediately with the error fed back to the model.
+MAX_ATTEMPTS = 10
+SDK_ERROR_BACKOFF_SECONDS = 60.0
+
+
 class MoveError(Exception):
     """Raised when a player fails to produce a valid move after retry."""
 
@@ -236,7 +243,7 @@ class BaseAdapter(ABC):
 
         last_error: str | None = None
 
-        for attempt in (1, 2):
+        for attempt in range(1, MAX_ATTEMPTS + 1):
             t0 = time.monotonic()
             try:
                 raw = self._call(
@@ -245,12 +252,20 @@ class BaseAdapter(ABC):
                     image_bytes_by_label=image_bytes_by_label,
                 )
             except Exception as exc:
+                # API / network / rate-limit error. Sleep before retrying
+                # to give the provider time to free up capacity.
                 last_error = f"sdk error: {exc}"
                 log.warning(
-                    "    %s %s try %d failed: %s",
-                    self.model_id, phase, attempt, last_error,
+                    "    %s %s try %d/%d sdk error: %s",
+                    self.model_id, phase, attempt, MAX_ATTEMPTS, last_error,
                 )
                 self._record(phase, lh, "<sdk error>", "", None, attempt, last_error)
+                if attempt < MAX_ATTEMPTS:
+                    log.info(
+                        "    %s %s sleeping %.0fs before retry",
+                        self.model_id, phase, SDK_ERROR_BACKOFF_SECONDS,
+                    )
+                    time.sleep(SDK_ERROR_BACKOFF_SECONDS)
                 continue
             dt = time.monotonic() - t0
 
@@ -259,8 +274,8 @@ class BaseAdapter(ABC):
             except Exception as exc:
                 last_error = f"json parse: {exc}"
                 log.warning(
-                    "    %s %s try %d bad json (%.1fs): %s",
-                    self.model_id, phase, attempt, dt, last_error,
+                    "    %s %s try %d/%d bad json (%.1fs): %s",
+                    self.model_id, phase, attempt, MAX_ATTEMPTS, dt, last_error,
                 )
                 self._record(phase, lh, messages_text(messages), raw, None, attempt, last_error)
                 messages = _append_retry_turn(messages, raw, last_error)
@@ -271,8 +286,8 @@ class BaseAdapter(ABC):
             except (ValidationError, ValueError) as exc:
                 last_error = f"validation: {exc}"
                 log.warning(
-                    "    %s %s try %d illegal (%.1fs): %s",
-                    self.model_id, phase, attempt, dt, last_error,
+                    "    %s %s try %d/%d illegal (%.1fs): %s",
+                    self.model_id, phase, attempt, MAX_ATTEMPTS, dt, last_error,
                 )
                 self._record(phase, lh, messages_text(messages), raw, parsed, attempt, last_error)
                 messages = _append_retry_turn(messages, raw, last_error)
@@ -282,7 +297,9 @@ class BaseAdapter(ABC):
             self._record(phase, lh, messages_text(messages), raw, parsed, attempt, None)
             return result
 
-        raise MoveError(f"{self.model_id} {phase} failed after 2 attempts: {last_error}")
+        raise MoveError(
+            f"{self.model_id} {phase} failed after {MAX_ATTEMPTS} attempts: {last_error}"
+        )
 
     def _record(self, phase, lh, prompt, raw, parsed, attempts, error):
         self.audit.append(

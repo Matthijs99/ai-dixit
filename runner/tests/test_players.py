@@ -55,12 +55,13 @@ class StubAdapter(BaseAdapter):
         return self.responses.pop(0)
 
 
-def test_adapter_retries_once_then_raises():
+def test_adapter_retries_up_to_max_attempts_then_raises():
+    from dixit_ai.players.base import MAX_ATTEMPTS
     hand = [Card(id=11), Card(id=22)]
-    a = StubAdapter(responses=['{"card": "ZZZ"}', '{"card": "BAD"}'])
+    a = StubAdapter(responses=['{"card": "ZZZ"}'] * MAX_ATTEMPTS)
     with pytest.raises(MoveError):
         a.pick_for_clue(hand, "x")
-    assert a.calls == 2
+    assert a.calls == MAX_ATTEMPTS
 
 
 def test_adapter_succeeds_on_second_try():
@@ -69,6 +70,53 @@ def test_adapter_succeeds_on_second_try():
     chosen = a.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
     assert a.calls == 2
+
+
+def test_adapter_sleeps_between_sdk_errors(monkeypatch):
+    """SDK errors get a sleep between retries; validation errors do not."""
+    from dixit_ai.players.base import (
+        BaseAdapter,
+        MAX_ATTEMPTS,
+        MoveError,
+        SDK_ERROR_BACKOFF_SECONDS,
+    )
+
+    sleeps: list[float] = []
+    monkeypatch.setattr("dixit_ai.players.base.time.sleep", lambda s: sleeps.append(s))
+
+    class RaisingAdapter(BaseAdapter):
+        model_id = "stub"
+        display_name = "stub"
+        org = "test"
+
+        def __init__(self):
+            super().__init__()
+            self.calls = 0
+
+        def _call(self, **_):
+            self.calls += 1
+            raise RuntimeError("rate limit 429")
+
+    hand = [Card(id=11), Card(id=22)]
+    a = RaisingAdapter()
+    with pytest.raises(MoveError):
+        a.pick_for_clue(hand, "x")
+    # MAX_ATTEMPTS calls, with a sleep between each consecutive pair (so MAX-1 sleeps).
+    assert a.calls == MAX_ATTEMPTS
+    assert len(sleeps) == MAX_ATTEMPTS - 1
+    assert all(s == SDK_ERROR_BACKOFF_SECONDS for s in sleeps)
+
+
+def test_adapter_no_sleep_on_validation_errors(monkeypatch):
+    sleeps: list[float] = []
+    monkeypatch.setattr("dixit_ai.players.base.time.sleep", lambda s: sleeps.append(s))
+
+    hand = [Card(id=11), Card(id=22)]
+    a = StubAdapter(responses=['{"card": "ZZZ"}'] * 10)
+    with pytest.raises(MoveError):
+        a.pick_for_clue(hand, "x")
+    # Validation errors should never trigger time.sleep.
+    assert sleeps == []
 
 
 from unittest.mock import MagicMock
