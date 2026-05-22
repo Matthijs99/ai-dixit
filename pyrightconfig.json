@@ -1,0 +1,6 @@
+{
+  "extraPaths": ["runner"],
+  "venvPath": "runner",
+  "venv": ".venv",
+  "pythonVersion": "3.12"
+}
