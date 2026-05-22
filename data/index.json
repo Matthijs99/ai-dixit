@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "game_id": "2026-05-22",
+    "date": "2026-05-22",
+    "status": "complete",
+    "winner": "gemini-2.5-pro",
+    "turns": 13,
+    "final_scores": {
+      "claude-opus-4-7": 29,
+      "gpt-5.5": 29,
+      "gemini-2.5-pro": 32,
+      "grok-4.3": 21,
+      "mistral-medium-3.5": 19
+    },
+    "elo_deltas": {
+      "claude-opus-4-7": 32.0,
+      "gpt-5.5": 0.0,
+      "gemini-2.5-pro": 64.0,
+      "grok-4.3": -32.0,
+      "mistral-medium-3.5": -64.0
+    }
+  }
+]
