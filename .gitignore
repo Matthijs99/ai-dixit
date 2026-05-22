@@ -1,0 +1,25 @@
+# brainstorm companion (Superpowers)
+.superpowers/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Node / Astro
+node_modules/
+web/dist/
+web/.astro/
+
+# Local secrets / env
+.env
+.env.*
+!.env.example
+
+# OS
+.DS_Store
