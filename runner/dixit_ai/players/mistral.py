@@ -19,7 +19,7 @@ class MistralPlayer(BaseAdapter):
     def __init__(self, client: Any = None) -> None:
         super().__init__()
         if client is None:
-            from mistralai import Mistral
+            from mistralai.client import Mistral
             client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
         self.client = client
 
