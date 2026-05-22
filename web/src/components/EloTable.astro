@@ -32,4 +32,15 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .rank { color: #7a8290; width: 32px; }
 .muted { color: #7a8290; }
 .elo { font-weight: 600; }
+
+/* Narrow phones: shrink the table and hide the Org column (3rd) so
+   the model name doesn't get squeezed. */
+@media (max-width: 600px) {
+  table { font-size: 14px; }
+  th, td { padding: 8px 6px; }
+  th:nth-child(3), td:nth-child(3) { display: none; }
+}
+@media (max-width: 380px) {
+  table { font-size: 13px; }
+}
 </style>

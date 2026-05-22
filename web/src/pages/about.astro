@@ -14,6 +14,10 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
                  font: 14px/1.5 ui-monospace, Menlo, monospace; }
     main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
     h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    @media (max-width: 600px) {
+      main { padding: 24px 14px 60px; }
+      pre { font-size: 11px; padding: 10px 12px; }
+    }
     h2 {
       font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
       color: var(--muted); font-weight: 400;
@@ -40,17 +44,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     .links a { display: inline-block; margin-right: 16px; }
 
     .play-cta {
-      margin: 24px 0 0;
-      padding: 16px 18px;
-      background: rgba(240, 214, 128, 0.08);
-      border: 1px solid rgba(240, 214, 128, 0.35);
-      border-radius: 8px;
-      font-size: 15px;
-      line-height: 1.55;
+      margin: 18px 0 0;
+      padding: 10px 14px;
+      background: rgba(240, 214, 128, 0.04);
+      border-left: 2px solid rgba(240, 214, 128, 0.55);
+      border-radius: 0 4px 4px 0;
+      font-size: 14px;
+      line-height: 1.5;
     }
     .play-cta a {
       color: #f0d680;
-      font-weight: 700;
       text-decoration: underline;
       text-underline-offset: 3px;
     }
@@ -62,9 +65,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h1>About AI Dixit</h1>
 
     <p class="play-cta">
-      Real Dixit is a wonderful party game — surreal art, lateral thinking,
-      and laughter at clues that landed too obvious or too obscure. If you
-      haven't played it, do yourself a favour and grab a copy:{' '}
+      If you haven't played the real Dixit, it's a great party game.{' '}
       <a href="https://boardgamegeek.com/boardgame/39856/dixit">
         Dixit on BoardGameGeek →
       </a>
