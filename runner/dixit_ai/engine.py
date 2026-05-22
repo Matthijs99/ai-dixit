@@ -106,6 +106,17 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
 
     by_id = {p.model_id: p for p in players}
     order = [p.model_id for p in players]
+    display_names = {p.model_id: getattr(p, "display_name", p.model_id) for p in players}
+
+    def _broadcast_state(turn: int) -> None:
+        for p in players:
+            if hasattr(p, "set_state"):
+                p.set_state(
+                    turn=turn,
+                    lineup=order,
+                    display_names=display_names,
+                    scoreboard=dict(totals),
+                )
 
     log.info("game start · seed=%s · players=%s", rng_seed, order)
 
@@ -117,6 +128,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
             status = "complete"
             break
 
+        _broadcast_state(turn_index)
         storyteller_id = order[turn_index % len(order)]
         storyteller = by_id[storyteller_id]
         log.info("turn %d · storyteller=%s", turn_index + 1, storyteller_id)

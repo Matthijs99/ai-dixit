@@ -129,9 +129,37 @@ class BaseAdapter(ABC):
     def __init__(self) -> None:
         self.audit: list[CallRecord] = []
         self._current_turn: int | None = None
+        self._lineup: list[str] = []
+        self._display_names: dict[str, str] = {}
+        self._scoreboard: dict[str, int] = {}
 
     def set_turn(self, turn: int) -> None:
         self._current_turn = turn
+
+    def set_state(
+        self,
+        *,
+        turn: int,
+        lineup: list[str],
+        display_names: dict[str, str],
+        scoreboard: dict[str, int],
+    ) -> None:
+        """Engine calls this before each player move with the current game state."""
+        self._current_turn = turn
+        self._lineup = list(lineup)
+        self._display_names = dict(display_names)
+        self._scoreboard = dict(scoreboard)
+
+    def _system_prompt(self) -> str:
+        from dixit_ai.prompts import build_system_prompt
+        return build_system_prompt(
+            my_model_id=self.model_id,
+            my_display_name=self.display_name,
+            lineup=self._lineup or [self.model_id],
+            display_names=self._display_names or {self.model_id: self.display_name},
+            scoreboard=self._scoreboard,
+            turn_number=(self._current_turn or 0) + 1,
+        )
 
     # Each concrete adapter implements _call.
     @abstractmethod
@@ -148,12 +176,12 @@ class BaseAdapter(ABC):
 
     def storytell(self, hand: list[Card]) -> tuple[CardId, str]:
         lh = _label_hand(hand)
-        from dixit_ai.prompts import SYSTEM_PRELUDE, storyteller_user
+        from dixit_ai.prompts import storyteller_user
         return self._run(
             phase="storytell",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, storyteller_user(lh.ordered_labels)
+                self._system_prompt(), storyteller_user(lh.ordered_labels)
             ),
             schema=_schema_for_labels(lh.ordered_labels, with_clue=True),
             validator=lambda m: _validate_story(StoryMove(**m), lh),
@@ -161,12 +189,12 @@ class BaseAdapter(ABC):
 
     def pick_for_clue(self, hand: list[Card], clue: str) -> CardId:
         lh = _label_hand(hand)
-        from dixit_ai.prompts import SYSTEM_PRELUDE, picker_user
+        from dixit_ai.prompts import picker_user
         return self._run(
             phase="pick",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, picker_user(lh.ordered_labels, clue)
+                self._system_prompt(), picker_user(lh.ordered_labels, clue)
             ),
             schema=_schema_for_labels(lh.ordered_labels, with_clue=False),
             validator=lambda m: _validate_pick(PickMove(**m), lh),
@@ -177,12 +205,12 @@ class BaseAdapter(ABC):
     ) -> CardId:
         lh = _label_hand(face_up_cards)
         own_label = next(L for L, cid in lh.labels.items() if cid == own_card_id)
-        from dixit_ai.prompts import SYSTEM_PRELUDE, voter_user
+        from dixit_ai.prompts import voter_user
         return self._run(
             phase="vote",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, voter_user(lh.ordered_labels, clue, own_label)
+                self._system_prompt(), voter_user(lh.ordered_labels, clue, own_label)
             ),
             schema=_schema_for_vote(lh.ordered_labels, own_label),
             validator=lambda m: _validate_vote(VoteMove(**m), lh, own_card_id),

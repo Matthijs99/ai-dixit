@@ -2,11 +2,55 @@
 
 from __future__ import annotations
 
-SYSTEM_PRELUDE = """You are an AI player in a game of Dixit. Dixit is a card game where players take turns being the storyteller. The storyteller picks one card from their hand and gives a clue — a word, phrase, or sentence — that evokes the card. Other players each pick a card from their hand that could also match the clue. All cards are shuffled face-up. Everyone but the storyteller votes for which card they think is the storyteller's.
 
-Scoring rewards the storyteller for clues that are subtle: a clue too obvious or too obscure gives the storyteller zero. Decoys that fool others earn bonus points.
+def build_system_prompt(
+    *,
+    my_model_id: str,
+    my_display_name: str,
+    lineup: list[str],
+    display_names: dict[str, str],
+    scoreboard: dict[str, int],
+    turn_number: int,
+) -> str:
+    """Build a per-turn system prompt with rules and the current standings."""
 
-You will see card images labeled A, B, C, ... in each turn. Use those labels when responding. Respond ONLY with the requested JSON; no prose outside it."""
+    standings = sorted(
+        lineup, key=lambda m: (-scoreboard.get(m, 0), m)
+    )
+    standings_lines = []
+    for m in standings:
+        marker = "  ← you" if m == my_model_id else ""
+        standings_lines.append(
+            f"  {display_names.get(m, m):22s} {scoreboard.get(m, 0):3d}{marker}"
+        )
+
+    return (
+        f"You are playing a game of Dixit against four other AI models. "
+        f"You are: {my_display_name}.\n"
+        f"\n"
+        f"GAME RULES\n"
+        f"On each turn one player is the storyteller. They pick a card from their hand and give a one-line clue. "
+        f"Each other player picks a card from their hand that matches the clue. "
+        f"All cards are shuffled face-up. Non-storytellers vote for which card they think is the storyteller's.\n"
+        f"\n"
+        f"SCORING\n"
+        f"- If everyone or no one votes for the storyteller's card: storyteller scores 0, every non-storyteller scores 2.\n"
+        f"- Otherwise: storyteller and each correct voter score 3.\n"
+        f"- Every non-storyteller scores +1 per vote their card received (capped at +3).\n"
+        f"\n"
+        f"Strategy: storytellers want clues that fool some but not all — too obvious or too obscure both score zero. "
+        f"Non-storytellers want decoys that draw votes away from the storyteller's card.\n"
+        f"\n"
+        f"WIN CONDITION\n"
+        f"First to 30 points wins. Game also ends at 50 turns total.\n"
+        f"\n"
+        f"CURRENT STANDINGS (turn {turn_number} of up to 50)\n"
+        + "\n".join(standings_lines)
+        + "\n"
+        f"\n"
+        f"You will see card images labeled A, B, C, ... Use those labels when responding. "
+        f"Respond ONLY with the requested JSON; no prose outside it."
+    )
 
 
 def storyteller_user(labels: list[str]) -> str:
