@@ -1,0 +1,44 @@
+name: nightly-game
+
+on:
+  schedule:
+    - cron: "0 22 * * *"
+    - cron: "0 23 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  play:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install runner
+        working-directory: runner
+        run: pip install -e .
+
+      - name: Play a game
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
+          XAI_API_KEY:       ${{ secrets.XAI_API_KEY }}
+          MISTRAL_API_KEY:   ${{ secrets.MISTRAL_API_KEY }}
+        run: python -m dixit_ai
+
+      - name: Commit results
+        run: |
+          git config user.name  "dixit-bot"
+          git config user.email "dixit-bot@users.noreply.github.com"
+          if git diff --quiet -- data/; then
+            echo "no data changes; the Amsterdam-hour guard probably skipped this run"
+            exit 0
+          fi
+          git add data/
+          git commit -m "game $(date -u +%Y-%m-%d)"
+          git push
