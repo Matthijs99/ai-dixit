@@ -4,14 +4,14 @@
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "rating": 1532.0,
+      "rating": 1516.0,
       "games": 1,
       "wins": 0
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1500.0,
+      "rating": 1516.0,
       "games": 1,
       "wins": 0
     },
