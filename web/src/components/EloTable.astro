@@ -15,7 +15,7 @@ const rows = Object.entries(elo.models)
         <td class="rank">{i + 1}</td>
         <td>{r.display_name}</td>
         <td class="muted">{r.org}</td>
-        <td class="num">{Math.round(r.rating)}</td>
+        <td class="num elo">{Math.round(r.rating)}</td>
         <td class="num">{r.games}</td>
         <td class="num">{r.wins}</td>
       </tr>
@@ -24,10 +24,12 @@ const rows = Object.entries(elo.models)
 </table>
 
 <style>
-table { width: 100%; border-collapse: collapse; font: 13px/1.4 ui-monospace, Menlo, monospace; }
-th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid #1d2128; }
-th { color: #7a8290; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+table { width: 100%; border-collapse: collapse; font: 16px/1.5 ui-monospace, Menlo, monospace; }
+th, td { padding: 12px 14px; text-align: left; border-bottom: 1px solid #1d2128; }
+th { color: #7a8290; font-weight: 400; letter-spacing: .14em; text-transform: uppercase; font-size: 12px; }
+tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
-.rank { color: #7a8290; }
+.rank { color: #7a8290; width: 32px; }
 .muted { color: #7a8290; }
+.elo { font-weight: 600; }
 </style>
