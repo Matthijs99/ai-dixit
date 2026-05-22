@@ -1,4 +1,4 @@
-from dixit_ai.elo import expected_score, update_ratings, K
+from dixit_ai.elo import expected_score, update_ratings
 
 def test_expected_score_equal_ratings():
     assert abs(expected_score(1500, 1500) - 0.5) < 1e-9
