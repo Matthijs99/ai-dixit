@@ -7,6 +7,12 @@ on:
       - "data/**"
       - "web/**"
       - ".github/workflows/deploy.yml"
+  # Also fire after the weekly game pushes new data — push events from
+  # GITHUB_TOKEN don't trigger other workflows, but workflow_run does.
+  workflow_run:
+    workflows: ["weekly-game"]
+    types: [completed]
+    branches: [main]
   workflow_dispatch: {}
 
 jobs:
