@@ -1,4 +1,4 @@
-from dixit_ai.engine import score_turn, play_game, TurnRecord, GameResult
+from dixit_ai.engine import score_turn, play_game, GameResult
 from dixit_ai.players.random_player import RandomPlayer
 
 # Each test specifies:
