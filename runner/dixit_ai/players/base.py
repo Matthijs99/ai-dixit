@@ -7,7 +7,7 @@ import random
 import string
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
-from typing import Any, Protocol
+from typing import Protocol
 
 from pydantic import BaseModel, Field, ValidationError
 
@@ -187,7 +187,7 @@ class BaseAdapter(ABC):
 
     # ----- Internals -----
 
-    def _build_messages(self, system: str, user: str, lh: LabeledHand) -> list[dict]:
+    def _build_messages(self, system: str, user: str, _lh: LabeledHand) -> list[dict]:
         """A provider-neutral message shape. Adapters reshape this as needed."""
         return [
             {"role": "system", "content": system},
@@ -200,8 +200,6 @@ class BaseAdapter(ABC):
             image_bytes_by_label[label] = card_image_path(cid).read_bytes()
 
         last_error: str | None = None
-        last_raw = ""
-        last_parsed: dict | None = None
 
         for attempt in (1, 2):
             try:
@@ -210,7 +208,6 @@ class BaseAdapter(ABC):
                     schema=schema,
                     image_bytes_by_label=image_bytes_by_label,
                 )
-                last_raw = raw
             except Exception as exc:
                 last_error = f"sdk error: {exc}"
                 self._record(phase, lh, "<sdk error>", "", None, attempt, last_error)
@@ -219,7 +216,6 @@ class BaseAdapter(ABC):
 
             try:
                 parsed = _loose_parse(raw)
-                last_parsed = parsed
             except Exception as exc:
                 last_error = f"json parse: {exc}"
                 self._record(phase, lh, messages_text(messages), raw, None, attempt, last_error)

@@ -1,9 +1,8 @@
-from unittest.mock import MagicMock
 import pytest
 from dixit_ai.cards import Card
 from dixit_ai.players.base import (
-    LabeledHand, MoveError, _label_hand, _validate_story, _validate_pick,
-    _validate_vote, StoryMove, PickMove, VoteMove, BaseAdapter,
+    LabeledHand, MoveError, _label_hand, _validate_story,
+    _validate_vote, StoryMove, VoteMove, BaseAdapter,
 )
 
 
@@ -51,6 +50,7 @@ class StubAdapter(BaseAdapter):
         self.calls = 0
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
+        _ = (messages, schema, image_bytes_by_label)   # accept but ignore
         self.calls += 1
         return self.responses.pop(0)
 
