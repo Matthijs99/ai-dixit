@@ -4,6 +4,16 @@ const elo: EloDoc = loadElo();
 const rows = Object.entries(elo.models)
   .map(([id, m]) => ({ id, ...m }))
   .sort((a, b) => b.rating - a.rating);
+
+// Org-hosted product or model card for each entry in the lineup.
+// Falls back to displaying just the name if no URL is known.
+const MODEL_URLS: Record<string, string> = {
+  'claude-opus-4-7':    'https://www.anthropic.com/claude/opus',
+  'gpt-5.5':            'https://openai.com/index/introducing-gpt-5-5/',
+  'gemini-2.5-pro':     'https://deepmind.google/models/gemini/pro/',
+  'grok-4.3':           'https://docs.x.ai/developers/models/grok-4.3',
+  'mistral-medium-3.5': 'https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04',
+};
 ---
 <table>
   <thead>
@@ -13,7 +23,13 @@ const rows = Object.entries(elo.models)
     {rows.map((r, i) => (
       <tr>
         <td class="rank">{i + 1}</td>
-        <td>{r.display_name}</td>
+        <td>
+          {MODEL_URLS[r.id] ? (
+            <a class="model-link" href={MODEL_URLS[r.id]} target="_blank" rel="noopener">{r.display_name}</a>
+          ) : (
+            r.display_name
+          )}
+        </td>
         <td class="muted">{r.org}</td>
         <td class="num elo">{Math.round(r.rating)}</td>
         <td class="num">{r.games}</td>
@@ -32,6 +48,8 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .rank { color: #7a8290; width: 32px; }
 .muted { color: #7a8290; }
 .elo { font-weight: 600; }
+.model-link { color: inherit; text-decoration: none; }
+.model-link:hover { color: #f0d680; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Narrow phones: shrink the table and hide the Org column (3rd) so
    the model name doesn't get squeezed. */
