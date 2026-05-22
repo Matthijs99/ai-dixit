@@ -32,7 +32,14 @@ jobs:
           GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
           XAI_API_KEY:       ${{ secrets.XAI_API_KEY }}
           MISTRAL_API_KEY:   ${{ secrets.MISTRAL_API_KEY }}
-        run: python -m dixit_ai
+        # On cron, enforce the Amsterdam-midnight guard. On manual
+        # workflow_dispatch, the trigger is intentional — bypass the guard.
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            python -m dixit_ai --dry-run
+          else
+            python -m dixit_ai
+          fi
 
       - name: Commit results
         run: |
