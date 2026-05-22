@@ -1,6 +1,4 @@
 import random
-from pathlib import Path
-import pytest
 from dixit_ai.cards import Card, Deck, ALL_CARDS, card_image_path
 
 def test_all_cards_has_100():
