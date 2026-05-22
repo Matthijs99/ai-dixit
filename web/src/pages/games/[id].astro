@@ -50,7 +50,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       border: 0;
       padding: 0;
       background: transparent;
-      max-width: min(90vw, 600px);
+      max-width: min(90vw, 480px);
       max-height: 90vh;
     }
     #card-modal::backdrop {
@@ -59,7 +59,12 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     }
     #card-modal img {
       display: block;
-      max-width: 100%;
+      /* Force consistent display size — source resolutions in the vendored
+         deck are bimodal (~236px vs ~564px wide), so without an explicit
+         width the modal expands inconsistently. Browsers smooth-upscale the
+         smaller source. */
+      width: min(90vw, 480px);
+      height: auto;
       max-height: 90vh;
       border-radius: 8px;
       box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
