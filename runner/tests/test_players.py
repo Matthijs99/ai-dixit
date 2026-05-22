@@ -74,7 +74,7 @@ def test_adapter_succeeds_on_second_try():
 from unittest.mock import MagicMock
 from dixit_ai.players.claude import ClaudePlayer
 
-def test_claude_adapter_returns_card_id_on_valid_response(monkeypatch):
+def test_claude_adapter_returns_card_id_on_valid_response():
     hand = [Card(id=11), Card(id=22)]
 
     # Build a fake anthropic.Messages response with a tool_use block.
