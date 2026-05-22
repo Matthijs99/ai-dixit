@@ -69,3 +69,22 @@ def test_adapter_succeeds_on_second_try():
     chosen = a.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
     assert a.calls == 2
+
+
+from unittest.mock import MagicMock
+from dixit_ai.players.claude import ClaudePlayer
+
+def test_claude_adapter_returns_card_id_on_valid_response(monkeypatch):
+    hand = [Card(id=11), Card(id=22)]
+
+    # Build a fake anthropic.Messages response with a tool_use block.
+    fake_tool_use = MagicMock(type="tool_use", name="submit_move", input={"card": "A"})
+    fake_msg = MagicMock(content=[fake_tool_use], stop_reason="tool_use")
+
+    fake_client = MagicMock()
+    fake_client.messages.create.return_value = fake_msg
+
+    player = ClaudePlayer(client=fake_client)
+    chosen = player.pick_for_clue(hand, "soft wind")
+    assert chosen in {11, 22}
+    fake_client.messages.create.assert_called_once()
