@@ -1,1 +1,23 @@
-[]
+[
+  {
+    "game_id": "2026-05-22",
+    "date": "2026-05-22",
+    "status": "complete",
+    "winner": "grok-4.3",
+    "turns": 12,
+    "final_scores": {
+      "claude-opus-4-7": 19,
+      "gpt-5.5": 28,
+      "gemini-2.5-pro": 25,
+      "grok-4.3": 31,
+      "mistral-medium-3.5": 18
+    },
+    "elo_deltas": {
+      "claude-opus-4-7": -32.0,
+      "gpt-5.5": 32.0,
+      "gemini-2.5-pro": 0.0,
+      "grok-4.3": 64.0,
+      "mistral-medium-3.5": -64.0
+    }
+  }
+]
