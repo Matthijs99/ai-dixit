@@ -1,0 +1,57 @@
+"""Mistral Pixtral Large adapter via response_format=json_object."""
+
+from __future__ import annotations
+
+import base64
+import os
+from typing import Any
+
+from dixit_ai.players.base import BaseAdapter
+
+MODEL = "pixtral-large-latest"
+
+
+class PixtralPlayer(BaseAdapter):
+    model_id = "pixtral-large"
+    display_name = "Pixtral Large"
+    org = "Mistral"
+
+    def __init__(self, client: Any = None) -> None:
+        super().__init__()
+        if client is None:
+            from mistralai import Mistral
+            client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
+        self.client = client
+
+    def _call(self, *, messages, schema, image_bytes_by_label) -> str:
+        system = next((m["content"] for m in messages if m["role"] == "system"), "")
+        first_user = next(m["content"] for m in messages if m["role"] == "user")
+
+        # Pixtral takes content as a list of mixed text+image parts.
+        schema_hint = (
+            "\n\nYour response MUST be valid JSON matching this schema:\n"
+            f"{schema}"
+        )
+        content_parts: list[dict] = [{"type": "text", "text": first_user + schema_hint}]
+        for label, blob in image_bytes_by_label.items():
+            b64 = base64.b64encode(blob).decode()
+            content_parts.append({"type": "text", "text": f"Card {label}:"})
+            content_parts.append(
+                {"type": "image_url", "image_url": f"data:image/jpeg;base64,{b64}"}
+            )
+
+        ms_messages: list[dict] = [
+            {"role": "system", "content": system},
+            {"role": "user", "content": content_parts},
+        ]
+        for m in messages:
+            if m["role"] == "system" or m["content"] == first_user:
+                continue
+            ms_messages.append(m)
+
+        resp = self.client.chat.complete(
+            model=MODEL,
+            messages=ms_messages,
+            response_format={"type": "json_object"},
+        )
+        return resp.choices[0].message.content or "{}"
