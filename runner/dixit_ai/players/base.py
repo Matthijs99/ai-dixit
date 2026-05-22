@@ -150,7 +150,7 @@ class BaseAdapter(ABC):
             phase="storytell",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, storyteller_user(lh.ordered_labels), lh
+                SYSTEM_PRELUDE, storyteller_user(lh.ordered_labels)
             ),
             schema=_schema_for_labels(lh.ordered_labels, with_clue=True),
             validator=lambda m: _validate_story(StoryMove(**m), lh),
@@ -163,7 +163,7 @@ class BaseAdapter(ABC):
             phase="pick",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, picker_user(lh.ordered_labels, clue), lh
+                SYSTEM_PRELUDE, picker_user(lh.ordered_labels, clue)
             ),
             schema=_schema_for_labels(lh.ordered_labels, with_clue=False),
             validator=lambda m: _validate_pick(PickMove(**m), lh),
@@ -179,7 +179,7 @@ class BaseAdapter(ABC):
             phase="vote",
             lh=lh,
             messages=self._build_messages(
-                SYSTEM_PRELUDE, voter_user(lh.ordered_labels, clue, own_label), lh
+                SYSTEM_PRELUDE, voter_user(lh.ordered_labels, clue, own_label)
             ),
             schema=_schema_for_vote(lh.ordered_labels, own_label),
             validator=lambda m: _validate_vote(VoteMove(**m), lh, own_card_id),
@@ -187,7 +187,7 @@ class BaseAdapter(ABC):
 
     # ----- Internals -----
 
-    def _build_messages(self, system: str, user: str, _lh: LabeledHand) -> list[dict]:
+    def _build_messages(self, system: str, user: str) -> list[dict]:
         """A provider-neutral message shape. Adapters reshape this as needed."""
         return [
             {"role": "system", "content": system},
