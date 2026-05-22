@@ -7,8 +7,8 @@ dependencies = [
   "pydantic>=2.6",
   "anthropic>=0.40",
   "openai>=1.50",
-  "google-genai>=0.3",
-  "mistralai>=1.2",
+  "google-genai>=1.0",
+  "mistralai>=1.2,<2",
   "pillow>=10",
 ]
 
