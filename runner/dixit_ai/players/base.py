@@ -132,6 +132,7 @@ class BaseAdapter(ABC):
         self._lineup: list[str] = []
         self._display_names: dict[str, str] = {}
         self._scoreboard: dict[str, int] = {}
+        self._history: list[str] = []
 
     def set_turn(self, turn: int) -> None:
         self._current_turn = turn
@@ -143,12 +144,14 @@ class BaseAdapter(ABC):
         lineup: list[str],
         display_names: dict[str, str],
         scoreboard: dict[str, int],
+        history: list[str] | None = None,
     ) -> None:
         """Engine calls this before each player move with the current game state."""
         self._current_turn = turn
         self._lineup = list(lineup)
         self._display_names = dict(display_names)
         self._scoreboard = dict(scoreboard)
+        self._history = list(history or [])
 
     def _system_prompt(self) -> str:
         from dixit_ai.prompts import build_system_prompt
@@ -159,6 +162,7 @@ class BaseAdapter(ABC):
             display_names=self._display_names or {self.model_id: self.display_name},
             scoreboard=self._scoreboard,
             turn_number=(self._current_turn or 0) + 1,
+            history=self._history,
         )
 
     # Each concrete adapter implements _call.

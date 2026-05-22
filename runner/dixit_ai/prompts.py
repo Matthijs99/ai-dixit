@@ -11,6 +11,7 @@ def build_system_prompt(
     display_names: dict[str, str],
     scoreboard: dict[str, int],
     turn_number: int,
+    history: list[str] | None = None,
 ) -> str:
     """Build a per-turn system prompt with rules and the current standings."""
 
@@ -23,6 +24,13 @@ def build_system_prompt(
         standings_lines.append(
             f"  {display_names.get(m, m):22s} {scoreboard.get(m, 0):3d}{marker}"
         )
+
+    history_section = ""
+    if history:
+        recent = history[-15:]
+        omitted = len(history) - len(recent)
+        intro = f"GAME HISTORY (last {len(recent)} of {len(history)} turns)" if omitted else "GAME HISTORY"
+        history_section = intro + "\n" + "\n".join(f"  {line}" for line in recent) + "\n\n"
 
     return (
         f"You are playing a game of Dixit against four other AI models. "
@@ -46,9 +54,9 @@ def build_system_prompt(
         f"\n"
         f"CURRENT STANDINGS (turn {turn_number} of up to 50)\n"
         + "\n".join(standings_lines)
-        + "\n"
-        f"\n"
-        f"You will see card images labeled A, B, C, ... Use those labels when responding. "
+        + "\n\n"
+        + history_section
+        + f"You will see card images labeled A, B, C, ... Use those labels when responding. "
         f"Respond ONLY with the requested JSON; no prose outside it."
     )
 

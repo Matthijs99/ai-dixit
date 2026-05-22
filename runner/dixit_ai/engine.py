@@ -107,6 +107,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
     by_id = {p.model_id: p for p in players}
     order = [p.model_id for p in players]
     display_names = {p.model_id: getattr(p, "display_name", p.model_id) for p in players}
+    history: list[str] = []
 
     def _broadcast_state(turn: int) -> None:
         for p in players:
@@ -116,7 +117,38 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
                     lineup=order,
                     display_names=display_names,
                     scoreboard=dict(totals),
+                    history=list(history),
                 )
+
+    def _summarise_turn(record: TurnRecord) -> str:
+        """One-line plain-text summary of a completed turn for downstream prompts."""
+        st = display_names.get(record.storyteller, record.storyteller)
+        if record.clue is None:
+            return f"turn {record.turn + 1} · {st}: forfeited (no clue)"
+
+        participants = [
+            pid for pid in record.votes
+        ]
+        correct = sum(
+            1 for v in record.votes.values() if v == record.storyteller_card
+        )
+        if not participants:
+            outcome = "no votes recorded"
+        elif correct == 0:
+            outcome = "no one guessed (all-or-none)"
+        elif correct == len(participants):
+            outcome = "everyone guessed (all-or-none)"
+        else:
+            outcome = f"partial: {correct}/{len(participants)} guessed"
+
+        deltas = ", ".join(
+            f"{display_names.get(pid, pid)}={record.scores_delta.get(pid, 0):+d}"
+            for pid in order
+        )
+        suffix = f" [degraded: {', '.join(record.degraded)}]" if record.degraded else ""
+        return (
+            f"turn {record.turn + 1} · {st}: \"{record.clue}\" · {outcome} · {deltas}{suffix}"
+        )
 
     log.info("game start · seed=%s · players=%s", rng_seed, order)
 
@@ -152,6 +184,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
         except MoveError:
             record.degraded.append(f"{storyteller_id}:storytell:forfeit")
             turns.append(record)
+            history.append(_summarise_turn(record))
             hand_snapshots.append({m: len(h) for m, h in hands.items()})
             turn_index += 1
             continue
@@ -160,6 +193,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
         if not any(c.id == story_card_id for c in hands[storyteller_id]):
             record.degraded.append(f"{storyteller_id}:storytell:illegal")
             turns.append(record)
+            history.append(_summarise_turn(record))
             hand_snapshots.append({m: len(h) for m, h in hands.items()})
             turn_index += 1
             continue
@@ -237,6 +271,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
                 hands[pid].append(c)
 
         turns.append(record)
+        history.append(_summarise_turn(record))
         hand_snapshots.append({m: len(h) for m, h in hands.items()})
         turn_index += 1
 
