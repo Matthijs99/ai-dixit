@@ -1,0 +1,77 @@
+---
+import CardImage from './CardImage.astro';
+import type { TurnRecord } from '../lib/data';
+
+interface Props { turn: TurnRecord; players: string[]; }
+const { turn, players } = Astro.props;
+
+const isSkipped = turn.clue === null;
+---
+<article>
+  <header>
+    <span class="turn-no">turn {turn.turn + 1}</span>
+    <span class="storyteller"><strong>{turn.storyteller}</strong></span>
+    {isSkipped ? (
+      <span class="skipped">— forfeited</span>
+    ) : (
+      <span class="clue">"{turn.clue}"</span>
+    )}
+  </header>
+
+  {!isSkipped && (
+    <div class="cards">
+      {turn.face_up_order.map(cid => {
+        const owner = Object.entries(turn.submissions).find(([, c]) => c === cid)?.[0];
+        const votes = Object.entries(turn.votes).filter(([, c]) => c === cid).map(([v]) => v);
+        const isStoryteller = cid === turn.storyteller_card;
+        return (
+          <div class="card" data-storyteller={isStoryteller}>
+            <CardImage cardId={cid} />
+            <div class="meta">
+              <div class="owner">{owner}</div>
+              {votes.length > 0 && <div class="votes">votes: {votes.join(', ')}</div>}
+              {isStoryteller && <div class="badge">STORYTELLER</div>}
+            </div>
+          </div>
+        );
+      })}
+    </div>
+  )}
+
+  <div class="scores">
+    {players.map(p => {
+      const delta = turn.scores_delta[p] ?? 0;
+      return (
+        <span class="score">
+          {p}: <strong>{turn.scores_total[p] ?? 0}</strong>
+          {delta !== 0 && (
+            <span class={delta > 0 ? 'pos' : 'neg'}> {delta > 0 ? '+' : ''}{delta}</span>
+          )}
+        </span>
+      );
+    })}
+  </div>
+
+  {turn.degraded.length > 0 && (
+    <div class="degraded">⚠ {turn.degraded.join(', ')}</div>
+  )}
+</article>
+
+<style>
+article { border-bottom: 1px solid #1d2128; padding: 14px 0; }
+header { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+.turn-no { color: var(--muted); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+.clue { color: #f0d680; font-style: italic; }
+.skipped { color: var(--muted); }
+.cards { display: flex; gap: 10px; margin: 10px 0; flex-wrap: wrap; }
+.card { display: flex; gap: 6px; align-items: flex-start; }
+.card[data-storyteller='true'] { background: rgba(255,255,255,0.04); border-radius: 8px; padding: 4px; }
+.meta { font-size: 11px; line-height: 1.4; }
+.owner { color: var(--fg); }
+.votes { color: var(--muted); }
+.badge { color: #f0d680; font-weight: 600; letter-spacing: .12em; font-size: 10px; }
+.scores { display: flex; gap: 12px; font-size: 12px; flex-wrap: wrap; margin-top: 4px; }
+.pos { color: var(--pos); }
+.neg { color: var(--neg); }
+.degraded { color: var(--neg); font-size: 12px; margin-top: 6px; }
+</style>

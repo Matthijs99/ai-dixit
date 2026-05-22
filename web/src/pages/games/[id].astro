@@ -1,0 +1,43 @@
+---
+import TurnRow from '../../components/TurnRow.astro';
+import { loadGame, loadIndex } from '../../lib/data';
+
+export function getStaticPaths() {
+  const rows = loadIndex();
+  return rows
+    .filter(r => r.status !== 'errored')
+    .map(r => ({ params: { id: r.game_id } }));
+}
+
+const { id } = Astro.params as { id: string };
+const game = loadGame(id);
+const winner = Object.entries(game.final_scores)
+  .sort((a, b) => b[1] - a[1])[0]?.[0];
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>AI Dixit · {id}</title>
+  <style is:global>
+    :root { --bg: #0f1115; --fg: #e6e8ee; --muted: #7a8290; --pos: #6fcf97; --neg: #eb5757; }
+    html, body { background: var(--bg); color: var(--fg); margin: 0; padding: 0;
+                 font: 14px/1.5 ui-monospace, Menlo, monospace; }
+    main { max-width: 900px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    .subtitle { color: var(--muted); font-size: 12px; letter-spacing: .18em;
+                text-transform: uppercase; }
+    a { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="subtitle"><a href="/">← leaderboard</a> · game {id}</p>
+    <h1>{id} · winner: {winner}</h1>
+    <p class="subtitle">status: {game.status} · {game.turns.length} turns</p>
+
+    <section>
+      {game.turns.map(t => <TurnRow turn={t} players={game.players} />)}
+    </section>
+  </main>
+</body>
+</html>

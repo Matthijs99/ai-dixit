@@ -1,0 +1,8 @@
+---
+interface Props { cardId: number; size?: number; }
+const { cardId, size = 80 } = Astro.props;
+const padded = String(cardId).padStart(5, '0');
+const src = `/cards/card_${padded}.jpg`;
+---
+<img src={src} alt={`Card ${cardId}`} width={size} height={size}
+     style="border-radius:6px; object-fit:cover; display:inline-block; margin-right:4px;" />
