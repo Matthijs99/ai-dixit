@@ -1,0 +1,52 @@
+---
+import EloTable from '../components/EloTable.astro';
+import { loadIndex, loadElo } from '../lib/data';
+
+const games = loadIndex().slice().reverse().slice(0, 30);
+const elo = loadElo();
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Dixit</title>
+  <style is:global>
+    :root {
+      --bg: #0f1115; --fg: #e6e8ee; --muted: #7a8290; --pos: #6fcf97; --neg: #eb5757;
+    }
+    html, body { background: var(--bg); color: var(--fg); margin: 0; padding: 0;
+                 font: 14px/1.5 ui-monospace, Menlo, monospace; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px; }
+    h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    .subtitle { color: var(--muted); font-size: 12px; letter-spacing: .18em;
+                text-transform: uppercase; }
+    section { margin-top: 32px; }
+    a { color: var(--fg); }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="subtitle">AI Dixit · updated {elo.updated_at}</p>
+    <h1>Leaderboard</h1>
+    <section><EloTable /></section>
+
+    <section>
+      <h2 class="subtitle">Recent games</h2>
+      <ul style="list-style:none; padding:0; font: 13px/1.6 ui-monospace, Menlo, monospace;">
+        {games.map(g => (
+          <li>
+            <a href={`/games/${g.game_id}`}>{g.date}</a>
+            <span style="color:var(--muted)"> · winner </span>
+            {g.winner ?? <em style="color:var(--muted)">none</em>}
+            <span style="color:var(--muted)"> · {g.turns} turns</span>
+            {g.status !== 'complete' && (
+              <span style="color:var(--neg)"> · {g.status}</span>
+            )}
+          </li>
+        ))}
+        {games.length === 0 && <li class="muted">No games yet.</li>}
+      </ul>
+    </section>
+  </main>
+</body>
+</html>

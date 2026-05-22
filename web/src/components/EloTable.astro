@@ -1,0 +1,33 @@
+---
+import { loadElo, type EloDoc } from '../lib/data';
+const elo: EloDoc = loadElo();
+const rows = Object.entries(elo.models)
+  .map(([id, m]) => ({ id, ...m }))
+  .sort((a, b) => b.rating - a.rating);
+---
+<table>
+  <thead>
+    <tr><th>#</th><th>Model</th><th>Org</th><th>Elo</th><th>Games</th><th>Wins</th></tr>
+  </thead>
+  <tbody>
+    {rows.map((r, i) => (
+      <tr>
+        <td class="rank">{i + 1}</td>
+        <td>{r.display_name}</td>
+        <td class="muted">{r.org}</td>
+        <td class="num">{Math.round(r.rating)}</td>
+        <td class="num">{r.games}</td>
+        <td class="num">{r.wins}</td>
+      </tr>
+    ))}
+  </tbody>
+</table>
+
+<style>
+table { width: 100%; border-collapse: collapse; font: 13px/1.4 ui-monospace, Menlo, monospace; }
+th, td { padding: 6px 8px; text-align: left; border-bottom: 1px solid #1d2128; }
+th { color: #7a8290; font-weight: 400; letter-spacing: .12em; text-transform: uppercase; font-size: 11px; }
+.num { text-align: right; font-variant-numeric: tabular-nums; }
+.rank { color: #7a8290; }
+.muted { color: #7a8290; }
+</style>
