@@ -1,4 +1,5 @@
-from dixit_ai.engine import score_turn
+from dixit_ai.engine import score_turn, play_game, TurnRecord, GameResult
+from dixit_ai.players.random_player import RandomPlayer
 
 # Each test specifies:
 #   storyteller: model_id
@@ -70,3 +71,58 @@ def test_pick_forfeit_no_card_no_decoy_bonus():
     # A is NOT in the returned delta (caller handles forfeiters).
     assert "A" not in delta
     assert delta == {"S": 3, "B": 3 + 1, "C": 0 + 1, "D": 0}
+
+
+def make_random_players(n: int = 5, base_seed: int = 100) -> list[RandomPlayer]:
+    return [RandomPlayer(model_id=f"r{i}", seed=base_seed + i) for i in range(n)]
+
+
+def test_game_terminates_under_turn_cap():
+    players = make_random_players()
+    result = play_game(players, rng_seed="test")
+    assert isinstance(result, GameResult)
+    assert len(result.turns) <= 50
+    assert result.status in {"complete", "turn_limit"}
+    assert set(result.final_scores.keys()) == {p.model_id for p in players}
+
+
+def test_game_winner_has_highest_score():
+    players = make_random_players()
+    result = play_game(players, rng_seed="test")
+    winner = result.winner
+    assert winner is not None
+    assert result.final_scores[winner] == max(result.final_scores.values())
+
+
+def test_determinism_with_same_seed():
+    a = play_game(make_random_players(), rng_seed="x")
+    b = play_game(make_random_players(), rng_seed="x")
+    assert a.final_scores == b.final_scores
+    assert a.status == b.status
+    assert [t.turn for t in a.turns] == [t.turn for t in b.turns]
+
+
+def test_hands_stay_at_size_six():
+    players = make_random_players()
+    result = play_game(players, rng_seed="test")
+    # The engine should never have left a player with fewer than 6 cards mid-game,
+    # because reshuffling keeps the deck non-empty.
+    for snap in result.hand_size_snapshots:
+        for size in snap.values():
+            assert size == 6, f"hand shrank to {size}"
+
+
+def test_storyteller_rotates():
+    players = make_random_players(3)  # 3 players, easier to verify rotation
+    result = play_game(players, rng_seed="test")
+    expected_storytellers = [players[i % 3].model_id for i in range(len(result.turns))]
+    actual = [t.storyteller for t in result.turns]
+    assert actual == expected_storytellers
+
+
+def test_face_up_order_includes_storyteller_card():
+    players = make_random_players()
+    result = play_game(players, rng_seed="test")
+    for t in result.turns:
+        if t.face_up_order:
+            assert t.storyteller_card in t.face_up_order
