@@ -101,3 +101,23 @@ def test_openai_adapter_returns_card_id_on_valid_response():
     player = OpenAIPlayer(client=fake_client)
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
+
+
+def test_gemini_adapter_returns_card_id_on_valid_response(monkeypatch):
+    import sys
+    from dixit_ai.players.gemini import GeminiPlayer
+
+    fake_part = MagicMock()
+    fake_part.from_text = lambda text: ("text", text)
+    fake_part.from_bytes = lambda data, mime_type: ("bytes", len(data))
+    fake_types = MagicMock(Part=fake_part, GenerateContentConfig=lambda **k: k)
+    monkeypatch.setitem(sys.modules, "google.genai.types", fake_types)
+
+    hand = [Card(id=11), Card(id=22)]
+    fake_resp = MagicMock(text='{"card": "A"}')
+    fake_client = MagicMock()
+    fake_client.models.generate_content.return_value = fake_resp
+
+    player = GeminiPlayer(client=fake_client)
+    chosen = player.pick_for_clue(hand, "x")
+    assert chosen in {11, 22}
