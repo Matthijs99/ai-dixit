@@ -34,6 +34,11 @@ def _is_amsterdam_midnight() -> bool:
     return datetime.now(AMSTERDAM).hour == 0
 
 
+def _now_iso_seconds() -> str:
+    """Amsterdam time, second precision — no microseconds in committed JSON."""
+    return datetime.now(tz=AMSTERDAM).replace(microsecond=0).isoformat()
+
+
 def _placements_from_scores(
     scores: dict[str, int], elo: dict[str, dict]
 ) -> list[str]:
@@ -116,13 +121,13 @@ def main(argv: list[str] | None = None) -> int:
         players = default_lineup()
 
     elo = load_elo()
-    started = datetime.now(tz=AMSTERDAM).isoformat()
+    started = _now_iso_seconds()
 
     try:
         result: GameResult = play_game(players, rng_seed=game_id)
     except Exception:
         # Catastrophic failure: write an error doc, still commit.
-        ended = datetime.now(tz=AMSTERDAM).isoformat()
+        ended = _now_iso_seconds()
         err_path = DATA_DIR / "games" / f"{game_id}.error.json"
         err_path.write_text(
             json.dumps(
@@ -148,7 +153,7 @@ def main(argv: list[str] | None = None) -> int:
         )
         return 2
 
-    ended = datetime.now(tz=AMSTERDAM).isoformat()
+    ended = _now_iso_seconds()
 
     # Update Elo.
     placements = _placements_from_scores(result.final_scores, elo)

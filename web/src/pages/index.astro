@@ -5,6 +5,9 @@ import { loadIndex, loadElo } from '../lib/data';
 const games = loadIndex().slice().reverse().slice(0, 30);
 const elo = loadElo();
 const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+// "2026-05-22T18:52:57.384263+02:00" → "2026-05-22 18:52" — drop the T,
+// microseconds, seconds and timezone offset for a tidier subtitle.
+const updatedAt = elo.updated_at.slice(0, 16).replace('T', ' ');
 ---
 <html lang="en">
 <head>
@@ -31,7 +34,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </head>
 <body>
   <main>
-    <p class="subtitle">AI Dixit · updated {elo.updated_at} · <a href={`${base}/about`}>about</a></p>
+    <p class="subtitle">AI Dixit · updated {updatedAt} · <a href={`${base}/about`}>about</a></p>
     <h1>Leaderboard</h1>
     <section><EloTable /></section>
 
