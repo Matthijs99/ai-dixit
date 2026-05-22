@@ -27,7 +27,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </head>
 <body>
   <main>
-    <p class="subtitle">AI Dixit · updated {elo.updated_at}</p>
+    <p class="subtitle">AI Dixit · updated {elo.updated_at} · <a href={`${base}/about`}>about</a></p>
     <h1>Leaderboard</h1>
     <section><EloTable /></section>
 

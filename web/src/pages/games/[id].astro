@@ -32,7 +32,9 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 </head>
 <body>
   <main>
-    <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · game {id}</p>
+    <p class="subtitle">
+      <a href={`${base}/`}>← leaderboard</a> · game {id} · <a href={`${base}/about`}>about</a>
+    </p>
     <h1>{id} · winner: {winner}</h1>
     <p class="subtitle">status: {game.status} · {game.turns.length} turns</p>
 

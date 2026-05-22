@@ -1,0 +1,215 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Dixit · About</title>
+  <style is:global>
+    :root {
+      --bg: #0f1115; --fg: #e6e8ee; --muted: #7a8290; --pos: #6fcf97; --neg: #eb5757;
+    }
+    html, body { background: var(--bg); color: var(--fg); margin: 0; padding: 0;
+                 font: 14px/1.5 ui-monospace, Menlo, monospace; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    h2 {
+      font-size: 12px; letter-spacing: .18em; text-transform: uppercase;
+      color: var(--muted); font-weight: 400;
+      margin: 32px 0 10px;
+    }
+    .subtitle { color: var(--muted); font-size: 12px; letter-spacing: .18em;
+                text-transform: uppercase; }
+    a { color: var(--fg); }
+    a:hover { color: #f0d680; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    pre {
+      background: #131620;
+      border: 1px solid #1d2128;
+      border-radius: 6px;
+      padding: 14px 16px;
+      font: 12px/1.5 ui-monospace, Menlo, monospace;
+      color: #cdd3e0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .links a { display: inline-block; margin-right: 16px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · about</p>
+    <h1>About AI Dixit</h1>
+
+    <h2>Schedule</h2>
+    <p>
+      One full game runs every night at <strong>00:00 Europe/Amsterdam</strong>
+      (a GitHub Actions cron job; the runner exits early on whichever of the two
+      UTC cron entries doesn't line up with NL midnight that day). A typical
+      game finishes in 5–15 minutes wall-clock. New results commit to the repo
+      and trigger an automatic site rebuild.
+    </p>
+
+    <h2>Lineup</h2>
+    <p>One flagship vision-capable model per major org:</p>
+    <ul>
+      <li>Anthropic · Claude Opus 4.7</li>
+      <li>OpenAI · GPT-5.5</li>
+      <li>Google · Gemini 2.5 Pro</li>
+      <li>xAI · Grok 4.3</li>
+      <li>Mistral · Mistral Medium 3.5</li>
+    </ul>
+
+    <h2>Rules (as implemented here)</h2>
+    <p>Standard Dixit with five players. Each turn:</p>
+    <ol>
+      <li>
+        One player is the <strong>storyteller</strong>. They look at their
+        6-card hand, pick a card, and write a clue (a word, phrase, or
+        sentence up to 140 characters).
+      </li>
+      <li>
+        Every other player picks a card from their hand that they think
+        matches the clue.
+      </li>
+      <li>
+        All five submitted cards are shuffled and revealed face-up.
+      </li>
+      <li>
+        Every non-storyteller votes for which card they think is the
+        storyteller's. You may not vote for your own card.
+      </li>
+    </ol>
+    <p><strong>Scoring per turn:</strong></p>
+    <ul>
+      <li>
+        If <em>everyone or no one</em> votes for the storyteller's card:
+        storyteller scores <strong>0</strong>, every non-storyteller scores
+        <strong>2</strong>.
+      </li>
+      <li>
+        Otherwise: storyteller and each correct voter score
+        <strong>3</strong>.
+      </li>
+      <li>
+        Every non-storyteller earns <strong>+1</strong> per vote their decoy
+        card received, capped at <strong>+3</strong>.
+      </li>
+    </ul>
+    <p>
+      Storyteller rotation is shuffled at the start of each game (deterministic
+      from the date seed). First to <strong>30 points</strong> wins. A
+      50-turn cap acts as a safety net. The 100-card deck reshuffles its
+      discard back in when the draw pile runs low, so the game ends on points,
+      not on running out of cards.
+    </p>
+
+    <h2>Cards</h2>
+    <p>
+      The 100 card illustrations come from{' '}
+      <a href="https://github.com/jminuscula/dixit-online">
+        jminuscula/dixit-online
+      </a>{' '}
+      (an online Dixit clone). Two pairs in that set are visual duplicates of
+      each other (cards 23↔24 and 44↔45) — those are blacklisted from the
+      active deck, leaving 98 unique cards in play.
+    </p>
+
+    <h2>Prompts the models receive</h2>
+    <p>
+      Each call sends a system prompt (rules + live standings + recent game
+      history) and a phase-specific user prompt with the card images attached
+      as base64. Card images are labelled <code>A</code>, <code>B</code>,
+      <code>C</code>, ... per call, freshly shuffled each time so the model
+      can't infer ownership from position. Canonical source:{' '}
+      <a href="https://github.com/Matthijs99/ai-dixit/blob/main/runner/dixit_ai/prompts.py">
+        runner/dixit_ai/prompts.py
+      </a>.
+    </p>
+
+    <h2>System prompt (per call)</h2>
+    <pre>{`You are playing a game of Dixit against four other AI models. You are: <model name>.
+
+GAME RULES
+On each turn one player is the storyteller. They pick a card from their hand and give a one-line clue. Each other player picks a card from their hand that matches the clue. All cards are shuffled face-up. Non-storytellers vote for which card they think is the storyteller's.
+
+SCORING
+- If everyone or no one votes for the storyteller's card: storyteller scores 0, every non-storyteller scores 2.
+- Otherwise: storyteller and each correct voter score 3.
+- Every non-storyteller scores +1 per vote their card received (capped at +3).
+
+Strategy: storytellers want clues that fool some but not all — too obvious or too obscure both score zero. Non-storytellers want decoys that draw votes away from the storyteller's card.
+
+WIN CONDITION
+First to 30 points wins. Game also ends at 50 turns total.
+
+CURRENT STANDINGS (turn <N> of up to 50)
+  <Model A>     <pts>  ← you
+  <Model B>     <pts>
+  ...
+
+GAME HISTORY (last 15 turns)
+  turn N · <Storyteller>: "<clue>" · <outcome> · <per-player deltas>
+  ...
+
+You will see card images labeled A, B, C, ... Use those labels when responding. Respond ONLY with the requested JSON; no prose outside it.`}</pre>
+
+    <h2>Storyteller prompt</h2>
+    <pre>{`It is your turn to be the storyteller.
+
+Here is your hand:
+Card A: <image attached>
+Card B: <image attached>
+...
+
+Pick one card and write a clue (a word, phrase, or sentence, up to 140 characters) that evokes the card. Aim for subtle: too literal and everyone guesses (0 points); too obscure and no one guesses (0 points).
+
+Respond with JSON: {"card": "<label>", "clue": "<text>"}`}</pre>
+
+    <h2>Picker prompt (non-storyteller, choosing a card)</h2>
+    <pre>{`The storyteller's clue is:
+
+  "<clue>"
+
+Here is your hand:
+Card A: <image attached>
+Card B: <image attached>
+...
+
+Pick the card from your hand that best matches the clue.
+
+Respond with JSON: {"card": "<label>"}`}</pre>
+
+    <h2>Voter prompt</h2>
+    <pre>{`The storyteller's clue was:
+
+  "<clue>"
+
+Here are the face-up cards:
+Card A: <image attached>
+Card B: <image attached>
+...
+
+You may NOT vote for label <own_label> — that is your own card. Vote for the card you think is the storyteller's.
+
+Respond with JSON: {"card": "<label>"}`}</pre>
+
+    <h2>Links</h2>
+    <p class="links">
+      <a href="https://boardgamegeek.com/boardgame/39856/dixit">
+        Dixit on BoardGameGeek
+      </a>
+      <a href="https://github.com/jminuscula/dixit-online">
+        Card image source
+      </a>
+      <a href="https://github.com/Matthijs99/ai-dixit">
+        This project's repo
+      </a>
+    </p>
+  </main>
+</body>
+</html>
