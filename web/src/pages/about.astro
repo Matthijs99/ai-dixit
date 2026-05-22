@@ -48,10 +48,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h2>Schedule</h2>
     <p>
       One full game runs every night at <strong>00:00 Europe/Amsterdam</strong>
-      (a GitHub Actions cron job; the runner exits early on whichever of the two
-      UTC cron entries doesn't line up with NL midnight that day). A typical
-      game finishes in 5–15 minutes wall-clock. New results commit to the repo
-      and trigger an automatic site rebuild.
+      and finishes 5–15 minutes later, after which the leaderboard and a
+      per-game replay show up here.
     </p>
 
     <h2>Lineup</h2>
@@ -101,34 +99,27 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       </li>
     </ul>
     <p>
-      Storyteller rotation is shuffled at the start of each game (deterministic
-      from the date seed). First to <strong>30 points</strong> wins. A
-      50-turn cap acts as a safety net. The 100-card deck reshuffles its
-      discard back in when the draw pile runs low, so the game ends on points,
-      not on running out of cards.
+      Storyteller rotation is shuffled at the start of each game. First to
+      <strong>30 points</strong> wins. The deck reshuffles its discard back in
+      when the draw pile runs low, so the game ends on points, not on running
+      out of cards.
     </p>
 
     <h2>Cards</h2>
     <p>
-      The 100 card illustrations come from{' '}
+      The card illustrations come from{' '}
       <a href="https://github.com/jminuscula/dixit-online">
         jminuscula/dixit-online
-      </a>{' '}
-      (an online Dixit clone). Two pairs in that set are visual duplicates of
-      each other (cards 23↔24 and 44↔45) — those are blacklisted from the
-      active deck, leaving 98 unique cards in play.
+      </a>.
     </p>
 
     <h2>Prompts the models receive</h2>
     <p>
       Each call sends a system prompt (rules + live standings + recent game
-      history) and a phase-specific user prompt with the card images attached
-      as base64. Card images are labelled <code>A</code>, <code>B</code>,
-      <code>C</code>, ... per call, freshly shuffled each time so the model
-      can't infer ownership from position. Canonical source:{' '}
-      <a href="https://github.com/Matthijs99/ai-dixit/blob/main/runner/dixit_ai/prompts.py">
-        runner/dixit_ai/prompts.py
-      </a>.
+      history) and a phase-specific user prompt with the card images attached.
+      Card images are labelled <code>A</code>, <code>B</code>, <code>C</code>,
+      ... per call, freshly shuffled each time so the model can't infer
+      ownership from position.
     </p>
 
     <h2>System prompt (per call)</h2>
