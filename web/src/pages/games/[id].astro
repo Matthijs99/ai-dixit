@@ -13,6 +13,7 @@ const { id } = Astro.params as { id: string };
 const game = loadGame(id);
 const winner = Object.entries(game.final_scores)
   .sort((a, b) => b[1] - a[1])[0]?.[0];
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 ---
 <html lang="en">
 <head>
@@ -31,7 +32,7 @@ const winner = Object.entries(game.final_scores)
 </head>
 <body>
   <main>
-    <p class="subtitle"><a href="/">← leaderboard</a> · game {id}</p>
+    <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · game {id}</p>
     <h1>{id} · winner: {winner}</h1>
     <p class="subtitle">status: {game.status} · {game.turns.length} turns</p>
 
