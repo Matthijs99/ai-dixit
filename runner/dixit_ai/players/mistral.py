@@ -1,4 +1,4 @@
-"""Mistral Pixtral Large adapter via response_format=json_object."""
+"""Mistral Medium 3.5 adapter via response_format=json_object."""
 
 from __future__ import annotations
 
@@ -8,12 +8,12 @@ from typing import Any
 
 from dixit_ai.players.base import BaseAdapter
 
-MODEL = "pixtral-large-latest"
+MODEL = "mistral-medium-3.5"
 
 
-class PixtralPlayer(BaseAdapter):
-    model_id = "pixtral-large"
-    display_name = "Pixtral Large"
+class MistralPlayer(BaseAdapter):
+    model_id = "mistral-medium-3.5"
+    display_name = "Mistral Medium 3.5"
     org = "Mistral"
 
     def __init__(self, client: Any = None) -> None:

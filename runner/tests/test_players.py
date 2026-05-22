@@ -103,8 +103,8 @@ def test_openai_adapter_returns_card_id_on_valid_response():
     assert chosen in {11, 22}
 
 
-def test_pixtral_adapter_returns_card_id_on_valid_response():
-    from dixit_ai.players.pixtral import PixtralPlayer
+def test_mistral_adapter_returns_card_id_on_valid_response():
+    from dixit_ai.players.mistral import MistralPlayer
 
     hand = [Card(id=11), Card(id=22)]
     fake_choice = MagicMock(message=MagicMock(content='{"card": "A"}'))
@@ -112,7 +112,7 @@ def test_pixtral_adapter_returns_card_id_on_valid_response():
     fake_client = MagicMock()
     fake_client.chat.complete.return_value = fake_resp
 
-    player = PixtralPlayer(client=fake_client)
+    player = MistralPlayer(client=fake_client)
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
 

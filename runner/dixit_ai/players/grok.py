@@ -7,13 +7,13 @@ from typing import Any
 
 from dixit_ai.players.openai import OpenAIPlayer
 
-MODEL = "grok-4"
+MODEL = "grok-4.3"
 BASE_URL = "https://api.x.ai/v1"
 
 
 class GrokPlayer(OpenAIPlayer):
     model_id = MODEL
-    display_name = "Grok 4"
+    display_name = "Grok 4.3"
     org = "xAI"
 
     def __init__(self, client: Any = None) -> None:

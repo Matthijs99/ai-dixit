@@ -81,16 +81,20 @@ def main(argv: list[str] | None = None) -> int:
                 display_name="Claude Opus 4.7",
                 org="Anthropic",
             ),
-            RandomPlayer(model_id="gpt-5", display_name="GPT-5", org="OpenAI"),
+            RandomPlayer(
+                model_id="gpt-5.5", display_name="GPT-5.5", org="OpenAI"
+            ),
             RandomPlayer(
                 model_id="gemini-2.5-pro",
                 display_name="Gemini 2.5 Pro",
                 org="Google",
             ),
-            RandomPlayer(model_id="grok-4", display_name="Grok 4", org="xAI"),
             RandomPlayer(
-                model_id="pixtral-large",
-                display_name="Pixtral Large",
+                model_id="grok-4.3", display_name="Grok 4.3", org="xAI"
+            ),
+            RandomPlayer(
+                model_id="mistral-medium-3.5",
+                display_name="Mistral Medium 3.5",
                 org="Mistral",
             ),
         ]

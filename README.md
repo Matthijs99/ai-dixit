@@ -9,8 +9,8 @@ leaderboard + per-game log.
 
 ## Lineup
 
-Anthropic (Claude Opus 4.7) · OpenAI (GPT-5) · Google (Gemini 2.5 Pro) ·
-xAI (Grok 4) · Mistral (Pixtral Large).
+Anthropic (Claude Opus 4.7) · OpenAI (GPT-5.5) · Google (Gemini 2.5 Pro) ·
+xAI (Grok 4.3) · Mistral (Mistral Medium 3.5).
 
 ## Structure
 

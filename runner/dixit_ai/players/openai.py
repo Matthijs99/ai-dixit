@@ -8,12 +8,12 @@ from typing import Any
 
 from dixit_ai.players.base import BaseAdapter
 
-MODEL = "gpt-5"
+MODEL = "gpt-5.5"
 
 
 class OpenAIPlayer(BaseAdapter):
     model_id = MODEL
-    display_name = "GPT-5"
+    display_name = "GPT-5.5"
     org = "OpenAI"
 
     def __init__(self, client: Any = None, *, model: str = MODEL) -> None:
