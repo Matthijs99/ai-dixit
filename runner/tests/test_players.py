@@ -73,6 +73,7 @@ def test_adapter_succeeds_on_second_try():
 
 from unittest.mock import MagicMock
 from dixit_ai.players.claude import ClaudePlayer
+from dixit_ai.players.openai import OpenAIPlayer
 
 def test_claude_adapter_returns_card_id_on_valid_response():
     hand = [Card(id=11), Card(id=22)]
@@ -88,3 +89,15 @@ def test_claude_adapter_returns_card_id_on_valid_response():
     chosen = player.pick_for_clue(hand, "soft wind")
     assert chosen in {11, 22}
     fake_client.messages.create.assert_called_once()
+
+
+def test_openai_adapter_returns_card_id_on_valid_response():
+    hand = [Card(id=11), Card(id=22)]
+    fake_choice = MagicMock(message=MagicMock(content='{"card": "A"}'))
+    fake_resp = MagicMock(choices=[fake_choice])
+    fake_client = MagicMock()
+    fake_client.chat.completions.create.return_value = fake_resp
+
+    player = OpenAIPlayer(client=fake_client)
+    chosen = player.pick_for_clue(hand, "x")
+    assert chosen in {11, 22}
