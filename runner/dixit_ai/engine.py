@@ -2,12 +2,15 @@
 
 from __future__ import annotations
 
+import logging
 import random
 from dataclasses import dataclass, field
 from typing import Mapping, Sequence
 
 from dixit_ai.cards import Card, CardId, Deck
 from dixit_ai.players.base import MoveError, Player
+
+log = logging.getLogger(__name__)
 
 
 ModelId = str
@@ -104,6 +107,8 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
     by_id = {p.model_id: p for p in players}
     order = [p.model_id for p in players]
 
+    log.info("game start · seed=%s · players=%s", rng_seed, order)
+
     turn_index = 0
     status = "turn_limit"
 
@@ -114,6 +119,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
 
         storyteller_id = order[turn_index % len(order)]
         storyteller = by_id[storyteller_id]
+        log.info("turn %d · storyteller=%s", turn_index + 1, storyteller_id)
 
         record = TurnRecord(
             turn=turn_index,
@@ -149,6 +155,7 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
         record.clue = clue
         record.storyteller_card = story_card_id
         record.submissions[storyteller_id] = story_card_id
+        log.info("  clue: %r (card %d)", clue, story_card_id)
 
         # b. Other players pick.
         for pid in order:
@@ -197,6 +204,11 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
             totals[pid] += delta[pid]
         record.scores_delta = delta
         record.scores_total = dict(totals)
+        log.info(
+            "  scores: %s%s",
+            ", ".join(f"{p}={totals[p]}({delta[p]:+d})" for p in order),
+            f" · degraded: {record.degraded}" if record.degraded else "",
+        )
 
         # f. Played cards → discard, and remove from each owner's hand.
         for cid in record.submissions.values():
@@ -217,6 +229,12 @@ def play_game(players: Sequence[Player], rng_seed: str = "default") -> GameResul
         turn_index += 1
 
     winner = max(totals, key=lambda p: totals[p]) if totals else None
+    log.info(
+        "game end · status=%s · winner=%s · final=%s",
+        status,
+        winner,
+        ", ".join(f"{p}={totals[p]}" for p in order),
+    )
     return GameResult(
         turns=turns,
         final_scores=dict(totals),

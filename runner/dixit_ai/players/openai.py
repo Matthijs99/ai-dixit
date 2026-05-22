@@ -6,6 +6,8 @@ import base64
 import os
 from typing import Any
 
+from openai import OpenAI
+
 from dixit_ai.players.base import BaseAdapter
 
 MODEL = "gpt-5.5"
@@ -18,10 +20,7 @@ class OpenAIPlayer(BaseAdapter):
 
     def __init__(self, client: Any = None, *, model: str = MODEL) -> None:
         super().__init__()
-        if client is None:
-            from openai import OpenAI
-            client = OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-        self.client = client
+        self.client = client or OpenAI(api_key=os.environ["OPENAI_API_KEY"])
         self._model = model
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:

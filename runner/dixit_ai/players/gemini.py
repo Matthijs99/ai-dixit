@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 from typing import Any
 
+from google import genai
+
 from dixit_ai.players.base import BaseAdapter
 
 MODEL = "gemini-2.5-pro"
@@ -17,10 +19,7 @@ class GeminiPlayer(BaseAdapter):
 
     def __init__(self, client: Any = None) -> None:
         super().__init__()
-        if client is None:
-            from google import genai
-            client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
-        self.client = client
+        self.client = client or genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
         from google.genai.types import Part, GenerateContentConfig

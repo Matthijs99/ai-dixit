@@ -5,6 +5,8 @@ from __future__ import annotations
 import os
 from typing import Any
 
+from openai import OpenAI
+
 from dixit_ai.players.openai import OpenAIPlayer
 
 MODEL = "grok-4.3"
@@ -17,7 +19,7 @@ class GrokPlayer(OpenAIPlayer):
     org = "xAI"
 
     def __init__(self, client: Any = None) -> None:
-        if client is None:
-            from openai import OpenAI
-            client = OpenAI(api_key=os.environ["XAI_API_KEY"], base_url=BASE_URL)
-        super().__init__(client=client, model=MODEL)
+        super().__init__(
+            client=client or OpenAI(api_key=os.environ["XAI_API_KEY"], base_url=BASE_URL),
+            model=MODEL,
+        )

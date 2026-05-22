@@ -7,6 +7,8 @@ import json
 import os
 from typing import Any
 
+from anthropic import Anthropic
+
 from dixit_ai.players.base import BaseAdapter
 
 MODEL = "claude-opus-4-7"
@@ -19,10 +21,7 @@ class ClaudePlayer(BaseAdapter):
 
     def __init__(self, client: Any = None) -> None:
         super().__init__()
-        if client is None:
-            from anthropic import Anthropic
-            client = Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-        self.client = client
+        self.client = client or Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
         system = next((m["content"] for m in messages if m["role"] == "system"), "")

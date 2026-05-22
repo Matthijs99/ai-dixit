@@ -6,6 +6,8 @@ import base64
 import os
 from typing import Any
 
+from mistralai.client import Mistral
+
 from dixit_ai.players.base import BaseAdapter
 
 MODEL = "mistral-medium-3.5"
@@ -18,10 +20,7 @@ class MistralPlayer(BaseAdapter):
 
     def __init__(self, client: Any = None) -> None:
         super().__init__()
-        if client is None:
-            from mistralai.client import Mistral
-            client = Mistral(api_key=os.environ["MISTRAL_API_KEY"])
-        self.client = client
+        self.client = client or Mistral(api_key=os.environ["MISTRAL_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
         system = next((m["content"] for m in messages if m["role"] == "system"), "")

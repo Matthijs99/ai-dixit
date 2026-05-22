@@ -3,8 +3,10 @@
 from __future__ import annotations
 
 import json
+import logging
 import random
 import string
+import time
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Protocol
@@ -12,6 +14,8 @@ from typing import Protocol
 from pydantic import BaseModel, Field, ValidationError
 
 from dixit_ai.cards import Card, CardId, card_image_path
+
+log = logging.getLogger(__name__)
 
 
 class MoveError(Exception):
@@ -202,6 +206,7 @@ class BaseAdapter(ABC):
         last_error: str | None = None
 
         for attempt in (1, 2):
+            t0 = time.monotonic()
             try:
                 raw = self._call(
                     messages=messages,
@@ -210,14 +215,22 @@ class BaseAdapter(ABC):
                 )
             except Exception as exc:
                 last_error = f"sdk error: {exc}"
+                log.warning(
+                    "    %s %s try %d failed: %s",
+                    self.model_id, phase, attempt, last_error,
+                )
                 self._record(phase, lh, "<sdk error>", "", None, attempt, last_error)
-                # Try a retry by re-issuing same prompt; no need to add a fake assistant turn.
                 continue
+            dt = time.monotonic() - t0
 
             try:
                 parsed = _loose_parse(raw)
             except Exception as exc:
                 last_error = f"json parse: {exc}"
+                log.warning(
+                    "    %s %s try %d bad json (%.1fs): %s",
+                    self.model_id, phase, attempt, dt, last_error,
+                )
                 self._record(phase, lh, messages_text(messages), raw, None, attempt, last_error)
                 messages = _append_retry_turn(messages, raw, last_error)
                 continue
@@ -226,10 +239,15 @@ class BaseAdapter(ABC):
                 result = validator(parsed)
             except (ValidationError, ValueError) as exc:
                 last_error = f"validation: {exc}"
+                log.warning(
+                    "    %s %s try %d illegal (%.1fs): %s",
+                    self.model_id, phase, attempt, dt, last_error,
+                )
                 self._record(phase, lh, messages_text(messages), raw, parsed, attempt, last_error)
                 messages = _append_retry_turn(messages, raw, last_error)
                 continue
 
+            log.info("    %s %s ok (%.1fs)", self.model_id, phase, dt)
             self._record(phase, lh, messages_text(messages), raw, parsed, attempt, None)
             return result
 
