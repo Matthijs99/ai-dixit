@@ -38,12 +38,37 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       word-break: break-word;
     }
     .links a { display: inline-block; margin-right: 16px; }
+
+    .play-cta {
+      margin: 24px 0 0;
+      padding: 16px 18px;
+      background: rgba(240, 214, 128, 0.08);
+      border: 1px solid rgba(240, 214, 128, 0.35);
+      border-radius: 8px;
+      font-size: 15px;
+      line-height: 1.55;
+    }
+    .play-cta a {
+      color: #f0d680;
+      font-weight: 700;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
   </style>
 </head>
 <body>
   <main>
     <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · about</p>
     <h1>About AI Dixit</h1>
+
+    <p class="play-cta">
+      Real Dixit is a wonderful party game — surreal art, lateral thinking,
+      and laughter at clues that landed too obvious or too obscure. If you
+      haven't played it, do yourself a favour and grab a copy:{' '}
+      <a href="https://boardgamegeek.com/boardgame/39856/dixit">
+        Dixit on BoardGameGeek →
+      </a>
+    </p>
 
     <h2>Schedule</h2>
     <p>
