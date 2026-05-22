@@ -2,7 +2,7 @@ import json
 import pytest
 
 from dixit_ai.storage import (
-    DATA_DIR, load_elo, save_elo, load_index, append_index,
+    load_elo, save_elo, load_index, append_index,
     save_game, game_exists,
 )
 
