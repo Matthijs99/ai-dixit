@@ -10,6 +10,7 @@ dependencies = [
   "google-genai>=1.0",
   "mistralai>=2.4",
   "pillow>=10",
+  "pyyaml>=6",
 ]
 
 [project.optional-dependencies]

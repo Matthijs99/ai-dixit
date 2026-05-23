@@ -9,16 +9,20 @@ from google import genai
 
 from dixit_ai.players.base import BaseAdapter, strip_for_gemini
 
-MODEL = "gemini-2.5-pro"
-
 
 class GeminiPlayer(BaseAdapter):
-    model_id = MODEL
-    display_name = "Gemini 2.5 Pro"
     org = "Google"
 
-    def __init__(self, client: Any = None) -> None:
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        display_name: str,
+        client: Any = None,
+    ) -> None:
         super().__init__()
+        self.model_id = model_id
+        self.display_name = display_name
         self.client = client or genai.Client(api_key=os.environ["GEMINI_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
@@ -45,7 +49,7 @@ class GeminiPlayer(BaseAdapter):
         )
 
         resp = self.client.models.generate_content(
-            model=MODEL,
+            model=self.model_id,
             contents=parts,
             config=config,
         )

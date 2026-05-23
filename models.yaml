@@ -1,0 +1,28 @@
+# Nightly Dixit player roster. Edit here to add, remove, or swap models.
+#
+# Each entry instantiates one adapter:
+#   adapter      — which adapter class to use (claude | openai | gemini | grok | mistral)
+#   model_id     — the provider's API model ID (must be vision-capable)
+#   display_name — what the leaderboard shows
+#   previous_ids — optional list of prior model_ids whose Elo history this entry inherits
+#
+# Audit notes (May 2026): all 5 picks are the current flagship from each lab.
+# Gemini 2.5 Pro has a deprecation flagged for ~2026-06-17 — verify against
+# https://ai.google.dev/gemini-api/docs/deprecations before swapping.
+
+players:
+  - adapter: claude
+    model_id: claude-opus-4-7
+    display_name: Claude Opus 4.7
+  - adapter: openai
+    model_id: gpt-5.5
+    display_name: GPT-5.5
+  - adapter: gemini
+    model_id: gemini-2.5-pro
+    display_name: Gemini 2.5 Pro
+  - adapter: grok
+    model_id: grok-4.3
+    display_name: Grok 4.3
+  - adapter: mistral
+    model_id: mistral-medium-3.5
+    display_name: Mistral Medium 3.5

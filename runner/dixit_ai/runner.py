@@ -11,7 +11,7 @@ import traceback
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from dixit_ai.elo import update_ratings
+from dixit_ai.elo import ensure_model_entries, update_ratings
 from dixit_ai.engine import GameResult, play_game
 from dixit_ai.players.base import BaseAdapter
 from dixit_ai.storage import (
@@ -90,37 +90,33 @@ def main(argv: list[str] | None = None) -> int:
         return 0
 
     if args.mock_players:
+        from dixit_ai.players import load_roster
         from dixit_ai.players.random_player import RandomPlayer
 
-        players = [
-            RandomPlayer(
-                model_id="claude-opus-4-7",
-                display_name="Claude Opus 4.7",
-                org="Anthropic",
-            ),
-            RandomPlayer(
-                model_id="gpt-5.5", display_name="GPT-5.5", org="OpenAI"
-            ),
-            RandomPlayer(
-                model_id="gemini-2.5-pro",
-                display_name="Gemini 2.5 Pro",
-                org="Google",
-            ),
-            RandomPlayer(
-                model_id="grok-4.3", display_name="Grok 4.3", org="xAI"
-            ),
-            RandomPlayer(
-                model_id="mistral-medium-3.5",
-                display_name="Mistral Medium 3.5",
-                org="Mistral",
-            ),
-        ]
+        # Adapter name → org. Keep this small map in sync with players/__init__.py.
+        _ORGS = {
+            "claude": "Anthropic",
+            "openai": "OpenAI",
+            "gemini": "Google",
+            "grok": "xAI",
+            "mistral": "Mistral",
+        }
+        players = []
+        for entry in load_roster():
+            player = RandomPlayer(
+                model_id=entry["model_id"],
+                display_name=entry["display_name"],
+                org=_ORGS.get(entry["adapter"], "random"),
+            )
+            player.previous_ids = list(entry.get("previous_ids") or [])
+            players.append(player)
     else:
         from dixit_ai.players import default_lineup
 
         players = default_lineup()
 
     elo = load_elo()
+    ensure_model_entries(elo, players)
     started = _now_iso_seconds()
 
     try:

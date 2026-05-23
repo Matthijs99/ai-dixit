@@ -11,16 +11,20 @@ from anthropic import Anthropic
 
 from dixit_ai.players.base import BaseAdapter
 
-MODEL = "claude-opus-4-7"
-
 
 class ClaudePlayer(BaseAdapter):
-    model_id = MODEL
-    display_name = "Claude Opus 4.7"
     org = "Anthropic"
 
-    def __init__(self, client: Any = None) -> None:
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        display_name: str,
+        client: Any = None,
+    ) -> None:
         super().__init__()
+        self.model_id = model_id
+        self.display_name = display_name
         self.client = client or Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
@@ -58,7 +62,7 @@ class ClaudePlayer(BaseAdapter):
         }
 
         resp = self.client.messages.create(
-            model=MODEL,
+            model=self.model_id,
             max_tokens=512,
             system=system,
             tools=[tool],

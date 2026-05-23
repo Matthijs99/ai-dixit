@@ -10,16 +10,20 @@ from mistralai.client import Mistral
 
 from dixit_ai.players.base import BaseAdapter
 
-MODEL = "mistral-medium-3.5"
-
 
 class MistralPlayer(BaseAdapter):
-    model_id = "mistral-medium-3.5"
-    display_name = "Mistral Medium 3.5"
     org = "Mistral"
 
-    def __init__(self, client: Any = None) -> None:
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        display_name: str,
+        client: Any = None,
+    ) -> None:
         super().__init__()
+        self.model_id = model_id
+        self.display_name = display_name
         self.client = client or Mistral(api_key=os.environ["MISTRAL_API_KEY"])
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
@@ -49,7 +53,7 @@ class MistralPlayer(BaseAdapter):
             ms_messages.append(m)
 
         resp = self.client.chat.complete(
-            model=MODEL,
+            model=self.model_id,
             messages=ms_messages,
             response_format={"type": "json_object"},
         )

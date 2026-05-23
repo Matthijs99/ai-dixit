@@ -2,9 +2,54 @@
 
 from __future__ import annotations
 
-from typing import Mapping, Sequence
+import logging
+from typing import Any, Iterable, Mapping, Sequence
 
 K = 32.0
+INITIAL_RATING = 1500.0
+
+log = logging.getLogger(__name__)
+
+
+def ensure_model_entries(elo: dict, players: Iterable[Any]) -> None:
+    """Make sure every player has an entry in elo["models"].
+
+    For a player whose model_id isn't present, carry over the rating, games,
+    and wins from the first matching `previous_ids` entry that *is* present.
+    Otherwise initialize fresh at INITIAL_RATING. Mutates `elo` in place; the
+    original previous_ids entry is kept (as a retired record) so historical
+    games keep resolving.
+    """
+    models = elo.setdefault("models", {})
+    for p in players:
+        if p.model_id in models:
+            continue
+        prior = next(
+            (pid for pid in getattr(p, "previous_ids", []) if pid in models),
+            None,
+        )
+        if prior is not None:
+            src = models[prior]
+            log.info(
+                "elo: %s inheriting from %s (rating=%.2f, games=%d, wins=%d)",
+                p.model_id, prior, src["rating"], src["games"], src["wins"],
+            )
+            models[p.model_id] = {
+                "display_name": p.display_name,
+                "org": p.org,
+                "rating": src["rating"],
+                "games": src["games"],
+                "wins": src["wins"],
+            }
+        else:
+            log.info("elo: initializing %s at %.0f", p.model_id, INITIAL_RATING)
+            models[p.model_id] = {
+                "display_name": p.display_name,
+                "org": p.org,
+                "rating": INITIAL_RATING,
+                "games": 0,
+                "wins": 0,
+            }
 
 
 def expected_score(rating_a: float, rating_b: float) -> float:

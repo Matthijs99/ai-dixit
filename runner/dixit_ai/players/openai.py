@@ -10,18 +10,21 @@ from openai import OpenAI
 
 from dixit_ai.players.base import BaseAdapter
 
-MODEL = "gpt-5.5"
-
 
 class OpenAIPlayer(BaseAdapter):
-    model_id = MODEL
-    display_name = "GPT-5.5"
     org = "OpenAI"
 
-    def __init__(self, client: Any = None, *, model: str = MODEL) -> None:
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        display_name: str,
+        client: Any = None,
+    ) -> None:
         super().__init__()
+        self.model_id = model_id
+        self.display_name = display_name
         self.client = client or OpenAI(api_key=os.environ["OPENAI_API_KEY"])
-        self._model = model
 
     def _call(self, *, messages, schema, image_bytes_by_label) -> str:
         system = next((m["content"] for m in messages if m["role"] == "system"), "")
@@ -52,7 +55,7 @@ class OpenAIPlayer(BaseAdapter):
             oa_messages.append(m)
 
         resp = self.client.chat.completions.create(
-            model=self._model,
+            model=self.model_id,
             messages=oa_messages,
             response_format={
                 "type": "json_schema",

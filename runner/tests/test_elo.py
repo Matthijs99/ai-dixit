@@ -1,4 +1,14 @@
-from dixit_ai.elo import expected_score, update_ratings
+from dataclasses import dataclass, field
+
+from dixit_ai.elo import ensure_model_entries, expected_score, update_ratings
+
+
+@dataclass
+class _FakePlayer:
+    model_id: str
+    display_name: str
+    org: str
+    previous_ids: list[str] = field(default_factory=list)
 
 def test_expected_score_equal_ratings():
     assert abs(expected_score(1500, 1500) - 0.5) < 1e-9
@@ -62,3 +72,62 @@ def test_symmetry_same_rating_same_placement():
     # A finished above B and C; B above C.
     # The middle player B has 1 win (vs C) and 1 loss (vs A): net 0.
     assert round(new["B"] - 1500) == 0
+
+
+def test_ensure_entries_inits_fresh_for_new_model():
+    elo: dict = {"models": {}}
+    p = _FakePlayer(model_id="new", display_name="New", org="Lab")
+    ensure_model_entries(elo, [p])
+    assert elo["models"]["new"] == {
+        "display_name": "New",
+        "org": "Lab",
+        "rating": 1500.0,
+        "games": 0,
+        "wins": 0,
+    }
+
+
+def test_ensure_entries_carries_over_via_previous_ids():
+    elo: dict = {
+        "models": {
+            "old": {
+                "display_name": "Old",
+                "org": "Lab",
+                "rating": 1623.5,
+                "games": 7,
+                "wins": 2,
+            }
+        }
+    }
+    p = _FakePlayer(
+        model_id="new", display_name="New", org="Lab", previous_ids=["old"]
+    )
+    ensure_model_entries(elo, [p])
+    # New entry inherits rating/games/wins from "old".
+    assert elo["models"]["new"]["rating"] == 1623.5
+    assert elo["models"]["new"]["games"] == 7
+    assert elo["models"]["new"]["wins"] == 2
+    # New entry uses the new player's display_name, not the old one's.
+    assert elo["models"]["new"]["display_name"] == "New"
+    # Old entry is preserved as a retired record.
+    assert "old" in elo["models"]
+    assert elo["models"]["old"]["rating"] == 1623.5
+
+
+def test_ensure_entries_skips_existing():
+    elo: dict = {
+        "models": {
+            "x": {
+                "display_name": "X",
+                "org": "Lab",
+                "rating": 1700.0,
+                "games": 3,
+                "wins": 1,
+            }
+        }
+    }
+    p = _FakePlayer(model_id="x", display_name="Renamed", org="Lab")
+    ensure_model_entries(elo, [p])
+    # Existing entry is left untouched — display_name not overwritten.
+    assert elo["models"]["x"]["display_name"] == "X"
+    assert elo["models"]["x"]["rating"] == 1700.0

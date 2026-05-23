@@ -133,7 +133,9 @@ def test_claude_adapter_returns_card_id_on_valid_response():
     fake_client = MagicMock()
     fake_client.messages.create.return_value = fake_msg
 
-    player = ClaudePlayer(client=fake_client)
+    player = ClaudePlayer(
+        model_id="claude-test", display_name="Claude Test", client=fake_client
+    )
     chosen = player.pick_for_clue(hand, "soft wind")
     assert chosen in {11, 22}
     fake_client.messages.create.assert_called_once()
@@ -146,7 +148,9 @@ def test_openai_adapter_returns_card_id_on_valid_response():
     fake_client = MagicMock()
     fake_client.chat.completions.create.return_value = fake_resp
 
-    player = OpenAIPlayer(client=fake_client)
+    player = OpenAIPlayer(
+        model_id="gpt-test", display_name="GPT Test", client=fake_client
+    )
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
 
@@ -160,7 +164,9 @@ def test_mistral_adapter_returns_card_id_on_valid_response():
     fake_client = MagicMock()
     fake_client.chat.complete.return_value = fake_resp
 
-    player = MistralPlayer(client=fake_client)
+    player = MistralPlayer(
+        model_id="mistral-test", display_name="Mistral Test", client=fake_client
+    )
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
 
@@ -174,7 +180,9 @@ def test_grok_adapter_returns_card_id_on_valid_response():
     fake_client = MagicMock()
     fake_client.chat.completions.create.return_value = fake_resp
 
-    player = GrokPlayer(client=fake_client)
+    player = GrokPlayer(
+        model_id="grok-test", display_name="Grok Test", client=fake_client
+    )
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
 
@@ -194,6 +202,78 @@ def test_gemini_adapter_returns_card_id_on_valid_response(monkeypatch):
     fake_client = MagicMock()
     fake_client.models.generate_content.return_value = fake_resp
 
-    player = GeminiPlayer(client=fake_client)
+    player = GeminiPlayer(
+        model_id="gemini-test", display_name="Gemini Test", client=fake_client
+    )
     chosen = player.pick_for_clue(hand, "x")
     assert chosen in {11, 22}
+
+
+# ----- Loader tests -----
+
+def test_load_roster_reads_yaml(tmp_path, monkeypatch):
+    from dixit_ai.players import load_roster
+
+    yaml_path = tmp_path / "models.yaml"
+    yaml_path.write_text(
+        "players:\n"
+        "  - adapter: openai\n"
+        "    model_id: gpt-x\n"
+        "    display_name: GPT X\n"
+        "    previous_ids: [gpt-old]\n"
+    )
+    monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
+    roster = load_roster()
+    assert len(roster) == 1
+    assert roster[0]["model_id"] == "gpt-x"
+    assert roster[0]["previous_ids"] == ["gpt-old"]
+
+
+def test_default_lineup_instantiates_from_yaml(tmp_path, monkeypatch):
+    from dixit_ai.players import default_lineup
+
+    yaml_path = tmp_path / "models.yaml"
+    yaml_path.write_text(
+        "players:\n"
+        "  - adapter: openai\n"
+        "    model_id: gpt-x\n"
+        "    display_name: GPT X\n"
+        "    previous_ids: [gpt-old]\n"
+    )
+    monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
+    # Loader instantiates OpenAIPlayer which would need OPENAI_API_KEY.
+    monkeypatch.setenv("OPENAI_API_KEY", "test-key")
+    lineup = default_lineup()
+    assert len(lineup) == 1
+    assert lineup[0].model_id == "gpt-x"
+    assert lineup[0].display_name == "GPT X"
+    assert lineup[0].previous_ids == ["gpt-old"]
+
+
+def test_default_lineup_rejects_unknown_adapter(tmp_path, monkeypatch):
+    from dixit_ai.players import default_lineup
+
+    yaml_path = tmp_path / "models.yaml"
+    yaml_path.write_text(
+        "players:\n"
+        "  - adapter: nope\n"
+        "    model_id: x\n"
+        "    display_name: X\n"
+    )
+    monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
+    with pytest.raises(ValueError, match="unknown adapter"):
+        default_lineup()
+
+
+def test_default_lineup_rejects_missing_fields(tmp_path, monkeypatch):
+    from dixit_ai.players import default_lineup
+
+    yaml_path = tmp_path / "models.yaml"
+    yaml_path.write_text(
+        "players:\n"
+        "  - adapter: openai\n"
+        "    model_id: gpt-x\n"
+    )
+    monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
+    with pytest.raises(ValueError, match="display_name"):
+        default_lineup()

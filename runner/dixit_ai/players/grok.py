@@ -9,17 +9,21 @@ from openai import OpenAI
 
 from dixit_ai.players.openai import OpenAIPlayer
 
-MODEL = "grok-4.3"
 BASE_URL = "https://api.x.ai/v1"
 
 
 class GrokPlayer(OpenAIPlayer):
-    model_id = MODEL
-    display_name = "Grok 4.3"
     org = "xAI"
 
-    def __init__(self, client: Any = None) -> None:
+    def __init__(
+        self,
+        *,
+        model_id: str,
+        display_name: str,
+        client: Any = None,
+    ) -> None:
         super().__init__(
+            model_id=model_id,
+            display_name=display_name,
             client=client or OpenAI(api_key=os.environ["XAI_API_KEY"], base_url=BASE_URL),
-            model=MODEL,
         )
