@@ -1,0 +1,570 @@
+{
+  "game_id": "2026-05-24",
+  "status": "complete",
+  "started_at": "2026-05-24T00:18:08+02:00",
+  "ended_at": "2026-05-24T00:29:34+02:00",
+  "seed": "2026-05-24",
+  "players": [
+    "mistral-large-2512",
+    "claude-opus-4-7",
+    "gemini-3.1-pro-preview",
+    "grok-4.3",
+    "gpt-5.5"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "mistral-large-2512",
+      "clue": "A silent journey under the watchful eye of the night.",
+      "storyteller_card": 87,
+      "submissions": {
+        "mistral-large-2512": 87,
+        "claude-opus-4-7": 25,
+        "gemini-3.1-pro-preview": 11,
+        "grok-4.3": 2,
+        "gpt-5.5": 65
+      },
+      "face_up_order": [
+        25,
+        2,
+        11,
+        87,
+        65
+      ],
+      "votes": {
+        "claude-opus-4-7": 87,
+        "gemini-3.1-pro-preview": 87,
+        "grok-4.3": 87,
+        "gpt-5.5": 87
+      },
+      "scores_delta": {
+        "mistral-large-2512": 0,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 0,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "degraded": []
+    },
+    {
+      "turn": 1,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Between the lines, chores can wait",
+      "storyteller_card": 73,
+      "submissions": {
+        "claude-opus-4-7": 73,
+        "mistral-large-2512": 79,
+        "gemini-3.1-pro-preview": 21,
+        "grok-4.3": 1,
+        "gpt-5.5": 4
+      },
+      "face_up_order": [
+        1,
+        73,
+        79,
+        21,
+        4
+      ],
+      "votes": {
+        "mistral-large-2512": 73,
+        "gemini-3.1-pro-preview": 73,
+        "grok-4.3": 73,
+        "gpt-5.5": 73
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "mistral-large-2512": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 4,
+        "grok-4.3": 4,
+        "gpt-5.5": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 2,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "A midnight harvest.",
+      "storyteller_card": 92,
+      "submissions": {
+        "gemini-3.1-pro-preview": 92,
+        "mistral-large-2512": 62,
+        "claude-opus-4-7": 95,
+        "grok-4.3": 6,
+        "gpt-5.5": 49
+      },
+      "face_up_order": [
+        49,
+        92,
+        62,
+        95,
+        6
+      ],
+      "votes": {
+        "mistral-large-2512": 6,
+        "claude-opus-4-7": 6,
+        "grok-4.3": 95,
+        "gpt-5.5": 95
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "mistral-large-2512": 2,
+        "claude-opus-4-7": 4,
+        "grok-4.3": 4,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 4,
+        "claude-opus-4-7": 6,
+        "gemini-3.1-pro-preview": 4,
+        "grok-4.3": 8,
+        "gpt-5.5": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 3,
+      "storyteller": "grok-4.3",
+      "clue": "A village caught between two worlds",
+      "storyteller_card": 12,
+      "submissions": {
+        "grok-4.3": 12,
+        "mistral-large-2512": 14,
+        "claude-opus-4-7": 99,
+        "gemini-3.1-pro-preview": 70,
+        "gpt-5.5": 53
+      },
+      "face_up_order": [
+        12,
+        70,
+        53,
+        14,
+        99
+      ],
+      "votes": {
+        "mistral-large-2512": 12,
+        "claude-opus-4-7": 12,
+        "gemini-3.1-pro-preview": 12,
+        "gpt-5.5": 99
+      },
+      "scores_delta": {
+        "grok-4.3": 3,
+        "mistral-large-2512": 3,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 0
+      },
+      "scores_total": {
+        "mistral-large-2512": 7,
+        "claude-opus-4-7": 10,
+        "gemini-3.1-pro-preview": 7,
+        "grok-4.3": 11,
+        "gpt-5.5": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 4,
+      "storyteller": "gpt-5.5",
+      "clue": "The floor forgot it was a roof.",
+      "storyteller_card": 36,
+      "submissions": {
+        "gpt-5.5": 36,
+        "mistral-large-2512": 98,
+        "claude-opus-4-7": 10,
+        "gemini-3.1-pro-preview": 66,
+        "grok-4.3": 78
+      },
+      "face_up_order": [
+        66,
+        98,
+        10,
+        36,
+        78
+      ],
+      "votes": {
+        "mistral-large-2512": 78,
+        "claude-opus-4-7": 36,
+        "gemini-3.1-pro-preview": 36,
+        "grok-4.3": 36
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "mistral-large-2512": 0,
+        "claude-opus-4-7": 3,
+        "gemini-3.1-pro-preview": 3,
+        "grok-4.3": 4
+      },
+      "scores_total": {
+        "mistral-large-2512": 7,
+        "claude-opus-4-7": 13,
+        "gemini-3.1-pro-preview": 10,
+        "grok-4.3": 15,
+        "gpt-5.5": 9
+      },
+      "degraded": []
+    },
+    {
+      "turn": 5,
+      "storyteller": "mistral-large-2512",
+      "clue": "The weight of wings when the sky refuses to let go.",
+      "storyteller_card": 44,
+      "submissions": {
+        "mistral-large-2512": 44,
+        "claude-opus-4-7": 91,
+        "gemini-3.1-pro-preview": 74,
+        "grok-4.3": 7,
+        "gpt-5.5": 27
+      },
+      "face_up_order": [
+        27,
+        91,
+        44,
+        74,
+        7
+      ],
+      "votes": {
+        "claude-opus-4-7": 74,
+        "gemini-3.1-pro-preview": 27,
+        "grok-4.3": 74,
+        "gpt-5.5": 74
+      },
+      "scores_delta": {
+        "mistral-large-2512": 0,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 5,
+        "grok-4.3": 2,
+        "gpt-5.5": 3
+      },
+      "scores_total": {
+        "mistral-large-2512": 7,
+        "claude-opus-4-7": 15,
+        "gemini-3.1-pro-preview": 15,
+        "grok-4.3": 17,
+        "gpt-5.5": 12
+      },
+      "degraded": []
+    },
+    {
+      "turn": 6,
+      "storyteller": "claude-opus-4-7",
+      "clue": "One note out of place in the uniform.",
+      "storyteller_card": 96,
+      "submissions": {
+        "claude-opus-4-7": 96,
+        "mistral-large-2512": 9,
+        "gemini-3.1-pro-preview": 88,
+        "grok-4.3": 100,
+        "gpt-5.5": 38
+      },
+      "face_up_order": [
+        9,
+        100,
+        96,
+        88,
+        38
+      ],
+      "votes": {
+        "mistral-large-2512": 96,
+        "gemini-3.1-pro-preview": 96,
+        "grok-4.3": 96,
+        "gpt-5.5": 96
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "mistral-large-2512": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 9,
+        "claude-opus-4-7": 15,
+        "gemini-3.1-pro-preview": 17,
+        "grok-4.3": 19,
+        "gpt-5.5": 14
+      },
+      "degraded": []
+    },
+    {
+      "turn": 7,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Unraveling summer.",
+      "storyteller_card": 13,
+      "submissions": {
+        "gemini-3.1-pro-preview": 13,
+        "mistral-large-2512": 94,
+        "claude-opus-4-7": 50,
+        "grok-4.3": 63,
+        "gpt-5.5": 97
+      },
+      "face_up_order": [
+        50,
+        94,
+        13,
+        63,
+        97
+      ],
+      "votes": {
+        "mistral-large-2512": 13,
+        "claude-opus-4-7": 13,
+        "grok-4.3": 13,
+        "gpt-5.5": 13
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "mistral-large-2512": 2,
+        "claude-opus-4-7": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 11,
+        "claude-opus-4-7": 17,
+        "gemini-3.1-pro-preview": 17,
+        "grok-4.3": 21,
+        "gpt-5.5": 16
+      },
+      "degraded": []
+    },
+    {
+      "turn": 8,
+      "storyteller": "grok-4.3",
+      "clue": "A game against the frost",
+      "storyteller_card": 80,
+      "submissions": {
+        "grok-4.3": 80,
+        "mistral-large-2512": 22,
+        "claude-opus-4-7": 57,
+        "gemini-3.1-pro-preview": 82,
+        "gpt-5.5": 35
+      },
+      "face_up_order": [
+        80,
+        57,
+        22,
+        35,
+        82
+      ],
+      "votes": {
+        "mistral-large-2512": 80,
+        "claude-opus-4-7": 80,
+        "gemini-3.1-pro-preview": 80,
+        "gpt-5.5": 80
+      },
+      "scores_delta": {
+        "grok-4.3": 0,
+        "mistral-large-2512": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 13,
+        "claude-opus-4-7": 19,
+        "gemini-3.1-pro-preview": 19,
+        "grok-4.3": 21,
+        "gpt-5.5": 18
+      },
+      "degraded": []
+    },
+    {
+      "turn": 9,
+      "storyteller": "gpt-5.5",
+      "clue": "Which weighs more at midnight?",
+      "storyteller_card": 30,
+      "submissions": {
+        "gpt-5.5": 30,
+        "mistral-large-2512": 54,
+        "claude-opus-4-7": 23,
+        "gemini-3.1-pro-preview": 61,
+        "grok-4.3": 42
+      },
+      "face_up_order": [
+        61,
+        54,
+        30,
+        42,
+        23
+      ],
+      "votes": {
+        "mistral-large-2512": 30,
+        "claude-opus-4-7": 30,
+        "gemini-3.1-pro-preview": 30,
+        "grok-4.3": 30
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "mistral-large-2512": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 15,
+        "claude-opus-4-7": 21,
+        "gemini-3.1-pro-preview": 21,
+        "grok-4.3": 23,
+        "gpt-5.5": 18
+      },
+      "degraded": []
+    },
+    {
+      "turn": 10,
+      "storyteller": "mistral-large-2512",
+      "clue": "Floating memories in a room without doors.",
+      "storyteller_card": 77,
+      "submissions": {
+        "mistral-large-2512": 77,
+        "claude-opus-4-7": 59,
+        "gemini-3.1-pro-preview": 32,
+        "grok-4.3": 52,
+        "gpt-5.5": 93
+      },
+      "face_up_order": [
+        93,
+        77,
+        59,
+        52,
+        32
+      ],
+      "votes": {
+        "claude-opus-4-7": 77,
+        "gemini-3.1-pro-preview": 59,
+        "grok-4.3": 77,
+        "gpt-5.5": 77
+      },
+      "scores_delta": {
+        "mistral-large-2512": 3,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 0,
+        "grok-4.3": 3,
+        "gpt-5.5": 3
+      },
+      "scores_total": {
+        "mistral-large-2512": 18,
+        "claude-opus-4-7": 25,
+        "gemini-3.1-pro-preview": 21,
+        "grok-4.3": 26,
+        "gpt-5.5": 21
+      },
+      "degraded": []
+    },
+    {
+      "turn": 11,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Where the old roots keep their secrets lit",
+      "storyteller_card": 58,
+      "submissions": {
+        "claude-opus-4-7": 58,
+        "mistral-large-2512": 41,
+        "gemini-3.1-pro-preview": 3,
+        "grok-4.3": 37,
+        "gpt-5.5": 90
+      },
+      "face_up_order": [
+        41,
+        58,
+        90,
+        37,
+        3
+      ],
+      "votes": {
+        "mistral-large-2512": 58,
+        "gemini-3.1-pro-preview": 58,
+        "grok-4.3": 58,
+        "gpt-5.5": 58
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "mistral-large-2512": 2,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.3": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "mistral-large-2512": 20,
+        "claude-opus-4-7": 25,
+        "gemini-3.1-pro-preview": 23,
+        "grok-4.3": 28,
+        "gpt-5.5": 23
+      },
+      "degraded": []
+    },
+    {
+      "turn": 12,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Cupid's first day.",
+      "storyteller_card": 89,
+      "submissions": {
+        "gemini-3.1-pro-preview": 89,
+        "mistral-large-2512": 56,
+        "claude-opus-4-7": 28,
+        "grok-4.3": 68,
+        "gpt-5.5": 34
+      },
+      "face_up_order": [
+        56,
+        28,
+        89,
+        68,
+        34
+      ],
+      "votes": {
+        "mistral-large-2512": 28,
+        "claude-opus-4-7": 89,
+        "grok-4.3": 89,
+        "gpt-5.5": 89
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 3,
+        "mistral-large-2512": 0,
+        "claude-opus-4-7": 4,
+        "grok-4.3": 3,
+        "gpt-5.5": 3
+      },
+      "scores_total": {
+        "mistral-large-2512": 20,
+        "claude-opus-4-7": 29,
+        "gemini-3.1-pro-preview": 26,
+        "grok-4.3": 31,
+        "gpt-5.5": 26
+      },
+      "degraded": []
+    }
+  ],
+  "final_scores": {
+    "mistral-large-2512": 20,
+    "claude-opus-4-7": 29,
+    "gemini-3.1-pro-preview": 26,
+    "grok-4.3": 31,
+    "gpt-5.5": 26
+  },
+  "elo_before": {
+    "mistral-large-2512": 1386.34,
+    "claude-opus-4-7": 1507.23,
+    "gemini-3.1-pro-preview": 1468.0,
+    "grok-4.3": 1549.66,
+    "gpt-5.5": 1588.77
+  },
+  "elo_after": {
+    "mistral-large-2512": 1346.79,
+    "claude-opus-4-7": 1537.71,
+    "gemini-3.1-pro-preview": 1459.15,
+    "grok-4.3": 1602.8,
+    "gpt-5.5": 1553.55
+  }
+}

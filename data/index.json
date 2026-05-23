@@ -40,5 +40,26 @@
       "grok-4.3": -14.34,
       "claude-opus-4-7": 39.23
     }
+  },
+  {
+    "game_id": "2026-05-24",
+    "date": "2026-05-24",
+    "status": "complete",
+    "winner": "grok-4.3",
+    "turns": 13,
+    "final_scores": {
+      "mistral-large-2512": 20,
+      "claude-opus-4-7": 29,
+      "gemini-3.1-pro-preview": 26,
+      "grok-4.3": 31,
+      "gpt-5.5": 26
+    },
+    "elo_deltas": {
+      "mistral-large-2512": -39.55,
+      "claude-opus-4-7": 30.48,
+      "gemini-3.1-pro-preview": -8.85,
+      "grok-4.3": 53.14,
+      "gpt-5.5": -35.22
+    }
   }
 ]
