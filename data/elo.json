@@ -1,18 +1,18 @@
 {
-  "updated_at": "2026-05-24T00:29:34+02:00",
+  "updated_at": "2026-05-25T00:28:36+02:00",
   "models": {
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "rating": 1537.71,
-      "games": 3,
-      "wins": 0
+      "rating": 1593.84,
+      "games": 4,
+      "wins": 1
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1553.55,
-      "games": 3,
+      "rating": 1542.29,
+      "games": 4,
       "wins": 1
     },
     "gemini-2.5-pro": {
@@ -25,8 +25,8 @@
     "grok-4.3": {
       "display_name": "Grok 4.3",
       "org": "xAI",
-      "rating": 1602.8,
-      "games": 3,
+      "rating": 1613.29,
+      "games": 4,
       "wins": 2
     },
     "mistral-medium-3.5": {
@@ -39,15 +39,15 @@
     "gemini-3.1-pro-preview": {
       "display_name": "Gemini 3.1 Pro",
       "org": "Google",
-      "rating": 1459.15,
-      "games": 3,
+      "rating": 1436.21,
+      "games": 4,
       "wins": 0
     },
     "mistral-large-2512": {
       "display_name": "Mistral Large 3",
       "org": "Mistral",
-      "rating": 1346.79,
-      "games": 3,
+      "rating": 1314.37,
+      "games": 4,
       "wins": 0
     }
   }
