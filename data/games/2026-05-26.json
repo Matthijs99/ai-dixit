@@ -1,0 +1,611 @@
+{
+  "game_id": "2026-05-26",
+  "status": "complete",
+  "started_at": "2026-05-26T00:23:40+02:00",
+  "ended_at": "2026-05-26T00:35:31+02:00",
+  "seed": "2026-05-26",
+  "players": [
+    "gemini-3.1-pro-preview",
+    "claude-opus-4-7",
+    "gpt-5.5",
+    "mistral-large-2512",
+    "grok-4.3"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Iron Chef",
+      "storyteller_card": 9,
+      "submissions": {
+        "gemini-3.1-pro-preview": 9,
+        "claude-opus-4-7": 49,
+        "gpt-5.5": 41,
+        "mistral-large-2512": 80,
+        "grok-4.3": 50
+      },
+      "face_up_order": [
+        41,
+        80,
+        49,
+        9,
+        50
+      ],
+      "votes": {
+        "claude-opus-4-7": 9,
+        "gpt-5.5": 9,
+        "mistral-large-2512": 9,
+        "grok-4.3": 9
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "degraded": []
+    },
+    {
+      "turn": 1,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Offering a key to the lost wanderer",
+      "storyteller_card": 6,
+      "submissions": {
+        "claude-opus-4-7": 6,
+        "gemini-3.1-pro-preview": 61,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 7,
+        "grok-4.3": 59
+      },
+      "face_up_order": [
+        61,
+        7,
+        59,
+        2,
+        6
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 6,
+        "gpt-5.5": 6,
+        "mistral-large-2512": 6,
+        "grok-4.3": 6
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 4,
+        "mistral-large-2512": 4,
+        "grok-4.3": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 2,
+      "storyteller": "gpt-5.5",
+      "clue": "In the nave of older gods",
+      "storyteller_card": 51,
+      "submissions": {
+        "gpt-5.5": 51,
+        "gemini-3.1-pro-preview": 46,
+        "claude-opus-4-7": 72,
+        "mistral-large-2512": 15,
+        "grok-4.3": 77
+      },
+      "face_up_order": [
+        51,
+        15,
+        46,
+        77,
+        72
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 51,
+        "claude-opus-4-7": 51,
+        "mistral-large-2512": 46,
+        "grok-4.3": 15
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "gemini-3.1-pro-preview": 4,
+        "claude-opus-4-7": 3,
+        "mistral-large-2512": 1,
+        "grok-4.3": 0
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 6,
+        "claude-opus-4-7": 5,
+        "gpt-5.5": 7,
+        "mistral-large-2512": 5,
+        "grok-4.3": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 3,
+      "storyteller": "mistral-large-2512",
+      "clue": "A perch for the unexpected",
+      "storyteller_card": 74,
+      "submissions": {
+        "mistral-large-2512": 74,
+        "gemini-3.1-pro-preview": 91,
+        "claude-opus-4-7": 22,
+        "gpt-5.5": 33,
+        "grok-4.3": 54
+      },
+      "face_up_order": [
+        33,
+        74,
+        54,
+        22,
+        91
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 74,
+        "claude-opus-4-7": 74,
+        "gpt-5.5": 74,
+        "grok-4.3": 22
+      },
+      "scores_delta": {
+        "mistral-large-2512": 3,
+        "gemini-3.1-pro-preview": 3,
+        "claude-opus-4-7": 4,
+        "gpt-5.5": 3,
+        "grok-4.3": 0
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 9,
+        "claude-opus-4-7": 9,
+        "gpt-5.5": 10,
+        "mistral-large-2512": 8,
+        "grok-4.3": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 4,
+      "storyteller": "grok-4.3",
+      "clue": "The river flows from his beard",
+      "storyteller_card": 17,
+      "submissions": {
+        "grok-4.3": 17,
+        "gemini-3.1-pro-preview": 62,
+        "claude-opus-4-7": 97,
+        "gpt-5.5": 90,
+        "mistral-large-2512": 28
+      },
+      "face_up_order": [
+        90,
+        97,
+        28,
+        62,
+        17
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 17,
+        "claude-opus-4-7": 17,
+        "gpt-5.5": 17,
+        "mistral-large-2512": 17
+      },
+      "scores_delta": {
+        "grok-4.3": 0,
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 11,
+        "claude-opus-4-7": 11,
+        "gpt-5.5": 12,
+        "mistral-large-2512": 10,
+        "grok-4.3": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 5,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "The anatomy of a choice.",
+      "storyteller_card": 30,
+      "submissions": {
+        "gemini-3.1-pro-preview": 30,
+        "claude-opus-4-7": 36,
+        "gpt-5.5": 42,
+        "mistral-large-2512": 55,
+        "grok-4.3": 10
+      },
+      "face_up_order": [
+        36,
+        42,
+        30,
+        10,
+        55
+      ],
+      "votes": {
+        "claude-opus-4-7": 30,
+        "gpt-5.5": 30,
+        "mistral-large-2512": 30,
+        "grok-4.3": 30
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 11,
+        "claude-opus-4-7": 13,
+        "gpt-5.5": 14,
+        "mistral-large-2512": 12,
+        "grok-4.3": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 6,
+      "storyteller": "claude-opus-4-7",
+      "clue": "What was once below is now above",
+      "storyteller_card": 83,
+      "submissions": {
+        "claude-opus-4-7": 83,
+        "gemini-3.1-pro-preview": 66,
+        "gpt-5.5": 65,
+        "mistral-large-2512": 43,
+        "grok-4.3": 40
+      },
+      "face_up_order": [
+        43,
+        83,
+        66,
+        65,
+        40
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 83,
+        "gpt-5.5": 83,
+        "mistral-large-2512": 83,
+        "grok-4.3": 83
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 13,
+        "claude-opus-4-7": 13,
+        "gpt-5.5": 16,
+        "mistral-large-2512": 14,
+        "grok-4.3": 8
+      },
+      "degraded": []
+    },
+    {
+      "turn": 7,
+      "storyteller": "gpt-5.5",
+      "clue": "Light enough for wishes",
+      "storyteller_card": 1,
+      "submissions": {
+        "gpt-5.5": 1,
+        "gemini-3.1-pro-preview": 94,
+        "claude-opus-4-7": 92,
+        "mistral-large-2512": 27,
+        "grok-4.3": 20
+      },
+      "face_up_order": [
+        92,
+        94,
+        1,
+        20,
+        27
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 1,
+        "claude-opus-4-7": 1,
+        "mistral-large-2512": 1,
+        "grok-4.3": 1
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 15,
+        "claude-opus-4-7": 15,
+        "gpt-5.5": 16,
+        "mistral-large-2512": 16,
+        "grok-4.3": 10
+      },
+      "degraded": []
+    },
+    {
+      "turn": 8,
+      "storyteller": "mistral-large-2512",
+      "clue": "A fleeting guest on winter's breath",
+      "storyteller_card": 35,
+      "submissions": {
+        "mistral-large-2512": 35,
+        "gemini-3.1-pro-preview": 86,
+        "claude-opus-4-7": 60,
+        "gpt-5.5": 52,
+        "grok-4.3": 82
+      },
+      "face_up_order": [
+        86,
+        60,
+        35,
+        52,
+        82
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 82,
+        "claude-opus-4-7": 52,
+        "gpt-5.5": 35,
+        "grok-4.3": 52
+      },
+      "scores_delta": {
+        "mistral-large-2512": 3,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7": 0,
+        "gpt-5.5": 5,
+        "grok-4.3": 1
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 15,
+        "claude-opus-4-7": 15,
+        "gpt-5.5": 21,
+        "mistral-large-2512": 19,
+        "grok-4.3": 11
+      },
+      "degraded": []
+    },
+    {
+      "turn": 9,
+      "storyteller": "grok-4.3",
+      "clue": "What the beam uncovers",
+      "storyteller_card": 78,
+      "submissions": {
+        "grok-4.3": 78,
+        "gemini-3.1-pro-preview": 25,
+        "claude-opus-4-7": 79,
+        "gpt-5.5": 69,
+        "mistral-large-2512": 76
+      },
+      "face_up_order": [
+        76,
+        78,
+        25,
+        79,
+        69
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 78,
+        "claude-opus-4-7": 78,
+        "gpt-5.5": 78,
+        "mistral-large-2512": 78
+      },
+      "scores_delta": {
+        "grok-4.3": 0,
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 17,
+        "claude-opus-4-7": 17,
+        "gpt-5.5": 23,
+        "mistral-large-2512": 21,
+        "grok-4.3": 11
+      },
+      "degraded": []
+    },
+    {
+      "turn": 10,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Life goes on beneath the surface.",
+      "storyteller_card": 19,
+      "submissions": {
+        "gemini-3.1-pro-preview": 19,
+        "claude-opus-4-7": 98,
+        "gpt-5.5": 29,
+        "mistral-large-2512": 89,
+        "grok-4.3": 16
+      },
+      "face_up_order": [
+        16,
+        89,
+        98,
+        19,
+        29
+      ],
+      "votes": {
+        "claude-opus-4-7": 19,
+        "gpt-5.5": 19,
+        "mistral-large-2512": 98,
+        "grok-4.3": 19
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 3,
+        "claude-opus-4-7": 4,
+        "gpt-5.5": 3,
+        "mistral-large-2512": 0,
+        "grok-4.3": 3
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 20,
+        "claude-opus-4-7": 21,
+        "gpt-5.5": 26,
+        "mistral-large-2512": 21,
+        "grok-4.3": 14
+      },
+      "degraded": []
+    },
+    {
+      "turn": 11,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Tending the garden where ideas grow",
+      "storyteller_card": 32,
+      "submissions": {
+        "claude-opus-4-7": 32,
+        "gemini-3.1-pro-preview": 47,
+        "gpt-5.5": 73,
+        "mistral-large-2512": 81,
+        "grok-4.3": 58
+      },
+      "face_up_order": [
+        58,
+        81,
+        32,
+        47,
+        73
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 32,
+        "gpt-5.5": 32,
+        "mistral-large-2512": 32,
+        "grok-4.3": 32
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 22,
+        "claude-opus-4-7": 21,
+        "gpt-5.5": 28,
+        "mistral-large-2512": 23,
+        "grok-4.3": 16
+      },
+      "degraded": []
+    },
+    {
+      "turn": 12,
+      "storyteller": "gpt-5.5",
+      "clue": "Ariadne's voicemail",
+      "storyteller_card": 67,
+      "submissions": {
+        "gpt-5.5": 67,
+        "gemini-3.1-pro-preview": 84,
+        "claude-opus-4-7": 53,
+        "mistral-large-2512": 23,
+        "grok-4.3": 14
+      },
+      "face_up_order": [
+        14,
+        84,
+        23,
+        53,
+        67
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 67,
+        "claude-opus-4-7": 67,
+        "mistral-large-2512": 67,
+        "grok-4.3": 67
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "mistral-large-2512": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 24,
+        "claude-opus-4-7": 23,
+        "gpt-5.5": 28,
+        "mistral-large-2512": 25,
+        "grok-4.3": 18
+      },
+      "degraded": []
+    },
+    {
+      "turn": 13,
+      "storyteller": "mistral-large-2512",
+      "clue": "Where the light guides the weary traveler home.",
+      "storyteller_card": 38,
+      "submissions": {
+        "mistral-large-2512": 38,
+        "gemini-3.1-pro-preview": 44,
+        "claude-opus-4-7": 99,
+        "gpt-5.5": 3,
+        "grok-4.3": 85
+      },
+      "face_up_order": [
+        99,
+        44,
+        38,
+        3,
+        85
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 38,
+        "claude-opus-4-7": 38,
+        "gpt-5.5": 38,
+        "grok-4.3": 38
+      },
+      "scores_delta": {
+        "mistral-large-2512": 0,
+        "gemini-3.1-pro-preview": 2,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "grok-4.3": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 26,
+        "claude-opus-4-7": 25,
+        "gpt-5.5": 30,
+        "mistral-large-2512": 25,
+        "grok-4.3": 20
+      },
+      "degraded": []
+    }
+  ],
+  "final_scores": {
+    "gemini-3.1-pro-preview": 26,
+    "claude-opus-4-7": 25,
+    "gpt-5.5": 30,
+    "mistral-large-2512": 25,
+    "grok-4.3": 20
+  },
+  "elo_before": {
+    "gemini-3.1-pro-preview": 1436.21,
+    "claude-opus-4-7": 1593.84,
+    "gpt-5.5": 1542.29,
+    "mistral-large-2512": 1314.37,
+    "grok-4.3": 1613.29
+  },
+  "elo_after": {
+    "gemini-3.1-pro-preview": 1481.87,
+    "claude-opus-4-7": 1558.92,
+    "gpt-5.5": 1597.92,
+    "mistral-large-2512": 1334.78,
+    "grok-4.3": 1526.51
+  }
+}
