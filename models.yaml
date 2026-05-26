@@ -47,13 +47,12 @@ players:
     fallback: grok-4.3
     fallback_display_name: Grok 4.3
   - adapter: bytedance
-    # ByteDance Seed via OpenRouter (OpenAI-compatible). NOTE: the leaderboard's
-    # top ByteDance row (dola-seed-2.0-pro) is NOT on OpenRouter — only the
-    # mini/lite tiers are. Using the best available (mini), lite as fallback.
-    model_id: bytedance-seed/seed-2.0-mini
-    display_name: ByteDance Seed 2.0 Mini
-    fallback: bytedance-seed/seed-2.0-lite
-    fallback_display_name: ByteDance Seed 2.0 Lite
+    # ByteDance Seed 2.0 Pro via BytePlus ModelArk (OpenAI-compatible) — the
+    # leaderboard's top ByteDance row. Lite is the stable fallback.
+    model_id: seed-2-0-pro-260328
+    display_name: Seed 2.0 Pro
+    fallback: seed-2-0-lite-260228
+    fallback_display_name: Seed 2.0 Lite
   - adapter: moonshot
     model_id: kimi-k2.6
     display_name: Kimi K2.6

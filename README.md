@@ -12,8 +12,8 @@ leaderboard + per-game log.
 The top 6 distinct orgs on the LMArena vision leaderboard (excluding rows tagged
 "preliminary"), each on its best eligible model — snapshot 2026-05-26:
 
-Anthropic (Claude Opus 4.7, thinking) · Google (Gemini 3 Pro) · OpenAI (GPT-5.5) ·
-xAI (Grok 4.20 reasoning) · ByteDance (Dola Seed 2.0 Pro) · Moonshot (Kimi K2.6).
+Anthropic (Claude Opus 4.7, thinking) · Google (Gemini 3.1 Pro) · OpenAI (GPT-5.5) ·
+xAI (Grok 4.20 reasoning) · ByteDance (Seed 2.0 Pro) · Moonshot (Kimi K2.6).
 
 Each entry has a stable `fallback` model in [`models.yaml`](models.yaml), swapped in
 automatically if the primary model is unavailable at game start.
@@ -52,8 +52,8 @@ npm run build
   build Astro and publish to GitHub Pages.
 
 Set repo secrets: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`,
-`XAI_API_KEY`, `MOONSHOT_API_KEY`, and `OPENROUTER_API_KEY` (used for the
-ByteDance Seed model).
+`XAI_API_KEY`, `MOONSHOT_API_KEY`, and `BYTEPLUS_API_KEY` (BytePlus ModelArk,
+used for the ByteDance Seed model).
 
 ## Re-running a day
 
