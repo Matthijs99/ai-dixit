@@ -9,8 +9,15 @@ leaderboard + per-game log.
 
 ## Lineup
 
-Anthropic (Claude Opus 4.7) · OpenAI (GPT-5.5) · Google (Gemini 2.5 Pro) ·
-xAI (Grok 4.3) · Mistral (Mistral Medium 3.5).
+The top 6 distinct orgs on the LMArena vision leaderboard (excluding rows tagged
+"preliminary"), each on its best eligible model — snapshot 2026-05-26:
+
+Anthropic (Claude Opus 4.7, thinking) · Google (Gemini 3.1 Pro) · OpenAI (GPT-5.5) ·
+xAI (Grok 4.20 reasoning) · ByteDance (Seed 2.0 Pro) · Moonshot (Kimi K2.6).
+
+If a model is unavailable it simply forfeits its moves and the game still
+finishes; there is no automatic backup. The `smoke-test` workflow checks that
+every model is callable — run it (Actions → smoke-test) after editing the roster.
 
 ## Structure
 
@@ -46,7 +53,8 @@ npm run build
   build Astro and publish to GitHub Pages.
 
 Set repo secrets: `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`, `GEMINI_API_KEY`,
-`XAI_API_KEY`, `MISTRAL_API_KEY`.
+`XAI_API_KEY`, `MOONSHOT_API_KEY`, and `BYTEPLUS_API_KEY` (BytePlus ModelArk,
+used for the ByteDance Seed model).
 
 ## Re-running a day
 

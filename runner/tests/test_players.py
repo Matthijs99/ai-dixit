@@ -187,6 +187,119 @@ def test_grok_adapter_returns_card_id_on_valid_response():
     assert chosen in {11, 22}
 
 
+def test_bytedance_adapter_returns_card_id_on_valid_response():
+    from dixit_ai.players.bytedance import BytedancePlayer
+
+    hand = [Card(id=11), Card(id=22)]
+    fake_choice = MagicMock(message=MagicMock(content='{"card": "A"}'))
+    fake_resp = MagicMock(choices=[fake_choice])
+    fake_client = MagicMock()
+    fake_client.chat.completions.create.return_value = fake_resp
+
+    player = BytedancePlayer(
+        model_id="bytedance/seed-test", display_name="Seed Test", client=fake_client
+    )
+    chosen = player.pick_for_clue(hand, "x")
+    assert chosen in {11, 22}
+    assert player.org == "Bytedance"
+
+
+def test_moonshot_adapter_returns_card_id_on_valid_response():
+    from dixit_ai.players.moonshot import MoonshotPlayer
+
+    hand = [Card(id=11), Card(id=22)]
+    fake_choice = MagicMock(message=MagicMock(content='{"card": "A"}'))
+    fake_resp = MagicMock(choices=[fake_choice])
+    fake_client = MagicMock()
+    fake_client.chat.completions.create.return_value = fake_resp
+
+    player = MoonshotPlayer(
+        model_id="kimi-test", display_name="Kimi Test", client=fake_client
+    )
+    chosen = player.pick_for_clue(hand, "x")
+    assert chosen in {11, 22}
+    assert player.org == "Moonshot"
+
+
+def test_claude_thinking_uses_auto_tool_choice_and_thinking_param():
+    hand = [Card(id=11), Card(id=22)]
+    fake_tool_use = MagicMock(type="tool_use", name="submit_move", input={"card": "A"})
+    fake_msg = MagicMock(content=[fake_tool_use], stop_reason="tool_use")
+    fake_client = MagicMock()
+    fake_client.messages.create.return_value = fake_msg
+
+    player = ClaudePlayer(
+        model_id="claude-test",
+        display_name="Claude Test",
+        thinking=True,
+        client=fake_client,
+    )
+    chosen = player.pick_for_clue(hand, "soft wind")
+    assert chosen in {11, 22}
+
+    kwargs = fake_client.messages.create.call_args.kwargs
+    # Forced tool use is incompatible with thinking → must be auto.
+    assert kwargs["tool_choice"] == {"type": "auto"}
+    # Opus 4.7: adaptive thinking + output_config.effort (no budget_tokens).
+    assert kwargs["thinking"] == {"type": "adaptive"}
+    assert kwargs["output_config"]["effort"] in {"low", "medium", "high", "xhigh", "max"}
+    assert "budget_tokens" not in kwargs["thinking"]
+
+
+def test_claude_without_thinking_forces_tool_choice():
+    hand = [Card(id=11), Card(id=22)]
+    fake_tool_use = MagicMock(type="tool_use", name="submit_move", input={"card": "A"})
+    fake_msg = MagicMock(content=[fake_tool_use], stop_reason="tool_use")
+    fake_client = MagicMock()
+    fake_client.messages.create.return_value = fake_msg
+
+    player = ClaudePlayer(
+        model_id="claude-test", display_name="Claude Test", client=fake_client
+    )
+    player.pick_for_clue(hand, "x")
+    kwargs = fake_client.messages.create.call_args.kwargs
+    assert kwargs["tool_choice"] == {"type": "tool", "name": "submit_move"}
+    assert "thinking" not in kwargs
+
+
+# ----- Smoke run -----
+
+class _SmokePlayer:
+    def __init__(self, model_id, ok):
+        self.model_id = model_id
+        self.display_name = model_id
+        self._ok = ok
+
+    def storytell(self, hand):
+        if not self._ok:
+            raise RuntimeError("boom")
+        return (hand[0].id, "a clue")
+
+
+def _run_smoke_with(monkeypatch, lineup):
+    """Call runner.run_smoke() with a stubbed lineup, restoring base constants."""
+    import dixit_ai.players as players_pkg
+    from dixit_ai import runner
+    from dixit_ai.players import base
+
+    saved = (base.MAX_ATTEMPTS, base.SDK_ERROR_BACKOFF_SECONDS)
+    monkeypatch.setattr(players_pkg, "default_lineup", lambda: lineup)
+    try:
+        return runner.run_smoke()
+    finally:
+        base.MAX_ATTEMPTS, base.SDK_ERROR_BACKOFF_SECONDS = saved
+
+
+def test_run_smoke_fails_when_any_model_unreachable(monkeypatch):
+    lineup = [_SmokePlayer("good", ok=True), _SmokePlayer("bad", ok=False)]
+    assert _run_smoke_with(monkeypatch, lineup) == 1
+
+
+def test_run_smoke_passes_when_all_models_callable(monkeypatch):
+    lineup = [_SmokePlayer("good", ok=True), _SmokePlayer("also-good", ok=True)]
+    assert _run_smoke_with(monkeypatch, lineup) == 0
+
+
 def test_gemini_adapter_returns_card_id_on_valid_response(monkeypatch):
     import sys
     from dixit_ai.players.gemini import GeminiPlayer

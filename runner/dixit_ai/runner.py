@@ -26,6 +26,8 @@ from dixit_ai.storage import (
 
 AMSTERDAM = ZoneInfo("Europe/Amsterdam")
 
+log = logging.getLogger(__name__)
+
 
 def _today_in_amsterdam() -> str:
     return datetime.now(AMSTERDAM).date().isoformat()
@@ -110,6 +112,48 @@ def _configure_logging() -> None:
     )
 
 
+def run_smoke() -> int:
+    """Verify every model is callable: one storytell per model.
+
+    Writes nothing. Returns non-zero if any model fails, so CI goes red. Each
+    model gets its own try/except, so one failure can't hide the others.
+    """
+    import random
+
+    from dixit_ai.cards import Deck
+    from dixit_ai.engine import HAND_SIZE
+    from dixit_ai.players import base, default_lineup
+
+    # Fail fast: a bad model id should error in seconds, not ~9 min of backoff.
+    base.MAX_ATTEMPTS = 3
+    base.SDK_ERROR_BACKOFF_SECONDS = 5.0
+
+    players = default_lineup()
+    deck = Deck(rng=random.Random("smoke"))
+
+    results = []
+    for p in players:
+        hand = deck.deal(HAND_SIZE)
+        try:
+            _, clue = p.storytell(hand)
+            results.append((True, p, f"clue={clue!r}"))
+        except Exception as exc:
+            results.append((False, p, f"{type(exc).__name__}: {exc}"))
+
+    log.info("===== smoke report =====")
+    for ok, p, note in results:
+        log.info("  %-4s %-22s %-32s %s", "PASS" if ok else "FAIL",
+                 p.display_name, p.model_id, note)
+
+    failed = [p.model_id for ok, p, _ in results if not ok]
+    if failed:
+        log.error("smoke FAILED: %d/%d models unreachable: %s",
+                  len(failed), len(results), ", ".join(failed))
+        return 1
+    log.info("smoke OK: all %d models callable", len(results))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     _configure_logging()
     parser = argparse.ArgumentParser()
@@ -129,11 +173,19 @@ def main(argv: list[str] | None = None) -> int:
         help="Override the game_id date (YYYY-MM-DD).",
     )
     parser.add_argument(
+        "--smoke",
+        action="store_true",
+        help="Verify every model is callable (one move each), write nothing.",
+    )
+    parser.add_argument(
         "--recompute-elo",
         action="store_true",
         help="Rebuild elo.json from index.json under the current rating system, then exit.",
     )
     args = parser.parse_args(argv)
+
+    if args.smoke:
+        return run_smoke()
 
     if args.recompute_elo:
         return recompute_elo()
@@ -160,6 +212,8 @@ def main(argv: list[str] | None = None) -> int:
             "gemini": "Google",
             "grok": "xAI",
             "mistral": "Mistral",
+            "bytedance": "Bytedance",
+            "moonshot": "Moonshot",
         }
         players = []
         for entry in load_roster():

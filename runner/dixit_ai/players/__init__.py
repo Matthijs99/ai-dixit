@@ -10,6 +10,9 @@ import yaml
 
 from dixit_ai.cards import REPO_ROOT
 
+# Adapters that accept a `thinking` constructor kwarg.
+_THINKING_ADAPTERS = {"claude"}
+
 
 def _models_yaml_path() -> Path:
     override = os.environ.get("DIXIT_MODELS_YAML")
@@ -35,10 +38,12 @@ def default_lineup(path: Path | None = None) -> list:
     consumers — and maintenance commands like ``--recompute-elo`` — don't need
     every provider SDK installed.
     """
+    from dixit_ai.players.bytedance import BytedancePlayer
     from dixit_ai.players.claude import ClaudePlayer
     from dixit_ai.players.gemini import GeminiPlayer
     from dixit_ai.players.grok import GrokPlayer
     from dixit_ai.players.mistral import MistralPlayer
+    from dixit_ai.players.moonshot import MoonshotPlayer
     from dixit_ai.players.openai import OpenAIPlayer
 
     _ADAPTERS: dict[str, type] = {
@@ -47,6 +52,8 @@ def default_lineup(path: Path | None = None) -> list:
         "gemini": GeminiPlayer,
         "grok": GrokPlayer,
         "mistral": MistralPlayer,
+        "bytedance": BytedancePlayer,
+        "moonshot": MoonshotPlayer,
     }
 
     players: list = []
@@ -65,7 +72,10 @@ def default_lineup(path: Path | None = None) -> list:
                 f"models.yaml entry #{i}: unknown adapter {adapter!r}; "
                 f"known: {sorted(_ADAPTERS)}"
             )
-        player = cls(model_id=model_id, display_name=display_name)
+        kwargs: dict[str, Any] = {"model_id": model_id, "display_name": display_name}
+        if adapter in _THINKING_ADAPTERS and entry.get("thinking"):
+            kwargs["thinking"] = True
+        player = cls(**kwargs)
         # Attach previous_ids for the Elo carryover layer to consult.
         player.previous_ids = list(entry.get("previous_ids") or [])
         players.append(player)

@@ -1,0 +1,37 @@
+name: smoke-test
+
+# Verifies every primary model in models.yaml is actually callable, one move
+# each, writing nothing. Runs on push to the feature branch (workflow_dispatch
+# only works for workflows already on the default branch) plus a manual trigger.
+on:
+  push:
+    # NB: '+' is a glob metachar in branch filters, so match the literal branch
+    # name with a wildcard instead of writing the '+' directly.
+    branches:
+      - 'worktree-feat*add_new_model'
+  workflow_dispatch: {}
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install runner
+        working-directory: runner
+        run: pip install -e .
+
+      - name: Smoke-test all models
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OPENAI_API_KEY:    ${{ secrets.OPENAI_API_KEY }}
+          GEMINI_API_KEY:    ${{ secrets.GEMINI_API_KEY }}
+          XAI_API_KEY:       ${{ secrets.XAI_API_KEY }}
+          MOONSHOT_API_KEY:  ${{ secrets.MOONSHOT_API_KEY }}
+          BYTEPLUS_API_KEY:  ${{ secrets.BYTEPLUS_API_KEY }}
+          ARK_API_KEY:       ${{ secrets.ARK_API_KEY }}
+        run: python -m dixit_ai --smoke
