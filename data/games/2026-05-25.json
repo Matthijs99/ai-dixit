@@ -1,0 +1,488 @@
+{
+  "game_id": "2026-05-25",
+  "status": "complete",
+  "started_at": "2026-05-25T00:20:07+02:00",
+  "ended_at": "2026-05-25T00:28:36+02:00",
+  "seed": "2026-05-25",
+  "players": [
+    "grok-4.3",
+    "claude-opus-4-7",
+    "gemini-3.1-pro-preview",
+    "gpt-5.5",
+    "mistral-large-2512"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "grok-4.3",
+      "clue": "Balancing act",
+      "storyteller_card": 30,
+      "submissions": {
+        "grok-4.3": 30,
+        "claude-opus-4-7": 10,
+        "gemini-3.1-pro-preview": 99,
+        "gpt-5.5": 22,
+        "mistral-large-2512": 98
+      },
+      "face_up_order": [
+        22,
+        99,
+        30,
+        10,
+        98
+      ],
+      "votes": {
+        "claude-opus-4-7": 30,
+        "gemini-3.1-pro-preview": 30,
+        "gpt-5.5": 30,
+        "mistral-large-2512": 10
+      },
+      "scores_delta": {
+        "grok-4.3": 3,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 3,
+        "mistral-large-2512": 0
+      },
+      "scores_total": {
+        "grok-4.3": 3,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 3,
+        "mistral-large-2512": 0
+      },
+      "degraded": []
+    },
+    {
+      "turn": 1,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Reframing reality",
+      "storyteller_card": 100,
+      "submissions": {
+        "claude-opus-4-7": 100,
+        "grok-4.3": 72,
+        "gemini-3.1-pro-preview": 23,
+        "gpt-5.5": 95,
+        "mistral-large-2512": 35
+      },
+      "face_up_order": [
+        23,
+        95,
+        100,
+        35,
+        72
+      ],
+      "votes": {
+        "grok-4.3": 100,
+        "gemini-3.1-pro-preview": 100,
+        "gpt-5.5": 100,
+        "mistral-large-2512": 100
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 0,
+        "grok-4.3": 2,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2
+      },
+      "scores_total": {
+        "grok-4.3": 5,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 5,
+        "gpt-5.5": 5,
+        "mistral-large-2512": 2
+      },
+      "degraded": []
+    },
+    {
+      "turn": 2,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Bedtime story",
+      "storyteller_card": 25,
+      "submissions": {
+        "gemini-3.1-pro-preview": 25,
+        "grok-4.3": 43,
+        "claude-opus-4-7": 21,
+        "gpt-5.5": 69,
+        "mistral-large-2512": 81
+      },
+      "face_up_order": [
+        21,
+        25,
+        69,
+        43,
+        81
+      ],
+      "votes": {
+        "grok-4.3": 21,
+        "claude-opus-4-7": 25,
+        "gpt-5.5": 21,
+        "mistral-large-2512": 21
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 3,
+        "grok-4.3": 0,
+        "claude-opus-4-7": 6,
+        "gpt-5.5": 0,
+        "mistral-large-2512": 0
+      },
+      "scores_total": {
+        "grok-4.3": 5,
+        "claude-opus-4-7": 10,
+        "gemini-3.1-pro-preview": 8,
+        "gpt-5.5": 5,
+        "mistral-large-2512": 2
+      },
+      "degraded": []
+    },
+    {
+      "turn": 3,
+      "storyteller": "gpt-5.5",
+      "clue": "The king kept his winter inside",
+      "storyteller_card": 62,
+      "submissions": {
+        "gpt-5.5": 62,
+        "grok-4.3": 54,
+        "claude-opus-4-7": 52,
+        "gemini-3.1-pro-preview": 74,
+        "mistral-large-2512": 31
+      },
+      "face_up_order": [
+        54,
+        31,
+        62,
+        74,
+        52
+      ],
+      "votes": {
+        "grok-4.3": 62,
+        "claude-opus-4-7": 62,
+        "gemini-3.1-pro-preview": 62,
+        "mistral-large-2512": 62
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "grok-4.3": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "mistral-large-2512": 2
+      },
+      "scores_total": {
+        "grok-4.3": 7,
+        "claude-opus-4-7": 12,
+        "gemini-3.1-pro-preview": 10,
+        "gpt-5.5": 5,
+        "mistral-large-2512": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 4,
+      "storyteller": "mistral-large-2512",
+      "clue": "A tiny door to a world of forgotten dreams",
+      "storyteller_card": 3,
+      "submissions": {
+        "mistral-large-2512": 3,
+        "grok-4.3": 15,
+        "claude-opus-4-7": 4,
+        "gemini-3.1-pro-preview": 77,
+        "gpt-5.5": 79
+      },
+      "face_up_order": [
+        15,
+        79,
+        3,
+        4,
+        77
+      ],
+      "votes": {
+        "grok-4.3": 3,
+        "claude-opus-4-7": 3,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 3
+      },
+      "scores_delta": {
+        "mistral-large-2512": 0,
+        "grok-4.3": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "grok-4.3": 9,
+        "claude-opus-4-7": 14,
+        "gemini-3.1-pro-preview": 12,
+        "gpt-5.5": 7,
+        "mistral-large-2512": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 5,
+      "storyteller": "grok-4.3",
+      "clue": "Winter lullaby",
+      "storyteller_card": 76,
+      "submissions": {
+        "grok-4.3": 76,
+        "claude-opus-4-7": 28,
+        "gemini-3.1-pro-preview": 1,
+        "gpt-5.5": 38,
+        "mistral-large-2512": 60
+      },
+      "face_up_order": [
+        1,
+        60,
+        38,
+        28,
+        76
+      ],
+      "votes": {
+        "claude-opus-4-7": 76,
+        "gemini-3.1-pro-preview": 76,
+        "gpt-5.5": 76,
+        "mistral-large-2512": 38
+      },
+      "scores_delta": {
+        "grok-4.3": 3,
+        "claude-opus-4-7": 3,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 4,
+        "mistral-large-2512": 0
+      },
+      "scores_total": {
+        "grok-4.3": 12,
+        "claude-opus-4-7": 17,
+        "gemini-3.1-pro-preview": 15,
+        "gpt-5.5": 11,
+        "mistral-large-2512": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 6,
+      "storyteller": "claude-opus-4-7",
+      "clue": "Lost in a chapter between the sheets",
+      "storyteller_card": 73,
+      "submissions": {
+        "claude-opus-4-7": 73,
+        "grok-4.3": 55,
+        "gemini-3.1-pro-preview": 18,
+        "gpt-5.5": 50,
+        "mistral-large-2512": 32
+      },
+      "face_up_order": [
+        55,
+        50,
+        32,
+        73,
+        18
+      ],
+      "votes": {
+        "grok-4.3": 73,
+        "gemini-3.1-pro-preview": 73,
+        "gpt-5.5": 73,
+        "mistral-large-2512": 50
+      },
+      "scores_delta": {
+        "claude-opus-4-7": 3,
+        "grok-4.3": 3,
+        "gemini-3.1-pro-preview": 3,
+        "gpt-5.5": 4,
+        "mistral-large-2512": 0
+      },
+      "scores_total": {
+        "grok-4.3": 15,
+        "claude-opus-4-7": 20,
+        "gemini-3.1-pro-preview": 18,
+        "gpt-5.5": 15,
+        "mistral-large-2512": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 7,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "The captain's childhood",
+      "storyteller_card": 66,
+      "submissions": {
+        "gemini-3.1-pro-preview": 66,
+        "grok-4.3": 14,
+        "claude-opus-4-7": 9,
+        "gpt-5.5": 8,
+        "mistral-large-2512": 42
+      },
+      "face_up_order": [
+        8,
+        14,
+        42,
+        66,
+        9
+      ],
+      "votes": {
+        "grok-4.3": 66,
+        "claude-opus-4-7": 66,
+        "gpt-5.5": 66,
+        "mistral-large-2512": 66
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "grok-4.3": 2,
+        "claude-opus-4-7": 2,
+        "gpt-5.5": 2,
+        "mistral-large-2512": 2
+      },
+      "scores_total": {
+        "grok-4.3": 17,
+        "claude-opus-4-7": 22,
+        "gemini-3.1-pro-preview": 18,
+        "gpt-5.5": 17,
+        "mistral-large-2512": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 8,
+      "storyteller": "gpt-5.5",
+      "clue": "Eviction notices from gravity",
+      "storyteller_card": 53,
+      "submissions": {
+        "gpt-5.5": 53,
+        "grok-4.3": 71,
+        "claude-opus-4-7": 94,
+        "gemini-3.1-pro-preview": 70,
+        "mistral-large-2512": 49
+      },
+      "face_up_order": [
+        71,
+        94,
+        49,
+        53,
+        70
+      ],
+      "votes": {
+        "grok-4.3": 53,
+        "claude-opus-4-7": 53,
+        "gemini-3.1-pro-preview": 53,
+        "mistral-large-2512": 71
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "grok-4.3": 4,
+        "claude-opus-4-7": 3,
+        "gemini-3.1-pro-preview": 3,
+        "mistral-large-2512": 0
+      },
+      "scores_total": {
+        "grok-4.3": 21,
+        "claude-opus-4-7": 25,
+        "gemini-3.1-pro-preview": 21,
+        "gpt-5.5": 20,
+        "mistral-large-2512": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 9,
+      "storyteller": "mistral-large-2512",
+      "clue": "The crossroads where every path whispers a different secret",
+      "storyteller_card": 63,
+      "submissions": {
+        "mistral-large-2512": 63,
+        "grok-4.3": 57,
+        "claude-opus-4-7": 58,
+        "gemini-3.1-pro-preview": 96,
+        "gpt-5.5": 86
+      },
+      "face_up_order": [
+        86,
+        63,
+        58,
+        57,
+        96
+      ],
+      "votes": {
+        "grok-4.3": 63,
+        "claude-opus-4-7": 63,
+        "gemini-3.1-pro-preview": 63,
+        "gpt-5.5": 63
+      },
+      "scores_delta": {
+        "mistral-large-2512": 0,
+        "grok-4.3": 2,
+        "claude-opus-4-7": 2,
+        "gemini-3.1-pro-preview": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "grok-4.3": 23,
+        "claude-opus-4-7": 27,
+        "gemini-3.1-pro-preview": 23,
+        "gpt-5.5": 22,
+        "mistral-large-2512": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 10,
+      "storyteller": "grok-4.3",
+      "clue": "Cosmic view from home",
+      "storyteller_card": 93,
+      "submissions": {
+        "grok-4.3": 93,
+        "claude-opus-4-7": 78,
+        "gemini-3.1-pro-preview": 85,
+        "gpt-5.5": 87,
+        "mistral-large-2512": 41
+      },
+      "face_up_order": [
+        41,
+        87,
+        78,
+        85,
+        93
+      ],
+      "votes": {
+        "claude-opus-4-7": 93,
+        "gemini-3.1-pro-preview": 41,
+        "gpt-5.5": 93,
+        "mistral-large-2512": 93
+      },
+      "scores_delta": {
+        "grok-4.3": 3,
+        "claude-opus-4-7": 3,
+        "gemini-3.1-pro-preview": 0,
+        "gpt-5.5": 3,
+        "mistral-large-2512": 4
+      },
+      "scores_total": {
+        "grok-4.3": 26,
+        "claude-opus-4-7": 30,
+        "gemini-3.1-pro-preview": 23,
+        "gpt-5.5": 25,
+        "mistral-large-2512": 10
+      },
+      "degraded": []
+    }
+  ],
+  "final_scores": {
+    "grok-4.3": 26,
+    "claude-opus-4-7": 30,
+    "gemini-3.1-pro-preview": 23,
+    "gpt-5.5": 25,
+    "mistral-large-2512": 10
+  },
+  "elo_before": {
+    "grok-4.3": 1602.8,
+    "claude-opus-4-7": 1537.71,
+    "gemini-3.1-pro-preview": 1459.15,
+    "gpt-5.5": 1553.55,
+    "mistral-large-2512": 1346.79
+  },
+  "elo_after": {
+    "grok-4.3": 1613.29,
+    "claude-opus-4-7": 1593.84,
+    "gemini-3.1-pro-preview": 1436.21,
+    "gpt-5.5": 1542.29,
+    "mistral-large-2512": 1314.37
+  }
+}

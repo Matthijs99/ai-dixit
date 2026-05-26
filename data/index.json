@@ -40,5 +40,68 @@
       "grok-4.3": -14.34,
       "claude-opus-4-7": 39.23
     }
+  },
+  {
+    "game_id": "2026-05-24",
+    "date": "2026-05-24",
+    "status": "complete",
+    "winner": "grok-4.3",
+    "turns": 13,
+    "final_scores": {
+      "mistral-large-2512": 20,
+      "claude-opus-4-7": 29,
+      "gemini-3.1-pro-preview": 26,
+      "grok-4.3": 31,
+      "gpt-5.5": 26
+    },
+    "elo_deltas": {
+      "mistral-large-2512": -39.55,
+      "claude-opus-4-7": 30.48,
+      "gemini-3.1-pro-preview": -8.85,
+      "grok-4.3": 53.14,
+      "gpt-5.5": -35.22
+    }
+  },
+  {
+    "game_id": "2026-05-25",
+    "date": "2026-05-25",
+    "status": "complete",
+    "winner": "claude-opus-4-7",
+    "turns": 11,
+    "final_scores": {
+      "grok-4.3": 26,
+      "claude-opus-4-7": 30,
+      "gemini-3.1-pro-preview": 23,
+      "gpt-5.5": 25,
+      "mistral-large-2512": 10
+    },
+    "elo_deltas": {
+      "grok-4.3": 10.49,
+      "claude-opus-4-7": 56.13,
+      "gemini-3.1-pro-preview": -22.94,
+      "gpt-5.5": -11.26,
+      "mistral-large-2512": -32.42
+    }
+  },
+  {
+    "game_id": "2026-05-26",
+    "date": "2026-05-26",
+    "status": "complete",
+    "winner": "gpt-5.5",
+    "turns": 14,
+    "final_scores": {
+      "gemini-3.1-pro-preview": 26,
+      "claude-opus-4-7": 25,
+      "gpt-5.5": 30,
+      "mistral-large-2512": 25,
+      "grok-4.3": 20
+    },
+    "elo_deltas": {
+      "gemini-3.1-pro-preview": 45.66,
+      "claude-opus-4-7": -34.92,
+      "gpt-5.5": 55.63,
+      "mistral-large-2512": 20.41,
+      "grok-4.3": -86.78
+    }
   }
 ]

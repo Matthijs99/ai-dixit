@@ -19,6 +19,7 @@ from dixit_ai.storage import (
     append_index,
     game_exists,
     load_elo,
+    load_index,
     save_elo,
     save_game,
 )
@@ -41,13 +42,64 @@ def _now_iso_seconds() -> str:
     return datetime.now(tz=AMSTERDAM).replace(microsecond=0).isoformat()
 
 
-def _placements_from_scores(
-    scores: dict[str, int], elo: dict[str, dict]
-) -> list[str]:
-    def key(model_id: str) -> tuple[int, float]:
-        return (-scores[model_id], -elo["models"][model_id]["rating"])
+@dataclasses.dataclass
+class _ReplayPlayer:
+    """Minimal player stand-in for replaying historical games."""
+    model_id: str
+    display_name: str
+    org: str
+    previous_ids: list[str]
 
-    return sorted(scores, key=key)
+
+def recompute_elo() -> int:
+    """Rebuild data/elo.json from scratch by replaying index.json under Glicko-2.
+
+    Metadata (display_name, org) is read from the existing elo.json; lineage
+    inheritance via `previous_ids` and the active-roster retired flags come from
+    models.yaml. Re-run this after changing the rating system or its constants.
+    """
+    from dixit_ai.players import load_roster
+
+    old = load_elo()
+    meta = {
+        mid: (e["display_name"], e["org"]) for mid, e in old["models"].items()
+    }
+    roster = load_roster()
+    prev_ids = {e["model_id"]: list(e.get("previous_ids") or []) for e in roster}
+    active = [e["model_id"] for e in roster]
+
+    def player(mid: str) -> _ReplayPlayer:
+        name, org = meta.get(mid, (mid, "?"))
+        return _ReplayPlayer(mid, name, org, prev_ids.get(mid, []))
+
+    index = load_index()
+    elo: dict = {"models": {}}
+    games_replayed = 0
+    for row in index:
+        scores = row.get("final_scores") or {}
+        if row.get("status") != "complete" or not scores:
+            continue
+        ensure_model_entries(elo, [player(mid) for mid in scores])
+        states = {
+            m: (elo["models"][m]["rating"], elo["models"][m]["rd"], elo["models"][m]["vol"])
+            for m in scores
+        }
+        for m, (rating, rd, vol) in update_ratings(states, scores).items():
+            entry = elo["models"][m]
+            entry["rating"] = round(rating, 2)
+            entry["rd"] = round(rd, 2)
+            entry["vol"] = round(vol, 6)
+            entry["games"] += 1
+            if m == row.get("winner"):
+                entry["wins"] += 1
+        games_replayed += 1
+
+    # Reconcile retired flags against the current roster.
+    ensure_model_entries(elo, [player(mid) for mid in active])
+    elo["updated_at"] = old.get("updated_at") or _now_iso_seconds()
+    save_elo(elo)
+    print(f"recomputed elo.json from {games_replayed} games")
+    return 0
 
 
 def _configure_logging() -> None:
@@ -123,12 +175,20 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--smoke",
         action="store_true",
-        help="Verify every primary model is callable (one move each), write nothing.",
+        help="Verify every model is callable (one move each), write nothing.",
+    )
+    parser.add_argument(
+        "--recompute-elo",
+        action="store_true",
+        help="Rebuild elo.json from index.json under the current rating system, then exit.",
     )
     args = parser.parse_args(argv)
 
     if args.smoke:
         return run_smoke()
+
+    if args.recompute_elo:
+        return recompute_elo()
 
     if not args.dry_run and not _is_amsterdam_midnight():
         print(
@@ -205,22 +265,27 @@ def main(argv: list[str] | None = None) -> int:
 
     ended = _now_iso_seconds()
 
-    # Update Elo.
-    placements = _placements_from_scores(result.final_scores, elo)
-    current_ratings = {
-        m: elo["models"][m]["rating"] for m in result.final_scores
+    # Update ratings (Glicko-2): this game is one rating period.
+    states = {
+        m: (
+            elo["models"][m]["rating"],
+            elo["models"][m]["rd"],
+            elo["models"][m]["vol"],
+        )
+        for m in result.final_scores
     }
-    new_ratings = update_ratings(
-        current_ratings, placements, scores=result.final_scores
-    )
-    elo_before = dict(current_ratings)
-    elo_after = {m: round(new_ratings[m], 2) for m in new_ratings}
+    new_states = update_ratings(states, result.final_scores)
+    elo_before = {m: round(states[m][0], 2) for m in states}
+    elo_after = {m: round(new_states[m][0], 2) for m in new_states}
 
-    for m, new_r in elo_after.items():
-        elo["models"][m]["rating"] = new_r
-        elo["models"][m]["games"] += 1
+    for m, (rating, rd, vol) in new_states.items():
+        entry = elo["models"][m]
+        entry["rating"] = round(rating, 2)
+        entry["rd"] = round(rd, 2)
+        entry["vol"] = round(vol, 6)
+        entry["games"] += 1
         if m == result.winner:
-            elo["models"][m]["wins"] += 1
+            entry["wins"] += 1
     elo["updated_at"] = ended
 
     # Build game doc.

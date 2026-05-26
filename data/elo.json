@@ -1,40 +1,70 @@
 {
-  "updated_at": "2026-05-23T00:36:51+02:00",
   "models": {
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "rating": 1507.23,
-      "games": 2,
-      "wins": 0
+      "rating": 1641.22,
+      "rd": 105.38,
+      "vol": 0.060024,
+      "games": 5,
+      "wins": 1
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1588.77,
-      "games": 2,
-      "wins": 1
+      "rating": 1690.73,
+      "rd": 107.78,
+      "vol": 0.060029,
+      "games": 5,
+      "wins": 2
     },
     "gemini-2.5-pro": {
       "display_name": "Gemini 2.5 Pro",
       "org": "Google",
-      "rating": 1468.0,
+      "rating": 1377.48,
+      "rd": 159.76,
+      "vol": 0.059997,
       "games": 2,
-      "wins": 0
+      "wins": 0,
+      "retired": true
     },
     "grok-4.3": {
       "display_name": "Grok 4.3",
       "org": "xAI",
-      "rating": 1549.66,
-      "games": 2,
-      "wins": 1
+      "rating": 1552.44,
+      "rd": 110.6,
+      "vol": 0.060074,
+      "games": 5,
+      "wins": 2
     },
     "mistral-medium-3.5": {
       "display_name": "Mistral Medium 3.5",
       "org": "Mistral",
-      "rating": 1386.34,
+      "rating": 1079.82,
+      "rd": 172.39,
+      "vol": 0.06,
       "games": 2,
+      "wins": 0,
+      "retired": true
+    },
+    "mistral-large-2512": {
+      "display_name": "Mistral Large 3",
+      "org": "Mistral",
+      "rating": 1141.77,
+      "rd": 137.84,
+      "vol": 0.060009,
+      "games": 5,
+      "wins": 0
+    },
+    "gemini-3.1-pro-preview": {
+      "display_name": "Gemini 3.1 Pro",
+      "org": "Google",
+      "rating": 1464.34,
+      "rd": 109.56,
+      "vol": 0.060008,
+      "games": 5,
       "wins": 0
     }
-  }
+  },
+  "updated_at": "2026-05-26T00:35:31+02:00"
 }
