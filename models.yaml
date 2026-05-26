@@ -1,28 +1,57 @@
 # Nightly Dixit player roster. Edit here to add, remove, or swap models.
 #
+# Roster rule: the top 6 distinct organizations on the LMArena *vision*
+# leaderboard (https://arena.ai/leaderboard/vision), excluding any row LMArena
+# tags "preliminary", taking each org's highest-ranked eligible row.
+# Snapshot: 2026-05-26. Re-run the rule to refresh.
+#
 # Each entry instantiates one adapter:
-#   adapter      — which adapter class to use (claude | openai | gemini | grok | mistral)
-#   model_id     — the provider's API model ID (must be vision-capable)
-#   display_name — what the leaderboard shows
-#   previous_ids — optional list of prior model_ids whose Elo history this entry inherits
+#   adapter       — which adapter class to use
+#                   (claude | openai | gemini | grok | mistral | bytedance | moonshot)
+#   model_id      — the provider's API model ID (must be vision-capable)
+#   display_name  — what the leaderboard shows
+#   previous_ids  — optional list of prior model_ids whose Elo history this entry inherits
+#   thinking      — optional; claude only. Enables extended thinking.
+#   fallback      — optional stable model_id used if the primary model is
+#                   unavailable at game start (resolved by BaseAdapter.resolve()).
+#   fallback_display_name — optional label to show when the fallback activates.
 
 players:
   - adapter: claude
-    model_id: claude-opus-4-7
-    display_name: Claude Opus 4.7
+    # Identity matches the LMArena row name. The adapter strips the "-thinking"
+    # suffix for the actual API call (thinking is a request param, not a model id).
+    model_id: claude-opus-4-7-thinking
+    display_name: Claude Opus 4.7 Thinking
+    thinking: true
+    previous_ids: [claude-opus-4-7]
+    fallback: claude-opus-4-6
+    fallback_display_name: Claude Opus 4.6
+  - adapter: gemini
+    model_id: gemini-3-pro
+    display_name: Gemini 3 Pro
+    previous_ids: [gemini-3.1-pro-preview, gemini-2.5-pro]
+    fallback: gemini-3.1-pro-preview
+    fallback_display_name: Gemini 3.1 Pro
   - adapter: openai
     model_id: gpt-5.5
     display_name: GPT-5.5
-  - adapter: gemini
-    # Preview model — Gemini 3.5 Pro was announced at I/O 2026 but ships
-    # in June; 3.1 Pro is the current Pro-tier model on the API.
-    model_id: gemini-3.1-pro-preview
-    display_name: Gemini 3.1 Pro
-    previous_ids: [gemini-2.5-pro]
+    fallback: gpt-5.4
+    fallback_display_name: GPT-5.4
   - adapter: grok
-    model_id: grok-4.3
-    display_name: Grok 4.3
-  - adapter: mistral
-    model_id: mistral-large-2512
-    display_name: Mistral Large 3
-    previous_ids: [mistral-medium-3.5]
+    # Top non-preliminary xAI row on the vision board (a beta reasoning build).
+    model_id: grok-4.20-beta-0309-reasoning
+    display_name: Grok 4.20 (reasoning)
+    previous_ids: [grok-4.3]
+    fallback: grok-4.3
+    fallback_display_name: Grok 4.3
+  - adapter: bytedance
+    # ByteDance Seed, reached via OpenRouter (OpenAI-compatible).
+    model_id: bytedance/dola-seed-2.0-pro
+    display_name: Dola Seed 2.0 Pro
+    fallback: bytedance/dola-seed-2.0
+    fallback_display_name: Dola Seed 2.0
+  - adapter: moonshot
+    model_id: kimi-k2.6
+    display_name: Kimi K2.6
+    fallback: kimi-k2.5
+    fallback_display_name: Kimi K2.5

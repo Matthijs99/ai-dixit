@@ -9,10 +9,12 @@ from typing import Any
 import yaml
 
 from dixit_ai.cards import REPO_ROOT
+from dixit_ai.players.bytedance import BytedancePlayer
 from dixit_ai.players.claude import ClaudePlayer
 from dixit_ai.players.gemini import GeminiPlayer
 from dixit_ai.players.grok import GrokPlayer
 from dixit_ai.players.mistral import MistralPlayer
+from dixit_ai.players.moonshot import MoonshotPlayer
 from dixit_ai.players.openai import OpenAIPlayer
 
 _ADAPTERS: dict[str, type] = {
@@ -21,7 +23,12 @@ _ADAPTERS: dict[str, type] = {
     "gemini": GeminiPlayer,
     "grok": GrokPlayer,
     "mistral": MistralPlayer,
+    "bytedance": BytedancePlayer,
+    "moonshot": MoonshotPlayer,
 }
+
+# Adapters that accept a `thinking` constructor kwarg.
+_THINKING_ADAPTERS = {"claude"}
 
 
 def _models_yaml_path() -> Path:
@@ -59,8 +66,14 @@ def default_lineup(path: Path | None = None) -> list:
                 f"models.yaml entry #{i}: unknown adapter {adapter!r}; "
                 f"known: {sorted(_ADAPTERS)}"
             )
-        player = cls(model_id=model_id, display_name=display_name)
+        kwargs: dict[str, Any] = {"model_id": model_id, "display_name": display_name}
+        if adapter in _THINKING_ADAPTERS and entry.get("thinking"):
+            kwargs["thinking"] = True
+        player = cls(**kwargs)
         # Attach previous_ids for the Elo carryover layer to consult.
         player.previous_ids = list(entry.get("previous_ids") or [])
+        # Attach a stable fallback model, resolved by player.resolve() before play.
+        player.fallback_model_id = entry.get("fallback")
+        player.fallback_display_name = entry.get("fallback_display_name")
         players.append(player)
     return players

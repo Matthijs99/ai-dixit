@@ -25,6 +25,8 @@ from dixit_ai.storage import (
 
 AMSTERDAM = ZoneInfo("Europe/Amsterdam")
 
+log = logging.getLogger(__name__)
+
 
 def _today_in_amsterdam() -> str:
     return datetime.now(AMSTERDAM).date().isoformat()
@@ -58,6 +60,52 @@ def _configure_logging() -> None:
     )
 
 
+def run_smoke() -> int:
+    """Verify every *primary* model is callable: one storytell per model.
+
+    Tests the real primaries (no resolve()/fallback) so failures surface. Writes
+    nothing. Returns non-zero if any model fails, so CI goes red. Each model gets
+    its own try/except, so one failure can't hide the others.
+    """
+    import random
+
+    from dixit_ai.cards import Deck
+    from dixit_ai.engine import HAND_SIZE
+    from dixit_ai.players import base, default_lineup
+
+    # Fail fast: a bad model id should error in seconds, not ~9 min of backoff.
+    base.MAX_ATTEMPTS = 3
+    base.SDK_ERROR_BACKOFF_SECONDS = 5.0
+
+    players = default_lineup()  # do NOT resolve(): we want to test the primaries
+    deck = Deck(rng=random.Random("smoke"))
+
+    results = []
+    for p in players:
+        hand = deck.deal(HAND_SIZE)
+        try:
+            _, clue = p.storytell(hand)
+            results.append((True, p, f"clue={clue!r}"))
+        except Exception as exc:
+            note = f"{type(exc).__name__}: {exc}"
+            if getattr(p, "fallback_model_id", None):
+                note += f"  (fallback: {p.fallback_model_id})"
+            results.append((False, p, note))
+
+    log.info("===== smoke report =====")
+    for ok, p, note in results:
+        log.info("  %-4s %-22s %-32s %s", "PASS" if ok else "FAIL",
+                 p.display_name, p.model_id, note)
+
+    failed = [p.model_id for ok, p, _ in results if not ok]
+    if failed:
+        log.error("smoke FAILED: %d/%d models unreachable: %s",
+                  len(failed), len(results), ", ".join(failed))
+        return 1
+    log.info("smoke OK: all %d models callable", len(results))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     _configure_logging()
     parser = argparse.ArgumentParser()
@@ -76,7 +124,15 @@ def main(argv: list[str] | None = None) -> int:
         default=None,
         help="Override the game_id date (YYYY-MM-DD).",
     )
+    parser.add_argument(
+        "--smoke",
+        action="store_true",
+        help="Verify every primary model is callable (one move each), write nothing.",
+    )
     args = parser.parse_args(argv)
+
+    if args.smoke:
+        return run_smoke()
 
     if not args.dry_run and not _is_amsterdam_midnight():
         print(
@@ -100,6 +156,8 @@ def main(argv: list[str] | None = None) -> int:
             "gemini": "Google",
             "grok": "xAI",
             "mistral": "Mistral",
+            "bytedance": "Bytedance",
+            "moonshot": "Moonshot",
         }
         players = []
         for entry in load_roster():
@@ -114,6 +172,11 @@ def main(argv: list[str] | None = None) -> int:
         from dixit_ai.players import default_lineup
 
         players = default_lineup()
+        # Resolve each player's model before the game: probe the primary and
+        # swap to its stable fallback if unavailable. Must happen before
+        # play_game(), which snapshots model_id for scoring/Elo keys.
+        for player in players:
+            player.resolve()
 
     elo = load_elo()
     ensure_model_entries(elo, players)
