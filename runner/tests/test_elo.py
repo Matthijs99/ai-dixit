@@ -109,9 +109,40 @@ def test_ensure_entries_carries_over_via_previous_ids():
     assert elo["models"]["new"]["wins"] == 2
     # New entry uses the new player's display_name, not the old one's.
     assert elo["models"]["new"]["display_name"] == "New"
-    # Old entry is preserved as a retired record.
+    # Old entry is preserved as a retired record, now flagged so the
+    # leaderboard can hide it while history still resolves.
     assert "old" in elo["models"]
     assert elo["models"]["old"]["rating"] == 1623.5
+    assert elo["models"]["old"].get("retired") is True
+    assert "retired" not in elo["models"]["new"]
+
+
+def test_ensure_entries_flags_models_absent_from_roster():
+    # A model present in elo.json but not in the active roster is retired;
+    # a model still in the roster has any stale retired flag cleared.
+    elo: dict = {
+        "models": {
+            "dropped": {
+                "display_name": "Dropped",
+                "org": "Lab",
+                "rating": 1500.0,
+                "games": 4,
+                "wins": 1,
+            },
+            "kept": {
+                "display_name": "Kept",
+                "org": "Lab",
+                "rating": 1510.0,
+                "games": 4,
+                "wins": 1,
+                "retired": True,
+            },
+        }
+    }
+    p = _FakePlayer(model_id="kept", display_name="Kept", org="Lab")
+    ensure_model_entries(elo, [p])
+    assert elo["models"]["dropped"].get("retired") is True
+    assert "retired" not in elo["models"]["kept"]
 
 
 def test_ensure_entries_skips_existing():
