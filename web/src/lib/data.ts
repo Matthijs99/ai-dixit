@@ -11,6 +11,9 @@ export interface ModelElo {
   rating: number;
   games: number;
   wins: number;
+  // Set on models no longer in the active roster. Kept in elo.json so past
+  // games still resolve, but hidden from the leaderboard.
+  retired?: boolean;
 }
 
 export interface EloDoc {

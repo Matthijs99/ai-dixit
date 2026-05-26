@@ -19,7 +19,13 @@ def ensure_model_entries(elo: dict, players: Iterable[Any]) -> None:
     Otherwise initialize fresh at INITIAL_RATING. Mutates `elo` in place; the
     original previous_ids entry is kept (as a retired record) so historical
     games keep resolving.
+
+    Finally, reconcile every entry against the active roster: entries whose
+    model_id is in the roster have any `retired` flag cleared; all others are
+    tagged `retired: True` so the leaderboard can hide them while their
+    history stays available for past games.
     """
+    players = list(players)
     models = elo.setdefault("models", {})
     for p in players:
         if p.model_id in models:
@@ -50,6 +56,13 @@ def ensure_model_entries(elo: dict, players: Iterable[Any]) -> None:
                 "games": 0,
                 "wins": 0,
             }
+
+    active_ids = {p.model_id for p in players}
+    for model_id, entry in models.items():
+        if model_id in active_ids:
+            entry.pop("retired", None)
+        else:
+            entry["retired"] = True
 
 
 def expected_score(rating_a: float, rating_b: float) -> float:
