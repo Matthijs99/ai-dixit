@@ -7,15 +7,16 @@
       "rd": 105.38,
       "vol": 0.060024,
       "games": 5,
-      "wins": 1
+      "wins": 1,
+      "retired": true
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1690.73,
-      "rd": 107.78,
-      "vol": 0.060029,
-      "games": 5,
+      "rating": 1702.01,
+      "rd": 95.04,
+      "vol": 0.060021,
+      "games": 6,
       "wins": 2
     },
     "gemini-2.5-pro": {
@@ -35,7 +36,8 @@
       "rd": 110.6,
       "vol": 0.060074,
       "games": 5,
-      "wins": 2
+      "wins": 2,
+      "retired": true
     },
     "mistral-medium-3.5": {
       "display_name": "Mistral Medium 3.5",
@@ -54,17 +56,54 @@
       "rd": 137.84,
       "vol": 0.060009,
       "games": 5,
-      "wins": 0
+      "wins": 0,
+      "retired": true
     },
     "gemini-3.1-pro-preview": {
       "display_name": "Gemini 3.1 Pro",
       "org": "Google",
-      "rating": 1464.34,
-      "rd": 109.56,
-      "vol": 0.060008,
-      "games": 5,
+      "rating": 1472.51,
+      "rd": 96.2,
+      "vol": 0.06,
+      "games": 6,
       "wins": 0
+    },
+    "claude-opus-4-7-thinking": {
+      "display_name": "Claude Opus 4.7 Thinking",
+      "org": "Anthropic",
+      "rating": 1666.34,
+      "rd": 92.76,
+      "vol": 0.060018,
+      "games": 6,
+      "wins": 1
+    },
+    "grok-4.20-beta-0309-reasoning": {
+      "display_name": "Grok 4.20 (reasoning)",
+      "org": "xAI",
+      "rating": 1482.89,
+      "rd": 95.85,
+      "vol": 0.060079,
+      "games": 6,
+      "wins": 2
+    },
+    "seed-2-0-pro-260328": {
+      "display_name": "Seed 2.0 Pro",
+      "org": "Bytedance",
+      "rating": 1230.76,
+      "rd": 160.98,
+      "vol": 0.059999,
+      "games": 1,
+      "wins": 0
+    },
+    "kimi-k2.6": {
+      "display_name": "Kimi K2.6",
+      "org": "Moonshot",
+      "rating": 1894.89,
+      "rd": 160.98,
+      "vol": 0.060002,
+      "games": 1,
+      "wins": 1
     }
   },
-  "updated_at": "2026-05-26T00:35:31+02:00"
+  "updated_at": "2026-05-27T01:27:35+02:00"
 }
