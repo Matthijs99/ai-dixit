@@ -9,6 +9,9 @@ export interface ModelElo {
   display_name: string;
   org: string;
   rating: number;
+  // Glicko-2 rating deviation (the confidence ±) and volatility.
+  rd: number;
+  vol: number;
   games: number;
   wins: number;
   // Set on models no longer in the active roster. Kept in elo.json so past

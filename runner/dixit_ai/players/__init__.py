@@ -9,19 +9,6 @@ from typing import Any
 import yaml
 
 from dixit_ai.cards import REPO_ROOT
-from dixit_ai.players.claude import ClaudePlayer
-from dixit_ai.players.gemini import GeminiPlayer
-from dixit_ai.players.grok import GrokPlayer
-from dixit_ai.players.mistral import MistralPlayer
-from dixit_ai.players.openai import OpenAIPlayer
-
-_ADAPTERS: dict[str, type] = {
-    "claude": ClaudePlayer,
-    "openai": OpenAIPlayer,
-    "gemini": GeminiPlayer,
-    "grok": GrokPlayer,
-    "mistral": MistralPlayer,
-}
 
 
 def _models_yaml_path() -> Path:
@@ -42,7 +29,26 @@ def load_roster(path: Path | None = None) -> list[dict[str, Any]]:
 
 
 def default_lineup(path: Path | None = None) -> list:
-    """Instantiate the configured players. Reads API keys from env."""
+    """Instantiate the configured players. Reads API keys from env.
+
+    Adapter classes are imported here (not at module load) so that roster-only
+    consumers — and maintenance commands like ``--recompute-elo`` — don't need
+    every provider SDK installed.
+    """
+    from dixit_ai.players.claude import ClaudePlayer
+    from dixit_ai.players.gemini import GeminiPlayer
+    from dixit_ai.players.grok import GrokPlayer
+    from dixit_ai.players.mistral import MistralPlayer
+    from dixit_ai.players.openai import OpenAIPlayer
+
+    _ADAPTERS: dict[str, type] = {
+        "claude": ClaudePlayer,
+        "openai": OpenAIPlayer,
+        "gemini": GeminiPlayer,
+        "grok": GrokPlayer,
+        "mistral": MistralPlayer,
+    }
+
     players: list = []
     for i, entry in enumerate(load_roster(path)):
         adapter = entry.get("adapter")
