@@ -136,8 +136,6 @@ class BaseAdapter(ABC):
     def __init__(self) -> None:
         self.audit: list[CallRecord] = []
         self.previous_ids: list[str] = []
-        self.fallback_model_id: str | None = None
-        self.fallback_display_name: str | None = None
         self._current_turn: int | None = None
         self._lineup: list[str] = []
         self._display_names: dict[str, str] = {}
@@ -174,37 +172,6 @@ class BaseAdapter(ABC):
             turn_number=(self._current_turn or 0) + 1,
             history=self._history,
         )
-
-    def resolve(self) -> None:
-        """Probe the primary model; swap to the stable fallback if unavailable.
-
-        Must run *before* the game starts: the engine snapshots each player's
-        model_id to key scoring and Elo, so model_id must be final beforehand.
-        No-op when there's no fallback or the primary already works.
-        """
-        if not self.fallback_model_id or self.fallback_model_id == self.model_id:
-            return
-        try:
-            self._probe()
-        except Exception as exc:
-            log.warning(
-                "resolve: %s unavailable (%s); falling back to %s",
-                self.model_id, exc, self.fallback_model_id,
-            )
-            self.model_id = self.fallback_model_id
-            if self.fallback_display_name:
-                self.display_name = self.fallback_display_name
-
-    def _probe(self) -> None:
-        """One minimal call to confirm the model id is callable. Raises on failure."""
-        schema = {
-            "type": "object",
-            "properties": {"ok": {"type": "string"}},
-            "required": ["ok"],
-            "additionalProperties": False,
-        }
-        messages = self._build_messages("Reply only with JSON.", 'Return {"ok":"ok"}.')
-        self._call(messages=messages, schema=schema, image_bytes_by_label={})
 
     # Each concrete adapter implements _call.
     @abstractmethod

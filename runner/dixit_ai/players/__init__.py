@@ -72,8 +72,5 @@ def default_lineup(path: Path | None = None) -> list:
         player = cls(**kwargs)
         # Attach previous_ids for the Elo carryover layer to consult.
         player.previous_ids = list(entry.get("previous_ids") or [])
-        # Attach a stable fallback model, resolved by player.resolve() before play.
-        player.fallback_model_id = entry.get("fallback")
-        player.fallback_display_name = entry.get("fallback_display_name")
         players.append(player)
     return players

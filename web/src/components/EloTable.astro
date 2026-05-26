@@ -6,28 +6,24 @@ const rows = Object.entries(elo.models)
   .sort((a, b) => b.rating - a.rating);
 
 // Org-hosted product or model card for each entry in the lineup.
-// Falls back to displaying just the name if no URL is known. Includes current
-// roster, their stable fallbacks, and retired models that still hold Elo history.
+// Falls back to displaying just the name if no URL is known. Includes the current
+// roster plus retired models that still hold Elo history.
 const MODEL_URLS: Record<string, string> = {
   // Anthropic
   'claude-opus-4-7-thinking':        'https://www.anthropic.com/claude/opus',
   'claude-opus-4-7':                 'https://www.anthropic.com/claude/opus',
-  'claude-opus-4-6':                 'https://www.anthropic.com/claude/opus',
   // Google
   'gemini-3.1-pro-preview':          'https://deepmind.google/models/gemini/pro/',
   'gemini-2.5-pro':                  'https://deepmind.google/models/gemini/pro/',
   // OpenAI
   'gpt-5.5':                         'https://openai.com/index/introducing-gpt-5-5/',
-  'gpt-5.4':                         'https://openai.com/index/introducing-gpt-5-5/',
   // xAI
   'grok-4.20-beta-0309-reasoning':   'https://docs.x.ai/developers/models',
   'grok-4.3':                        'https://docs.x.ai/developers/models/grok-4.3',
   // ByteDance (via BytePlus ModelArk)
   'seed-2-0-pro-260328':             'https://seed.bytedance.com/',
-  'seed-2-0-lite-260228':            'https://seed.bytedance.com/',
   // Moonshot
   'kimi-k2.6':                       'https://platform.moonshot.ai/',
-  'kimi-k2.5':                       'https://platform.moonshot.ai/',
   // Retired (historical Elo rows)
   'mistral-large-2512':              'https://docs.mistral.ai/models/',
   'mistral-medium-3.5':              'https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04',

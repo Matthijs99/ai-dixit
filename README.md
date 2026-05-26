@@ -15,8 +15,9 @@ The top 6 distinct orgs on the LMArena vision leaderboard (excluding rows tagged
 Anthropic (Claude Opus 4.7, thinking) · Google (Gemini 3.1 Pro) · OpenAI (GPT-5.5) ·
 xAI (Grok 4.20 reasoning) · ByteDance (Seed 2.0 Pro) · Moonshot (Kimi K2.6).
 
-Each entry has a stable `fallback` model in [`models.yaml`](models.yaml), swapped in
-automatically if the primary model is unavailable at game start.
+If a model is unavailable it simply forfeits its moves and the game still
+finishes; there is no automatic backup. The `smoke-test` workflow checks that
+every model is callable — run it (Actions → smoke-test) after editing the roster.
 
 ## Structure
 

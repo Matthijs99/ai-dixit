@@ -262,55 +262,12 @@ def test_claude_without_thinking_forces_tool_choice():
     assert "thinking" not in kwargs
 
 
-# ----- Fallback resolution -----
-
-class _ResolveStub(BaseAdapter):
-    org = "test"
-
-    def __init__(self, *, model_id, display_name, raise_on_probe):
-        super().__init__()
-        self.model_id = model_id
-        self.display_name = display_name
-        self._raise = raise_on_probe
-
-    def _call(self, *, messages, schema, image_bytes_by_label) -> str:
-        _ = (messages, schema, image_bytes_by_label)
-        if self._raise:
-            raise RuntimeError("model not found")
-        return '{"ok": "ok"}'
-
-
-def test_resolve_swaps_to_fallback_when_primary_unavailable():
-    p = _ResolveStub(model_id="primary", display_name="Primary", raise_on_probe=True)
-    p.fallback_model_id = "fallback"
-    p.fallback_display_name = "Fallback"
-    p.resolve()
-    assert p.model_id == "fallback"
-    assert p.display_name == "Fallback"
-
-
-def test_resolve_keeps_primary_when_available():
-    p = _ResolveStub(model_id="primary", display_name="Primary", raise_on_probe=False)
-    p.fallback_model_id = "fallback"
-    p.fallback_display_name = "Fallback"
-    p.resolve()
-    assert p.model_id == "primary"
-    assert p.display_name == "Primary"
-
-
-def test_resolve_noop_without_fallback():
-    p = _ResolveStub(model_id="primary", display_name="Primary", raise_on_probe=True)
-    p.resolve()  # no fallback set → must not raise, must not change
-    assert p.model_id == "primary"
-
-
 # ----- Smoke run -----
 
 class _SmokePlayer:
     def __init__(self, model_id, ok):
         self.model_id = model_id
         self.display_name = model_id
-        self.fallback_model_id = "fb-" + model_id
         self._ok = ok
 
     def storytell(self, hand):
