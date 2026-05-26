@@ -27,7 +27,8 @@ players:
     fallback: claude-opus-4-6
     fallback_display_name: Claude Opus 4.6
   - adapter: gemini
-    model_id: gemini-3-pro
+    # API id for the leaderboard's "gemini-3-pro" row is gemini-3-pro-preview.
+    model_id: gemini-3-pro-preview
     display_name: Gemini 3 Pro
     previous_ids: [gemini-3.1-pro-preview, gemini-2.5-pro]
     fallback: gemini-3.1-pro-preview
@@ -45,11 +46,13 @@ players:
     fallback: grok-4.3
     fallback_display_name: Grok 4.3
   - adapter: bytedance
-    # ByteDance Seed, reached via OpenRouter (OpenAI-compatible).
-    model_id: bytedance/dola-seed-2.0-pro
-    display_name: Dola Seed 2.0 Pro
-    fallback: bytedance/dola-seed-2.0
-    fallback_display_name: Dola Seed 2.0
+    # ByteDance Seed via OpenRouter (OpenAI-compatible). NOTE: the leaderboard's
+    # top ByteDance row (dola-seed-2.0-pro) is NOT on OpenRouter — only the
+    # mini/lite tiers are. Using the best available (mini), lite as fallback.
+    model_id: bytedance-seed/seed-2.0-mini
+    display_name: ByteDance Seed 2.0 Mini
+    fallback: bytedance-seed/seed-2.0-lite
+    fallback_display_name: ByteDance Seed 2.0 Lite
   - adapter: moonshot
     model_id: kimi-k2.6
     display_name: Kimi K2.6

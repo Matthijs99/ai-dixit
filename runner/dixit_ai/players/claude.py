@@ -15,8 +15,9 @@ from dixit_ai.players.base import BaseAdapter
 class ClaudePlayer(BaseAdapter):
     org = "Anthropic"
 
-    # Extended-thinking budget (tokens). Kept modest to cap nightly cost.
-    THINKING_BUDGET = 1536
+    # Thinking effort (Opus 4.7 adaptive thinking). "medium" balances the
+    # depth a Dixit move needs against nightly token cost.
+    THINKING_EFFORT = "medium"
 
     def __init__(
         self,
@@ -81,12 +82,12 @@ class ClaudePlayer(BaseAdapter):
             "messages": user_msgs,
         }
         if self.thinking:
-            kwargs["thinking"] = {
-                "type": "enabled",
-                "budget_tokens": self.THINKING_BUDGET,
-            }
-            # max_tokens must exceed the thinking budget and leave room for output.
-            kwargs["max_tokens"] = self.THINKING_BUDGET + 512
+            # Opus 4.7 supports adaptive thinking only; depth is set via
+            # output_config.effort (not a token budget). Give max_tokens room
+            # for the thinking pass plus the tool call.
+            kwargs["thinking"] = {"type": "adaptive"}
+            kwargs["output_config"] = {"effort": self.THINKING_EFFORT}
+            kwargs["max_tokens"] = 4096
         else:
             # Without thinking we can force the tool for a guaranteed structured call.
             kwargs["tool_choice"] = {"type": "tool", "name": "submit_move"}

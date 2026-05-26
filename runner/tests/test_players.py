@@ -240,9 +240,10 @@ def test_claude_thinking_uses_auto_tool_choice_and_thinking_param():
     kwargs = fake_client.messages.create.call_args.kwargs
     # Forced tool use is incompatible with thinking → must be auto.
     assert kwargs["tool_choice"] == {"type": "auto"}
-    assert kwargs["thinking"]["type"] == "enabled"
-    # max_tokens must exceed the thinking budget.
-    assert kwargs["max_tokens"] > kwargs["thinking"]["budget_tokens"]
+    # Opus 4.7: adaptive thinking + output_config.effort (no budget_tokens).
+    assert kwargs["thinking"] == {"type": "adaptive"}
+    assert kwargs["output_config"]["effort"] in {"low", "medium", "high", "xhigh", "max"}
+    assert "budget_tokens" not in kwargs["thinking"]
 
 
 def test_claude_without_thinking_forces_tool_choice():
