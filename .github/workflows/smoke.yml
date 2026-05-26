@@ -5,8 +5,10 @@ name: smoke-test
 # only works for workflows already on the default branch) plus a manual trigger.
 on:
   push:
+    # NB: '+' is a glob metachar in branch filters, so match the literal branch
+    # name with a wildcard instead of writing the '+' directly.
     branches:
-      - worktree-feat+add_new_model
+      - 'worktree-feat*add_new_model'
   workflow_dispatch: {}
 
 jobs:
