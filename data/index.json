@@ -126,5 +126,28 @@
       "claude-opus-4-7-thinking": 25.12,
       "seed-2-0-pro-260328": -269.24
     }
+  },
+  {
+    "game_id": "2026-05-28",
+    "date": "2026-05-28",
+    "status": "complete",
+    "winner": "kimi-k2.6",
+    "turns": 14,
+    "final_scores": {
+      "claude-opus-4-7-thinking": 20,
+      "gpt-5.5": 24,
+      "grok-4.20-beta-0309-reasoning": 24,
+      "gemini-3.1-pro-preview": 30,
+      "seed-2-0-pro-260328": 25,
+      "kimi-k2.6": 31
+    },
+    "elo_deltas": {
+      "claude-opus-4-7-thinking": -116.72,
+      "gpt-5.5": -69.67,
+      "grok-4.20-beta-0309-reasoning": -14.0,
+      "gemini-3.1-pro-preview": 89.63,
+      "seed-2-0-pro-260328": 248.92,
+      "kimi-k2.6": 68.77
+    }
   }
 ]
