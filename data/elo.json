@@ -13,10 +13,10 @@
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1632.34,
-      "rd": 86.16,
-      "vol": 0.060036,
-      "games": 7,
+      "rating": 1590.91,
+      "rd": 78.25,
+      "vol": 0.060038,
+      "games": 8,
       "wins": 2
     },
     "gemini-2.5-pro": {
@@ -62,48 +62,48 @@
     "gemini-3.1-pro-preview": {
       "display_name": "Gemini 3.1 Pro",
       "org": "Google",
-      "rating": 1562.14,
-      "rd": 86.91,
-      "vol": 0.060029,
-      "games": 7,
+      "rating": 1588.64,
+      "rd": 78.52,
+      "vol": 0.060023,
+      "games": 8,
       "wins": 0
     },
     "claude-opus-4-7-thinking": {
       "display_name": "Claude Opus 4.7 Thinking",
       "org": "Anthropic",
-      "rating": 1549.62,
-      "rd": 84.2,
-      "vol": 0.060083,
-      "games": 7,
+      "rating": 1480.02,
+      "rd": 76.58,
+      "vol": 0.060111,
+      "games": 8,
       "wins": 1
     },
     "grok-4.20-beta-0309-reasoning": {
       "display_name": "Grok 4.20 (reasoning)",
       "org": "xAI",
-      "rating": 1468.89,
-      "rd": 86.56,
-      "vol": 0.060071,
-      "games": 7,
+      "rating": 1466.27,
+      "rd": 78.77,
+      "vol": 0.060061,
+      "games": 8,
       "wins": 2
     },
     "seed-2-0-pro-260328": {
       "display_name": "Seed 2.0 Pro",
       "org": "Bytedance",
-      "rating": 1479.68,
-      "rd": 136.87,
-      "vol": 0.060032,
-      "games": 2,
-      "wins": 0
+      "rating": 1696.81,
+      "rd": 109.2,
+      "vol": 0.060078,
+      "games": 3,
+      "wins": 1
     },
     "kimi-k2.6": {
       "display_name": "Kimi K2.6",
       "org": "Moonshot",
-      "rating": 1963.66,
-      "rd": 134.45,
-      "vol": 0.06,
-      "games": 2,
+      "rating": 1922.8,
+      "rd": 121.71,
+      "vol": 0.059998,
+      "games": 3,
       "wins": 2
     }
   },
-  "updated_at": "2026-05-28T01:36:13+02:00"
+  "updated_at": "2026-05-29T01:50:12+02:00"
 }

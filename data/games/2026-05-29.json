@@ -1,0 +1,731 @@
+{
+  "game_id": "2026-05-29",
+  "status": "complete",
+  "started_at": "2026-05-29T00:33:24+02:00",
+  "ended_at": "2026-05-29T01:50:12+02:00",
+  "seed": "2026-05-29",
+  "players": [
+    "claude-opus-4-7-thinking",
+    "kimi-k2.6",
+    "gpt-5.5",
+    "seed-2-0-pro-260328",
+    "grok-4.20-beta-0309-reasoning",
+    "gemini-3.1-pro-preview"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Suspended between the watchers of my daydream",
+      "storyteller_card": 77,
+      "submissions": {
+        "claude-opus-4-7-thinking": 77,
+        "kimi-k2.6": 10,
+        "gpt-5.5": 46,
+        "seed-2-0-pro-260328": 27,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 59
+      },
+      "face_up_order": [
+        2,
+        59,
+        10,
+        27,
+        46,
+        77
+      ],
+      "votes": {
+        "kimi-k2.6": 77,
+        "gpt-5.5": 77,
+        "seed-2-0-pro-260328": 77,
+        "grok-4.20-beta-0309-reasoning": 77,
+        "gemini-3.1-pro-preview": 77
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "degraded": []
+    },
+    {
+      "turn": 1,
+      "storyteller": "kimi-k2.6",
+      "clue": "Tangled light beckons the silent watcher.",
+      "storyteller_card": 23,
+      "submissions": {
+        "kimi-k2.6": 23,
+        "claude-opus-4-7-thinking": 39,
+        "gpt-5.5": 38,
+        "seed-2-0-pro-260328": 44,
+        "grok-4.20-beta-0309-reasoning": 26,
+        "gemini-3.1-pro-preview": 95
+      },
+      "face_up_order": [
+        95,
+        39,
+        44,
+        26,
+        23,
+        38
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 23,
+        "gpt-5.5": 23,
+        "seed-2-0-pro-260328": 23,
+        "grok-4.20-beta-0309-reasoning": 23,
+        "gemini-3.1-pro-preview": 23
+      },
+      "scores_delta": {
+        "kimi-k2.6": 0,
+        "claude-opus-4-7-thinking": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 4,
+        "seed-2-0-pro-260328": 4,
+        "grok-4.20-beta-0309-reasoning": 4,
+        "gemini-3.1-pro-preview": 4
+      },
+      "degraded": []
+    },
+    {
+      "turn": 2,
+      "storyteller": "gpt-5.5",
+      "clue": "Winter kept one ember alive",
+      "storyteller_card": 5,
+      "submissions": {
+        "gpt-5.5": 5,
+        "claude-opus-4-7-thinking": 31,
+        "kimi-k2.6": 30,
+        "seed-2-0-pro-260328": 3,
+        "grok-4.20-beta-0309-reasoning": 19,
+        "gemini-3.1-pro-preview": 72
+      },
+      "face_up_order": [
+        19,
+        30,
+        31,
+        72,
+        5,
+        3
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 5,
+        "kimi-k2.6": 5,
+        "seed-2-0-pro-260328": 5,
+        "grok-4.20-beta-0309-reasoning": 5,
+        "gemini-3.1-pro-preview": 5
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 4,
+        "kimi-k2.6": 4,
+        "gpt-5.5": 4,
+        "seed-2-0-pro-260328": 6,
+        "grok-4.20-beta-0309-reasoning": 6,
+        "gemini-3.1-pro-preview": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 3,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "Nobody ever thinks there is a little man living inside the moon.",
+      "storyteller_card": 28,
+      "submissions": {
+        "seed-2-0-pro-260328": 28,
+        "claude-opus-4-7-thinking": 42,
+        "kimi-k2.6": 86,
+        "gpt-5.5": 87,
+        "grok-4.20-beta-0309-reasoning": 48,
+        "gemini-3.1-pro-preview": 32
+      },
+      "face_up_order": [
+        42,
+        87,
+        48,
+        86,
+        32,
+        28
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 28,
+        "kimi-k2.6": 28,
+        "gpt-5.5": 28,
+        "grok-4.20-beta-0309-reasoning": 28,
+        "gemini-3.1-pro-preview": 28
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 6,
+        "kimi-k2.6": 6,
+        "gpt-5.5": 6,
+        "seed-2-0-pro-260328": 6,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "gemini-3.1-pro-preview": 8
+      },
+      "degraded": []
+    },
+    {
+      "turn": 4,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Heavy is the head that wears the crown",
+      "storyteller_card": 62,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 62,
+        "claude-opus-4-7-thinking": 100,
+        "kimi-k2.6": 74,
+        "gpt-5.5": 18,
+        "seed-2-0-pro-260328": 9,
+        "gemini-3.1-pro-preview": 36
+      },
+      "face_up_order": [
+        100,
+        9,
+        74,
+        36,
+        18,
+        62
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 62,
+        "kimi-k2.6": 62,
+        "gpt-5.5": 62,
+        "seed-2-0-pro-260328": 62,
+        "gemini-3.1-pro-preview": 62
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 8,
+        "kimi-k2.6": 8,
+        "gpt-5.5": 8,
+        "seed-2-0-pro-260328": 8,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "gemini-3.1-pro-preview": 10
+      },
+      "degraded": []
+    },
+    {
+      "turn": 5,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "The shortest distance between two points.",
+      "storyteller_card": 67,
+      "submissions": {
+        "gemini-3.1-pro-preview": 67,
+        "claude-opus-4-7-thinking": 43,
+        "kimi-k2.6": 51,
+        "gpt-5.5": 75,
+        "seed-2-0-pro-260328": 33,
+        "grok-4.20-beta-0309-reasoning": 57
+      },
+      "face_up_order": [
+        43,
+        33,
+        75,
+        67,
+        57,
+        51
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 67,
+        "kimi-k2.6": 67,
+        "gpt-5.5": 67,
+        "seed-2-0-pro-260328": 67,
+        "grok-4.20-beta-0309-reasoning": 67
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 10,
+        "kimi-k2.6": 10,
+        "gpt-5.5": 10,
+        "seed-2-0-pro-260328": 10,
+        "grok-4.20-beta-0309-reasoning": 10,
+        "gemini-3.1-pro-preview": 10
+      },
+      "degraded": []
+    },
+    {
+      "turn": 6,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Given enough time, the fish learns to fly.",
+      "storyteller_card": 83,
+      "submissions": {
+        "claude-opus-4-7-thinking": 83,
+        "kimi-k2.6": 79,
+        "gpt-5.5": 20,
+        "seed-2-0-pro-260328": 93,
+        "grok-4.20-beta-0309-reasoning": 53,
+        "gemini-3.1-pro-preview": 58
+      },
+      "face_up_order": [
+        83,
+        93,
+        20,
+        53,
+        58,
+        79
+      ],
+      "votes": {
+        "kimi-k2.6": 83,
+        "gpt-5.5": 83,
+        "seed-2-0-pro-260328": 83,
+        "grok-4.20-beta-0309-reasoning": 83,
+        "gemini-3.1-pro-preview": 83
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 10,
+        "kimi-k2.6": 12,
+        "gpt-5.5": 12,
+        "seed-2-0-pro-260328": 12,
+        "grok-4.20-beta-0309-reasoning": 12,
+        "gemini-3.1-pro-preview": 12
+      },
+      "degraded": []
+    },
+    {
+      "turn": 7,
+      "storyteller": "kimi-k2.6",
+      "clue": "Gravity lost interest during the second movement.",
+      "storyteller_card": 40,
+      "submissions": {
+        "kimi-k2.6": 40,
+        "claude-opus-4-7-thinking": 70,
+        "gpt-5.5": 99,
+        "seed-2-0-pro-260328": 94,
+        "grok-4.20-beta-0309-reasoning": 92,
+        "gemini-3.1-pro-preview": 84
+      },
+      "face_up_order": [
+        40,
+        70,
+        99,
+        94,
+        92,
+        84
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 40,
+        "gpt-5.5": 40,
+        "seed-2-0-pro-260328": 40,
+        "grok-4.20-beta-0309-reasoning": 40,
+        "gemini-3.1-pro-preview": 40
+      },
+      "scores_delta": {
+        "kimi-k2.6": 0,
+        "claude-opus-4-7-thinking": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 12,
+        "kimi-k2.6": 12,
+        "gpt-5.5": 14,
+        "seed-2-0-pro-260328": 14,
+        "grok-4.20-beta-0309-reasoning": 14,
+        "gemini-3.1-pro-preview": 14
+      },
+      "degraded": []
+    },
+    {
+      "turn": 8,
+      "storyteller": "gpt-5.5",
+      "clue": "Ariadne at archery practice",
+      "storyteller_card": 89,
+      "submissions": {
+        "gpt-5.5": 89,
+        "claude-opus-4-7-thinking": 6,
+        "kimi-k2.6": 66,
+        "seed-2-0-pro-260328": 47,
+        "grok-4.20-beta-0309-reasoning": 63,
+        "gemini-3.1-pro-preview": 96
+      },
+      "face_up_order": [
+        6,
+        63,
+        96,
+        66,
+        47,
+        89
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 89,
+        "kimi-k2.6": 89,
+        "seed-2-0-pro-260328": 89,
+        "grok-4.20-beta-0309-reasoning": 89,
+        "gemini-3.1-pro-preview": 89
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 14,
+        "kimi-k2.6": 14,
+        "gpt-5.5": 14,
+        "seed-2-0-pro-260328": 16,
+        "grok-4.20-beta-0309-reasoning": 16,
+        "gemini-3.1-pro-preview": 16
+      },
+      "degraded": []
+    },
+    {
+      "turn": 9,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "I found the quietest spot high above the washing line to read undisturbed.",
+      "storyteller_card": 73,
+      "submissions": {
+        "seed-2-0-pro-260328": 73,
+        "claude-opus-4-7-thinking": 4,
+        "kimi-k2.6": 41,
+        "gpt-5.5": 21,
+        "grok-4.20-beta-0309-reasoning": 81,
+        "gemini-3.1-pro-preview": 7
+      },
+      "face_up_order": [
+        7,
+        73,
+        41,
+        21,
+        81,
+        4
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 73,
+        "kimi-k2.6": 73,
+        "gpt-5.5": 73,
+        "grok-4.20-beta-0309-reasoning": 73,
+        "gemini-3.1-pro-preview": 73
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 16,
+        "kimi-k2.6": 16,
+        "gpt-5.5": 16,
+        "seed-2-0-pro-260328": 16,
+        "grok-4.20-beta-0309-reasoning": 18,
+        "gemini-3.1-pro-preview": 18
+      },
+      "degraded": []
+    },
+    {
+      "turn": 10,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Keys to another world",
+      "storyteller_card": 16,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 16,
+        "claude-opus-4-7-thinking": 12,
+        "kimi-k2.6": 61,
+        "gpt-5.5": 76,
+        "seed-2-0-pro-260328": 78,
+        "gemini-3.1-pro-preview": 56
+      },
+      "face_up_order": [
+        61,
+        16,
+        56,
+        76,
+        78,
+        12
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 16,
+        "kimi-k2.6": 16,
+        "gpt-5.5": 16,
+        "seed-2-0-pro-260328": 16,
+        "gemini-3.1-pro-preview": 16
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 18,
+        "kimi-k2.6": 18,
+        "gpt-5.5": 18,
+        "seed-2-0-pro-260328": 18,
+        "grok-4.20-beta-0309-reasoning": 18,
+        "gemini-3.1-pro-preview": 20
+      },
+      "degraded": []
+    },
+    {
+      "turn": 11,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Out of office.",
+      "storyteller_card": 82,
+      "submissions": {
+        "gemini-3.1-pro-preview": 82,
+        "claude-opus-4-7-thinking": 14,
+        "kimi-k2.6": 97,
+        "gpt-5.5": 91,
+        "seed-2-0-pro-260328": 61,
+        "grok-4.20-beta-0309-reasoning": 15
+      },
+      "face_up_order": [
+        14,
+        82,
+        61,
+        91,
+        15,
+        97
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 82,
+        "kimi-k2.6": 82,
+        "gpt-5.5": 82,
+        "seed-2-0-pro-260328": 82,
+        "grok-4.20-beta-0309-reasoning": 82
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 20,
+        "kimi-k2.6": 20,
+        "gpt-5.5": 20,
+        "seed-2-0-pro-260328": 20,
+        "grok-4.20-beta-0309-reasoning": 20,
+        "gemini-3.1-pro-preview": 20
+      },
+      "degraded": []
+    },
+    {
+      "turn": 12,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Confessions that caught fire",
+      "storyteller_card": 50,
+      "submissions": {
+        "claude-opus-4-7-thinking": 50,
+        "kimi-k2.6": 54,
+        "gpt-5.5": 35,
+        "seed-2-0-pro-260328": 37,
+        "grok-4.20-beta-0309-reasoning": 39,
+        "gemini-3.1-pro-preview": 68
+      },
+      "face_up_order": [
+        68,
+        54,
+        39,
+        35,
+        37,
+        50
+      ],
+      "votes": {
+        "kimi-k2.6": 50,
+        "gpt-5.5": 50,
+        "seed-2-0-pro-260328": 50,
+        "grok-4.20-beta-0309-reasoning": 50,
+        "gemini-3.1-pro-preview": 50
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gemini-3.1-pro-preview": 2
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 20,
+        "kimi-k2.6": 22,
+        "gpt-5.5": 22,
+        "seed-2-0-pro-260328": 22,
+        "grok-4.20-beta-0309-reasoning": 22,
+        "gemini-3.1-pro-preview": 22
+      },
+      "degraded": []
+    },
+    {
+      "turn": 13,
+      "storyteller": "kimi-k2.6",
+      "clue": "The neighborhood drifted away that afternoon.",
+      "storyteller_card": 47,
+      "submissions": {
+        "kimi-k2.6": 47,
+        "claude-opus-4-7-thinking": 23,
+        "gpt-5.5": 65,
+        "seed-2-0-pro-260328": 71,
+        "grok-4.20-beta-0309-reasoning": 60,
+        "gemini-3.1-pro-preview": 96
+      },
+      "face_up_order": [
+        47,
+        65,
+        60,
+        96,
+        23,
+        71
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 71,
+        "gpt-5.5": 71,
+        "seed-2-0-pro-260328": 47,
+        "grok-4.20-beta-0309-reasoning": 47,
+        "gemini-3.1-pro-preview": 47
+      },
+      "scores_delta": {
+        "kimi-k2.6": 3,
+        "claude-opus-4-7-thinking": 0,
+        "gpt-5.5": 0,
+        "seed-2-0-pro-260328": 5,
+        "grok-4.20-beta-0309-reasoning": 3,
+        "gemini-3.1-pro-preview": 3
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 20,
+        "kimi-k2.6": 25,
+        "gpt-5.5": 22,
+        "seed-2-0-pro-260328": 27,
+        "grok-4.20-beta-0309-reasoning": 25,
+        "gemini-3.1-pro-preview": 25
+      },
+      "degraded": []
+    },
+    {
+      "turn": 14,
+      "storyteller": "gpt-5.5",
+      "clue": "Pascal's morning commute",
+      "storyteller_card": 30,
+      "submissions": {
+        "gpt-5.5": 30,
+        "claude-opus-4-7-thinking": 9,
+        "kimi-k2.6": 90,
+        "seed-2-0-pro-260328": 10,
+        "grok-4.20-beta-0309-reasoning": 85,
+        "gemini-3.1-pro-preview": 55
+      },
+      "face_up_order": [
+        30,
+        10,
+        55,
+        85,
+        90,
+        9
+      ],
+      "votes": {
+        "claude-opus-4-7-thinking": 30,
+        "kimi-k2.6": 30,
+        "seed-2-0-pro-260328": 30,
+        "grok-4.20-beta-0309-reasoning": 90,
+        "gemini-3.1-pro-preview": 30
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "claude-opus-4-7-thinking": 3,
+        "kimi-k2.6": 4,
+        "seed-2-0-pro-260328": 3,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "gemini-3.1-pro-preview": 3
+      },
+      "scores_total": {
+        "claude-opus-4-7-thinking": 23,
+        "kimi-k2.6": 29,
+        "gpt-5.5": 25,
+        "seed-2-0-pro-260328": 30,
+        "grok-4.20-beta-0309-reasoning": 25,
+        "gemini-3.1-pro-preview": 28
+      },
+      "degraded": []
+    }
+  ],
+  "final_scores": {
+    "claude-opus-4-7-thinking": 23,
+    "kimi-k2.6": 29,
+    "gpt-5.5": 25,
+    "seed-2-0-pro-260328": 30,
+    "grok-4.20-beta-0309-reasoning": 25,
+    "gemini-3.1-pro-preview": 28
+  },
+  "elo_before": {
+    "claude-opus-4-7-thinking": 1549.62,
+    "kimi-k2.6": 1963.66,
+    "gpt-5.5": 1632.34,
+    "seed-2-0-pro-260328": 1479.68,
+    "grok-4.20-beta-0309-reasoning": 1468.89,
+    "gemini-3.1-pro-preview": 1562.14
+  },
+  "elo_after": {
+    "claude-opus-4-7-thinking": 1480.02,
+    "kimi-k2.6": 1922.8,
+    "gpt-5.5": 1590.91,
+    "seed-2-0-pro-260328": 1696.81,
+    "grok-4.20-beta-0309-reasoning": 1466.27,
+    "gemini-3.1-pro-preview": 1588.64
+  }
+}
