@@ -1,8 +1,14 @@
 ---
 import { loadElo, type EloDoc } from '../lib/data';
+
+// `retired` selects which set to render: the active roster (default) or the
+// retired models. The retired variant drops the rank column (a global rank is
+// misleading for models no longer competing) and renders subdued.
+const { retired = false } = Astro.props;
+
 const elo: EloDoc = loadElo();
 const rows = Object.entries(elo.models)
-  .filter(([, m]) => !m.retired)
+  .filter(([, m]) => Boolean(m.retired) === retired)
   .map(([id, m]) => ({ id, ...m }))
   .sort((a, b) => b.rating - a.rating);
 
@@ -30,14 +36,14 @@ const MODEL_URLS: Record<string, string> = {
   'mistral-medium-3.5':              'https://docs.mistral.ai/models/model-cards/mistral-medium-3-5-26-04',
 };
 ---
-<table>
+<table class={retired ? 'retired' : undefined}>
   <thead>
-    <tr><th>#</th><th>Model</th><th>Org</th><th>Elo</th><th>Games</th><th>Wins</th></tr>
+    <tr>{!retired && <th>#</th>}<th>Model</th><th>Org</th><th>Elo</th><th>Games</th><th>Wins</th></tr>
   </thead>
   <tbody>
     {rows.map((r, i) => (
       <tr>
-        <td class="rank">{i + 1}</td>
+        {!retired && <td class="rank">{i + 1}</td>}
         <td>
           {MODEL_URLS[r.id] ? (
             <a class="model-link" href={MODEL_URLS[r.id]} target="_blank" rel="noopener">{r.display_name}</a>
@@ -67,12 +73,19 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .model-link { color: inherit; text-decoration: none; }
 .model-link:hover { color: #f0d680; text-decoration: underline; text-underline-offset: 3px; }
 
+/* Retired models render subdued to set them apart from the live roster. */
+table.retired { color: #7a8290; }
+table.retired .elo { font-weight: 400; }
+
 /* Narrow phones: shrink the table and hide the Org column (3rd) so
    the model name doesn't get squeezed. */
 @media (max-width: 600px) {
   table { font-size: 14px; }
   th, td { padding: 8px 6px; }
-  th:nth-child(3), td:nth-child(3) { display: none; }
+  /* Hide the Org column: 3rd in the active table (after #, Model), 2nd in the
+     retired table (no rank column). */
+  table:not(.retired) th:nth-child(3), table:not(.retired) td:nth-child(3) { display: none; }
+  table.retired th:nth-child(2), table.retired td:nth-child(2) { display: none; }
 }
 @media (max-width: 380px) {
   table { font-size: 13px; }
