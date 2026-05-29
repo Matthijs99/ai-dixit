@@ -8,7 +8,8 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // "2026-05-22T18:52:57.384263+02:00" → "2026-05-22 18:52" — drop the T,
 // microseconds, seconds and timezone offset for a tidier subtitle.
 const updatedAt = elo.updated_at.slice(0, 16).replace('T', ' ');
-const hasRetired = Object.values(elo.models).some(m => m.retired);
+const retiredCount = Object.values(elo.models).filter(m => m.retired).length;
+const hasRetired = retiredCount > 0;
 ---
 <html lang="en">
 <head>
@@ -31,6 +32,16 @@ const hasRetired = Object.values(elo.models).some(m => m.retired);
                 text-transform: uppercase; }
     section { margin-top: 32px; }
     a { color: var(--fg); }
+    details.retired-toggle > summary {
+      cursor: pointer; list-style: none; display: inline-flex; align-items: center;
+      gap: 8px; user-select: none;
+    }
+    details.retired-toggle > summary::-webkit-details-marker { display: none; }
+    details.retired-toggle > summary::before {
+      content: "\25B8"; color: var(--muted); transition: transform .15s ease;
+    }
+    details.retired-toggle[open] > summary::before { transform: rotate(90deg); }
+    details.retired-toggle[open] > summary { margin-bottom: 12px; }
   </style>
 </head>
 <body>
@@ -41,12 +52,10 @@ const hasRetired = Object.values(elo.models).some(m => m.retired);
 
     {hasRetired && (
       <section>
-        <h2 class="subtitle">Retired</h2>
-        <p style="color:var(--muted); font-size:12px; margin:4px 0 12px">
-          Models that have left the roster. Games and wins are counted per model;
-          where a successor exists it inherits only the predecessor's rating.
-        </p>
-        <EloTable retired />
+        <details class="retired-toggle">
+          <summary class="subtitle">Retired ({retiredCount})</summary>
+          <EloTable retired />
+        </details>
       </section>
     )}
 
