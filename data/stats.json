@@ -3,107 +3,85 @@
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "rating": 1641.22,
-      "rd": 105.38,
-      "vol": 0.060024,
       "games": 5,
       "wins": 1,
+      "points": 131,
       "retired": true
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "rating": 1590.91,
-      "rd": 78.25,
-      "vol": 0.060038,
       "games": 8,
-      "wins": 2
+      "wins": 2,
+      "points": 217
     },
     "gemini-2.5-pro": {
       "display_name": "Gemini 2.5 Pro",
       "org": "Google",
-      "rating": 1377.48,
-      "rd": 159.76,
-      "vol": 0.059997,
       "games": 2,
       "wins": 0,
+      "points": 50,
       "retired": true
     },
     "grok-4.3": {
       "display_name": "Grok 4.3",
       "org": "xAI",
-      "rating": 1552.44,
-      "rd": 110.6,
-      "vol": 0.060074,
       "games": 5,
       "wins": 2,
+      "points": 135,
       "retired": true
     },
     "mistral-medium-3.5": {
       "display_name": "Mistral Medium 3.5",
       "org": "Mistral",
-      "rating": 1079.82,
-      "rd": 172.39,
-      "vol": 0.06,
       "games": 2,
       "wins": 0,
+      "points": 29,
       "retired": true
     },
     "mistral-large-2512": {
       "display_name": "Mistral Large 3",
       "org": "Mistral",
-      "rating": 1141.77,
-      "rd": 137.84,
-      "vol": 0.060009,
-      "games": 5,
+      "games": 3,
       "wins": 0,
+      "points": 55,
       "retired": true
     },
     "gemini-3.1-pro-preview": {
       "display_name": "Gemini 3.1 Pro",
       "org": "Google",
-      "rating": 1588.64,
-      "rd": 78.52,
-      "vol": 0.060023,
       "games": 6,
-      "wins": 0
-    },
-    "claude-opus-4-7-thinking": {
-      "display_name": "Claude Opus 4.7 Thinking",
-      "org": "Anthropic",
-      "rating": 1480.02,
-      "rd": 76.58,
-      "vol": 0.060111,
-      "games": 3,
-      "wins": 0
-    },
-    "grok-4.20-beta-0309-reasoning": {
-      "display_name": "Grok 4.20 (reasoning)",
-      "org": "xAI",
-      "rating": 1466.27,
-      "rd": 78.77,
-      "vol": 0.060061,
-      "games": 3,
-      "wins": 0
-    },
-    "seed-2-0-pro-260328": {
-      "display_name": "Seed 2.0 Pro",
-      "org": "Bytedance",
-      "rating": 1696.81,
-      "rd": 109.2,
-      "vol": 0.060078,
-      "games": 3,
-      "wins": 1
+      "wins": 0,
+      "points": 154
     },
     "kimi-k2.6": {
       "display_name": "Kimi K2.6",
       "org": "Moonshot",
-      "rating": 1922.8,
-      "rd": 121.71,
-      "vol": 0.059998,
       "games": 3,
-      "wins": 2
+      "wins": 2,
+      "points": 90
+    },
+    "grok-4.20-beta-0309-reasoning": {
+      "display_name": "Grok 4.20 (reasoning)",
+      "org": "xAI",
+      "games": 3,
+      "wins": 0,
+      "points": 67
+    },
+    "claude-opus-4-7-thinking": {
+      "display_name": "Claude Opus 4.7 Thinking",
+      "org": "Anthropic",
+      "games": 3,
+      "wins": 0,
+      "points": 67
+    },
+    "seed-2-0-pro-260328": {
+      "display_name": "Seed 2.0 Pro",
+      "org": "Bytedance",
+      "games": 3,
+      "wins": 1,
+      "points": 70
     }
   },
-  "updated_at": "2026-05-29T01:50:12+02:00"
+  "updated_at": "2026-05-29T13:30:32+02:00"
 }

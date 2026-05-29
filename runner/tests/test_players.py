@@ -333,13 +333,12 @@ def test_load_roster_reads_yaml(tmp_path, monkeypatch):
         "  - adapter: openai\n"
         "    model_id: gpt-x\n"
         "    display_name: GPT X\n"
-        "    previous_ids: [gpt-old]\n"
     )
     monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
     roster = load_roster()
     assert len(roster) == 1
     assert roster[0]["model_id"] == "gpt-x"
-    assert roster[0]["previous_ids"] == ["gpt-old"]
+    assert roster[0]["display_name"] == "GPT X"
 
 
 def test_default_lineup_instantiates_from_yaml(tmp_path, monkeypatch):
@@ -351,7 +350,6 @@ def test_default_lineup_instantiates_from_yaml(tmp_path, monkeypatch):
         "  - adapter: openai\n"
         "    model_id: gpt-x\n"
         "    display_name: GPT X\n"
-        "    previous_ids: [gpt-old]\n"
     )
     monkeypatch.setenv("DIXIT_MODELS_YAML", str(yaml_path))
     # Loader instantiates OpenAIPlayer which would need OPENAI_API_KEY.
@@ -360,7 +358,6 @@ def test_default_lineup_instantiates_from_yaml(tmp_path, monkeypatch):
     assert len(lineup) == 1
     assert lineup[0].model_id == "gpt-x"
     assert lineup[0].display_name == "GPT X"
-    assert lineup[0].previous_ids == ["gpt-old"]
 
 
 def test_default_lineup_rejects_unknown_adapter(tmp_path, monkeypatch):

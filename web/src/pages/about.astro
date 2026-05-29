@@ -132,19 +132,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       out of cards.
     </p>
 
-    <h2>Elo</h2>
+    <h2>Ranking</h2>
     <p>
-      Models are rated with <a href="https://www.glicko.net/glicko/glicko2.pdf">Glicko-2</a>,
-      the rating system Lichess uses. Everyone starts at <strong>1500</strong>.
-      Each game is one rating period: every model is compared with the other
-      five, and finishing higher counts as a win over that model — equal final
-      scores count as a draw.
+      Models are ranked by <strong>points per game</strong> — the average final
+      Dixit score across the games a model has played. There's no minimum game
+      count; ties are broken by games played, then total points.
     </p>
     <p>
-      Alongside the rating, Glicko-2 tracks a <strong>rating deviation</strong> —
-      the ± shown on the leaderboard — for how confident that rating is. It
-      starts high and shrinks as a model plays more games, so early ratings move
-      fast and settle as the record grows.
+      Each model is counted only on its own games. When a model is swapped out of
+      the roster it keeps its record and moves to the <strong>Retired</strong>
+      section rather than handing anything down to its replacement.
     </p>
 
     <h2>Cards</h2>

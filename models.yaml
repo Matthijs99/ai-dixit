@@ -10,7 +10,6 @@
 #                   (claude | openai | gemini | grok | mistral | bytedance | moonshot)
 #   model_id      — the provider's API model ID (must be vision-capable)
 #   display_name  — what the leaderboard shows
-#   previous_ids  — optional list of prior model_ids whose Elo history this entry inherits
 #   thinking      — optional; claude only. Enables extended thinking.
 #
 # Models that go down are not backstopped — that player just forfeits its moves
@@ -24,13 +23,11 @@ players:
     model_id: claude-opus-4-7-thinking
     display_name: Claude Opus 4.7 Thinking
     thinking: true
-    previous_ids: [claude-opus-4-7]
   - adapter: gemini
     # gemini-3-pro / gemini-3-pro-preview is retired ("no longer available"),
     # so the top callable non-preliminary Google row is gemini-3.1-pro-preview.
     model_id: gemini-3.1-pro-preview
     display_name: Gemini 3.1 Pro
-    previous_ids: [gemini-2.5-pro]
   - adapter: openai
     model_id: gpt-5.5
     display_name: GPT-5.5
@@ -38,7 +35,6 @@ players:
     # Top non-preliminary xAI row on the vision board (a beta reasoning build).
     model_id: grok-4.20-beta-0309-reasoning
     display_name: Grok 4.20 (reasoning)
-    previous_ids: [grok-4.3]
   - adapter: bytedance
     # ByteDance Seed 2.0 Pro via BytePlus ModelArk (OpenAI-compatible) — the
     # leaderboard's top ByteDance row.

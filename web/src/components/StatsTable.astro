@@ -1,20 +1,24 @@
 ---
-import { loadElo, type EloDoc } from '../lib/data';
+import { loadStats, type StatsDoc } from '../lib/data';
 
 // `retired` selects which set to render: the active roster (default) or the
 // retired models. The retired variant drops the rank column (a global rank is
 // misleading for models no longer competing) and renders subdued.
 const { retired = false } = Astro.props;
 
-const elo: EloDoc = loadElo();
-const rows = Object.entries(elo.models)
+const ppg = (m: { points: number; games: number }) =>
+  m.games ? m.points / m.games : 0;
+
+const stats: StatsDoc = loadStats();
+const rows = Object.entries(stats.models)
   .filter(([, m]) => Boolean(m.retired) === retired)
   .map(([id, m]) => ({ id, ...m }))
-  .sort((a, b) => b.rating - a.rating);
+  // Rank by points-per-game; break ties by games played, then total points.
+  .sort((a, b) => ppg(b) - ppg(a) || b.games - a.games || b.points - a.points);
 
 // Org-hosted product or model card for each entry in the lineup.
 // Falls back to displaying just the name if no URL is known. Includes the current
-// roster plus retired models that still hold Elo history.
+// roster plus retired models that still hold a record.
 const MODEL_URLS: Record<string, string> = {
   // Anthropic
   'claude-opus-4-7-thinking':        'https://www.anthropic.com/news/claude-opus-4-7',
@@ -38,7 +42,7 @@ const MODEL_URLS: Record<string, string> = {
 ---
 <table class={retired ? 'retired' : undefined}>
   <thead>
-    <tr>{!retired && <th>#</th>}<th>Model</th><th>Org</th><th>Elo</th><th>Games</th><th>Wins</th></tr>
+    <tr>{!retired && <th>#</th>}<th>Model</th><th>Org</th><th>P/Game</th><th>Games</th><th>Wins</th></tr>
   </thead>
   <tbody>
     {rows.map((r, i) => (
@@ -52,7 +56,7 @@ const MODEL_URLS: Record<string, string> = {
           )}
         </td>
         <td class="muted">{r.org}</td>
-        <td class="num elo">{Math.round(r.rating)}<span class="rd">&#8201;&plusmn;&#8201;{Math.round(r.rd)}</span></td>
+        <td class="num ppg">{ppg(r).toFixed(1)}</td>
         <td class="num">{r.games}</td>
         <td class="num">{r.wins}</td>
       </tr>
@@ -68,14 +72,13 @@ tbody tr:hover { background: rgba(255, 255, 255, 0.03); }
 .num { text-align: right; font-variant-numeric: tabular-nums; }
 .rank { color: #7a8290; width: 32px; }
 .muted { color: #7a8290; }
-.elo { font-weight: 600; }
-.rd { color: #7a8290; font-weight: 400; font-size: 0.82em; }
+.ppg { font-weight: 600; }
 .model-link { color: inherit; text-decoration: none; }
 .model-link:hover { color: #f0d680; text-decoration: underline; text-underline-offset: 3px; }
 
 /* Retired models render subdued to set them apart from the live roster. */
 table.retired { color: #7a8290; }
-table.retired .elo { font-weight: 400; }
+table.retired .ppg { font-weight: 400; }
 
 /* Narrow phones: shrink the table and hide the Org column (3rd) so
    the model name doesn't get squeezed. */

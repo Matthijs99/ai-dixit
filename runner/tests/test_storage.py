@@ -2,7 +2,7 @@ import json
 import pytest
 
 from dixit_ai.storage import (
-    load_elo, save_elo, load_index, append_index,
+    load_stats, save_stats, load_index, append_index,
     save_game, game_exists,
 )
 
@@ -11,17 +11,17 @@ def test_data_dir_resolves_to_repo_data(tmp_path, monkeypatch):
     monkeypatch.setattr("dixit_ai.storage.DATA_DIR", tmp_path)
     assert tmp_path.exists()
 
-def test_save_and_load_elo(tmp_path, monkeypatch):
+def test_save_and_load_stats(tmp_path, monkeypatch):
     monkeypatch.setattr("dixit_ai.storage.DATA_DIR", tmp_path)
     payload = {
         "updated_at": "2026-05-22T03:14:00Z",
         "models": {
-            "m1": {"display_name": "M1", "org": "X", "rating": 1500, "games": 0, "wins": 0},
+            "m1": {"display_name": "M1", "org": "X", "games": 0, "wins": 0, "points": 0},
         },
     }
-    save_elo(payload)
-    assert (tmp_path / "elo.json").exists()
-    loaded = load_elo()
+    save_stats(payload)
+    assert (tmp_path / "stats.json").exists()
+    loaded = load_stats()
     assert loaded == payload
 
 def test_append_index_and_load(tmp_path, monkeypatch):

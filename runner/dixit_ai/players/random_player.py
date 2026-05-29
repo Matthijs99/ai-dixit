@@ -20,7 +20,6 @@ class RandomPlayer:
         self.model_id = model_id
         self.display_name = display_name or model_id
         self.org = org
-        self.previous_ids: list[str] = []
         self._rng = random.Random(seed)
 
     def storytell(self, hand: list[Card]) -> tuple[CardId, str]:
