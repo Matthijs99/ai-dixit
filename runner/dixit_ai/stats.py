@@ -14,6 +14,18 @@ from typing import Any, Iterable, Mapping
 log = logging.getLogger(__name__)
 
 
+# Some entries are the same underlying model under different ids (e.g. the same
+# Claude version run with and without extended thinking) and should share one
+# leaderboard line. Map alias id -> canonical id; everything keys off canonical.
+MODEL_ALIASES: dict[str, str] = {
+    "claude-opus-4-7-thinking": "claude-opus-4-7",
+}
+
+
+def canonical_id(model_id: str) -> str:
+    return MODEL_ALIASES.get(model_id, model_id)
+
+
 # ----- Roster bookkeeping -----
 
 def _new_entry(player: Any) -> dict:
@@ -45,10 +57,11 @@ def ensure_model_entries(stats: dict, players: Iterable[Any]) -> None:
     players = list(players)
     models = stats.setdefault("models", {})
     for p in players:
-        if p.model_id not in models:
-            log.info("stats: initializing %s", p.model_id)
-            models[p.model_id] = _new_entry(p)
-    _reconcile_retired(models, {p.model_id for p in players})
+        mid = canonical_id(p.model_id)
+        if mid not in models:
+            log.info("stats: initializing %s", mid)
+            models[mid] = _new_entry(p)
+    _reconcile_retired(models, {canonical_id(p.model_id) for p in players})
 
 
 # ----- Recording results -----
@@ -64,9 +77,10 @@ def record_game(
     its running points total, and credit a win if it is `winner`. Entries must
     already exist (call `ensure_model_entries` first). Mutates `models` in place.
     """
+    winner_id = canonical_id(winner) if winner is not None else None
     for model_id, score in scores.items():
-        entry = models[model_id]
+        entry = models[canonical_id(model_id)]
         entry["games"] += 1
         entry["points"] += score
-        if model_id == winner:
+        if canonical_id(model_id) == winner_id:
             entry["wins"] += 1

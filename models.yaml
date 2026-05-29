@@ -21,7 +21,9 @@ players:
     # Identity matches the LMArena row name. The adapter strips the "-thinking"
     # suffix for the actual API call (thinking is a request param, not a model id).
     model_id: claude-opus-4-7-thinking
-    display_name: Claude Opus 4.7 Thinking
+    # Same model as the earlier non-thinking claude-opus-4-7; stats.py aliases
+    # the two onto one leaderboard line, so keep the display name unqualified.
+    display_name: Claude Opus 4.7
     thinking: true
   - adapter: gemini
     # gemini-3-pro / gemini-3-pro-preview is retired ("no longer available"),
