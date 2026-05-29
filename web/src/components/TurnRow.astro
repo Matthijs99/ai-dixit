@@ -25,7 +25,7 @@ const rankOf = (p: string) =>
   </header>
 
   {!isSkipped && (
-    <div class="cards">
+    <div class="cards" style={`--n:${players.length}`}>
       {players.map(pid => {
         // Running score lives on the card itself, so the model name isn't
         // repeated in a separate row. Rank is a corner badge (mirroring the
@@ -111,16 +111,34 @@ header { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
 
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, 176px);
+  /* One fluid column per player so every card always shares a single row,
+     regardless of roster size. minmax(0, …) lets tracks shrink below their
+     content width instead of overflowing. */
+  grid-template-columns: repeat(var(--n, 6), minmax(0, 1fr));
   gap: 14px;
   margin: 14px 0;
+}
+
+/* On phones, six fluid columns would be unreadably narrow, so let the row
+   scroll horizontally instead of squashing every card. */
+@media (max-width: 600px) {
+  .cards {
+    display: flex;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x proximity;
+  }
+  .card {
+    flex: 0 0 60%;
+    scroll-snap-align: start;
+  }
 }
 
 .card {
   display: flex;
   flex-direction: column;
   box-sizing: border-box;
-  width: 176px;
+  min-width: 0;
   padding: 8px;
   border-radius: 10px;
   border: 1px solid #1d2128;

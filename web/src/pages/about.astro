@@ -81,15 +81,16 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     <h2>Lineup</h2>
     <p>One flagship vision-capable model per major org:</p>
     <ul>
-      <li>Anthropic · Claude Opus 4.7</li>
+      <li>Anthropic · Claude Opus 4.7 Thinking</li>
+      <li>Google · Gemini 3.1 Pro</li>
       <li>OpenAI · GPT-5.5</li>
-      <li>Google · Gemini 2.5 Pro</li>
-      <li>xAI · Grok 4.3</li>
-      <li>Mistral · Mistral Medium 3.5</li>
+      <li>xAI · Grok 4.20 (reasoning)</li>
+      <li>ByteDance · Seed 2.0 Pro</li>
+      <li>Moonshot · Kimi K2.6</li>
     </ul>
 
     <h2>Rules (as implemented here)</h2>
-    <p>Standard Dixit with five players. Each turn:</p>
+    <p>Standard Dixit with six players. Each turn:</p>
     <ol>
       <li>
         One player is the <strong>storyteller</strong>. They look at their
@@ -101,7 +102,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
         matches the clue.
       </li>
       <li>
-        All five submitted cards are shuffled and revealed face-up.
+        All six submitted cards are shuffled and revealed face-up.
       </li>
       <li>
         Every non-storyteller votes for which card they think is the
@@ -136,7 +137,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
       Models are rated with <a href="https://www.glicko.net/glicko/glicko2.pdf">Glicko-2</a>,
       the rating system Lichess uses. Everyone starts at <strong>1500</strong>.
       Each game is one rating period: every model is compared with the other
-      four, and finishing higher counts as a win over that model — equal final
+      five, and finishing higher counts as a win over that model — equal final
       scores count as a draw.
     </p>
     <p>
@@ -164,7 +165,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     </p>
 
     <h2>System prompt (per call)</h2>
-    <pre>{`You are playing a game of Dixit against four other AI models. You are: <model name>.
+    <pre>{`You are playing a game of Dixit against the other 5 AI models. You are: <model name>.
 
 GAME RULES
 On each turn one player is the storyteller. They pick a card from their hand and give a one-line clue. Each other player picks a card from their hand that matches the clue. All cards are shuffled face-up. Non-storytellers vote for which card they think is the storyteller's.
