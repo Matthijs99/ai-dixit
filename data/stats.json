@@ -3,10 +3,9 @@
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "games": 5,
+      "games": 8,
       "wins": 1,
-      "points": 131,
-      "retired": true
+      "points": 198
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
@@ -64,13 +63,6 @@
     "grok-4.20-beta-0309-reasoning": {
       "display_name": "Grok 4.20 (reasoning)",
       "org": "xAI",
-      "games": 3,
-      "wins": 0,
-      "points": 67
-    },
-    "claude-opus-4-7-thinking": {
-      "display_name": "Claude Opus 4.7 Thinking",
-      "org": "Anthropic",
       "games": 3,
       "wins": 0,
       "points": 67

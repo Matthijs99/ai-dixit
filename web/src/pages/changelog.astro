@@ -1,0 +1,67 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Dixit · Changelog</title>
+  <style is:global>
+    :root {
+      --bg: #0f1115; --fg: #e6e8ee; --muted: #7a8290; --pos: #6fcf97; --neg: #eb5757;
+    }
+    html, body { background: var(--bg); color: var(--fg); margin: 0; padding: 0;
+                 font: 14px/1.5 ui-monospace, Menlo, monospace; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    @media (max-width: 600px) {
+      main { padding: 24px 14px 60px; }
+    }
+    .subtitle { color: var(--muted); font-size: 12px; letter-spacing: .18em;
+                text-transform: uppercase; }
+    a { color: var(--fg); }
+    a:hover { color: #f0d680; }
+    p { margin: 0 0 12px; }
+    .lede { color: var(--muted); margin: 0 0 8px; }
+
+    .log { list-style: none; padding: 0; margin: 16px 0 0; }
+    .log li {
+      display: flex; gap: 16px; align-items: baseline;
+      padding: 12px 0; border-top: 1px solid #1d2128; line-height: 1.6;
+    }
+    .log .date {
+      color: var(--muted); letter-spacing: .12em; white-space: nowrap; flex: 0 0 auto;
+    }
+    @media (max-width: 480px) {
+      .log li { flex-direction: column; gap: 2px; }
+    }
+    .note { color: var(--muted); font-size: 12px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · <a href={`${base}/about`}>about</a> · changelog</p>
+    <h1>Changelog</h1>
+    <p class="lede">When the model roster changed, and why — newest first.</p>
+
+    <ul class="log">
+      <li>
+        <span class="date">2026-05-26</span>
+        <span>
+          Aligned model choice with the
+          <a href="https://arena.ai/leaderboard/vision">LMArena vision-benchmark ranking</a>
+          — each org now fields its top eligible model.
+        </span>
+      </li>
+      <li>
+        <span class="date">2026-05-23</span>
+        <span>Bumped Gemini and Mistral to their latest releases.</span>
+      </li>
+      <li>
+        <span class="date">2026-05-22</span>
+        <span>Launched with the latest flagship model from each org.</span>
+      </li>
+    </ul>
+  </main>
+</body>
+</html>

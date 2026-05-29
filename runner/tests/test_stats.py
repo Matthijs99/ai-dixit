@@ -67,3 +67,36 @@ def test_ensure_entries_skips_existing():
     # Existing tallies and metadata are left untouched.
     assert stats["models"]["x"]["display_name"] == "X"
     assert stats["models"]["x"]["points"] == 60
+
+
+# ----- Aliased models (same model under two ids share one line) -----
+
+def test_record_game_folds_aliased_model_into_canonical():
+    # claude-opus-4-7-thinking is the same model as claude-opus-4-7, so its
+    # game must accumulate onto the canonical entry, not a separate one.
+    models = {
+        "claude-opus-4-7": {"display_name": "Claude Opus 4.7", "org": "Anthropic",
+                            "games": 5, "wins": 1, "points": 131},
+    }
+    record_game(models, {"claude-opus-4-7-thinking": 30}, winner="claude-opus-4-7-thinking")
+    assert "claude-opus-4-7-thinking" not in models
+    entry = models["claude-opus-4-7"]
+    assert entry["games"] == 6
+    assert entry["points"] == 161
+    assert entry["wins"] == 2
+
+
+def test_ensure_entries_keeps_aliased_active_model_under_canonical():
+    # The roster lists the thinking id, but it should keep the canonical entry
+    # active (clear `retired`) rather than spawn a second row.
+    stats: dict = {
+        "models": {
+            "claude-opus-4-7": {"display_name": "Claude Opus 4.7", "org": "Anthropic",
+                                "games": 5, "wins": 1, "points": 131, "retired": True},
+        }
+    }
+    p = _FakePlayer(model_id="claude-opus-4-7-thinking",
+                    display_name="Claude Opus 4.7", org="Anthropic")
+    ensure_model_entries(stats, [p])
+    assert "claude-opus-4-7-thinking" not in stats["models"]
+    assert "retired" not in stats["models"]["claude-opus-4-7"]
