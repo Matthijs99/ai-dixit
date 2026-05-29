@@ -135,7 +135,6 @@ class BaseAdapter(ABC):
 
     def __init__(self) -> None:
         self.audit: list[CallRecord] = []
-        self.previous_ids: list[str] = []
         self._current_turn: int | None = None
         self._lineup: list[str] = []
         self._display_names: dict[str, str] = {}

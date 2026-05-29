@@ -19,12 +19,12 @@ def _write_json(path: Path, value: Any) -> None:
     path.write_text(json.dumps(value, indent=2, sort_keys=False) + "\n")
 
 
-def load_elo() -> dict:
-    return _read_json(DATA_DIR / "elo.json")
+def load_stats() -> dict:
+    return _read_json(DATA_DIR / "stats.json")
 
 
-def save_elo(payload: dict) -> None:
-    _write_json(DATA_DIR / "elo.json", payload)
+def save_stats(payload: dict) -> None:
+    _write_json(DATA_DIR / "stats.json", payload)
 
 
 def load_index() -> list:

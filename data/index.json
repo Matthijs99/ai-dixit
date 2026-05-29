@@ -11,13 +11,6 @@
       "gemini-2.5-pro": 25,
       "grok-4.3": 31,
       "mistral-medium-3.5": 18
-    },
-    "elo_deltas": {
-      "claude-opus-4-7": -32.0,
-      "gpt-5.5": 32.0,
-      "gemini-2.5-pro": 0.0,
-      "grok-4.3": 64.0,
-      "mistral-medium-3.5": -64.0
     }
   },
   {
@@ -32,13 +25,6 @@
       "mistral-medium-3.5": 11,
       "grok-4.3": 27,
       "claude-opus-4-7": 28
-    },
-    "elo_deltas": {
-      "gpt-5.5": 56.77,
-      "gemini-2.5-pro": -32.0,
-      "mistral-medium-3.5": -49.66,
-      "grok-4.3": -14.34,
-      "claude-opus-4-7": 39.23
     }
   },
   {
@@ -53,13 +39,6 @@
       "gemini-3.1-pro-preview": 26,
       "grok-4.3": 31,
       "gpt-5.5": 26
-    },
-    "elo_deltas": {
-      "mistral-large-2512": -39.55,
-      "claude-opus-4-7": 30.48,
-      "gemini-3.1-pro-preview": -8.85,
-      "grok-4.3": 53.14,
-      "gpt-5.5": -35.22
     }
   },
   {
@@ -74,13 +53,6 @@
       "gemini-3.1-pro-preview": 23,
       "gpt-5.5": 25,
       "mistral-large-2512": 10
-    },
-    "elo_deltas": {
-      "grok-4.3": 10.49,
-      "claude-opus-4-7": 56.13,
-      "gemini-3.1-pro-preview": -22.94,
-      "gpt-5.5": -11.26,
-      "mistral-large-2512": -32.42
     }
   },
   {
@@ -95,13 +67,6 @@
       "gpt-5.5": 30,
       "mistral-large-2512": 25,
       "grok-4.3": 20
-    },
-    "elo_deltas": {
-      "gemini-3.1-pro-preview": 45.66,
-      "claude-opus-4-7": -34.92,
-      "gpt-5.5": 55.63,
-      "mistral-large-2512": 20.41,
-      "grok-4.3": -86.78
     }
   },
   {
@@ -117,14 +82,6 @@
       "gemini-3.1-pro-preview": 21,
       "claude-opus-4-7-thinking": 24,
       "seed-2-0-pro-260328": 15
-    },
-    "elo_deltas": {
-      "gpt-5.5": 11.28,
-      "kimi-k2.6": 394.89,
-      "grok-4.20-beta-0309-reasoning": -69.55,
-      "gemini-3.1-pro-preview": 8.17,
-      "claude-opus-4-7-thinking": 25.12,
-      "seed-2-0-pro-260328": -269.24
     }
   },
   {
@@ -140,14 +97,6 @@
       "gemini-3.1-pro-preview": 30,
       "seed-2-0-pro-260328": 25,
       "kimi-k2.6": 31
-    },
-    "elo_deltas": {
-      "claude-opus-4-7-thinking": -116.72,
-      "gpt-5.5": -69.67,
-      "grok-4.20-beta-0309-reasoning": -14.0,
-      "gemini-3.1-pro-preview": 89.63,
-      "seed-2-0-pro-260328": 248.92,
-      "kimi-k2.6": 68.77
     }
   },
   {
@@ -163,14 +112,6 @@
       "seed-2-0-pro-260328": 30,
       "grok-4.20-beta-0309-reasoning": 25,
       "gemini-3.1-pro-preview": 28
-    },
-    "elo_deltas": {
-      "claude-opus-4-7-thinking": -69.6,
-      "kimi-k2.6": -40.86,
-      "gpt-5.5": -41.43,
-      "seed-2-0-pro-260328": 217.13,
-      "grok-4.20-beta-0309-reasoning": -2.62,
-      "gemini-3.1-pro-preview": 26.5
     }
   }
 ]

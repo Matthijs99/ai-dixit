@@ -5,24 +5,23 @@ import { dirname, resolve } from 'node:path';
 const here = dirname(fileURLToPath(import.meta.url));
 const dataDir = resolve(here, '../../../data');
 
-export interface ModelElo {
+export interface ModelStats {
   display_name: string;
   org: string;
-  rating: number;
-  // Glicko-2 rating deviation (the confidence ±) and volatility.
-  rd: number;
-  vol: number;
   games: number;
   wins: number;
-  // Set on models no longer in the active roster. Kept in elo.json so past
+  // Total final-score points across this model's own games. Points-per-game
+  // (points / games) is the ranking metric, derived at render.
+  points: number;
+  // Set on models no longer in the active roster. Kept in stats.json so past
   // games still resolve; shown in a separate "Retired" section on the
   // leaderboard rather than the main ranking.
   retired?: boolean;
 }
 
-export interface EloDoc {
+export interface StatsDoc {
   updated_at: string;
-  models: Record<string, ModelElo>;
+  models: Record<string, ModelStats>;
 }
 
 export interface IndexRow {
@@ -32,7 +31,6 @@ export interface IndexRow {
   winner: string | null;
   turns: number;
   final_scores: Record<string, number>;
-  elo_deltas: Record<string, number>;
 }
 
 export interface TurnRecord {
@@ -57,12 +55,10 @@ export interface GameDoc {
   players: string[];
   turns: TurnRecord[];
   final_scores: Record<string, number>;
-  elo_before: Record<string, number>;
-  elo_after: Record<string, number>;
 }
 
-export function loadElo(): EloDoc {
-  return JSON.parse(readFileSync(resolve(dataDir, 'elo.json'), 'utf-8'));
+export function loadStats(): StatsDoc {
+  return JSON.parse(readFileSync(resolve(dataDir, 'stats.json'), 'utf-8'));
 }
 
 export function loadIndex(): IndexRow[] {

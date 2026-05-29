@@ -11,17 +11,17 @@ import traceback
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from dixit_ai.elo import ensure_model_entries, update_ratings
 from dixit_ai.engine import GameResult, play_game
 from dixit_ai.players.base import BaseAdapter
+from dixit_ai.stats import ensure_model_entries, record_game
 from dixit_ai.storage import (
     DATA_DIR,
     append_index,
     game_exists,
-    load_elo,
     load_index,
-    save_elo,
+    load_stats,
     save_game,
+    save_stats,
 )
 
 AMSTERDAM = ZoneInfo("Europe/Amsterdam")
@@ -48,58 +48,51 @@ class _ReplayPlayer:
     model_id: str
     display_name: str
     org: str
-    previous_ids: list[str]
 
 
-def recompute_elo() -> int:
-    """Rebuild data/elo.json from scratch by replaying index.json under Glicko-2.
+def recompute_stats() -> int:
+    """Rebuild data/stats.json from scratch by replaying index.json.
 
-    Metadata (display_name, org) is read from the existing elo.json; lineage
-    inheritance via `previous_ids` and the active-roster retired flags come from
-    models.yaml. Re-run this after changing the rating system or its constants.
+    Metadata (display_name, org) is read from the existing stats.json — notably
+    for retired models, whose names live only there and not in models.yaml. The
+    active-roster retired flags come from models.yaml. Re-run this after changing
+    how standings are computed.
     """
     from dixit_ai.players import load_roster
 
-    old = load_elo()
+    old = _read_json_or_empty(DATA_DIR / "stats.json")
     meta = {
-        mid: (e["display_name"], e["org"]) for mid, e in old["models"].items()
+        mid: (e["display_name"], e["org"])
+        for mid, e in old.get("models", {}).items()
     }
     roster = load_roster()
-    prev_ids = {e["model_id"]: list(e.get("previous_ids") or []) for e in roster}
     active = [e["model_id"] for e in roster]
 
     def player(mid: str) -> _ReplayPlayer:
         name, org = meta.get(mid, (mid, "?"))
-        return _ReplayPlayer(mid, name, org, prev_ids.get(mid, []))
+        return _ReplayPlayer(mid, name, org)
 
     index = load_index()
-    elo: dict = {"models": {}}
+    stats: dict = {"models": {}}
     games_replayed = 0
     for row in index:
         scores = row.get("final_scores") or {}
         if row.get("status") != "complete" or not scores:
             continue
-        ensure_model_entries(elo, [player(mid) for mid in scores])
-        states = {
-            m: (elo["models"][m]["rating"], elo["models"][m]["rd"], elo["models"][m]["vol"])
-            for m in scores
-        }
-        for m, (rating, rd, vol) in update_ratings(states, scores).items():
-            entry = elo["models"][m]
-            entry["rating"] = round(rating, 2)
-            entry["rd"] = round(rd, 2)
-            entry["vol"] = round(vol, 6)
-            entry["games"] += 1
-            if m == row.get("winner"):
-                entry["wins"] += 1
+        ensure_model_entries(stats, [player(mid) for mid in scores])
+        record_game(stats["models"], scores, row.get("winner"))
         games_replayed += 1
 
     # Reconcile retired flags against the current roster.
-    ensure_model_entries(elo, [player(mid) for mid in active])
-    elo["updated_at"] = old.get("updated_at") or _now_iso_seconds()
-    save_elo(elo)
-    print(f"recomputed elo.json from {games_replayed} games")
+    ensure_model_entries(stats, [player(mid) for mid in active])
+    stats["updated_at"] = old.get("updated_at") or _now_iso_seconds()
+    save_stats(stats)
+    print(f"recomputed stats.json from {games_replayed} games")
     return 0
+
+
+def _read_json_or_empty(path) -> dict:
+    return json.loads(path.read_text()) if path.exists() else {}
 
 
 def _configure_logging() -> None:
@@ -178,17 +171,17 @@ def main(argv: list[str] | None = None) -> int:
         help="Verify every model is callable (one move each), write nothing.",
     )
     parser.add_argument(
-        "--recompute-elo",
+        "--recompute-stats",
         action="store_true",
-        help="Rebuild elo.json from index.json under the current rating system, then exit.",
+        help="Rebuild stats.json from index.json, then exit.",
     )
     args = parser.parse_args(argv)
 
     if args.smoke:
         return run_smoke()
 
-    if args.recompute_elo:
-        return recompute_elo()
+    if args.recompute_stats:
+        return recompute_stats()
 
     if not args.dry_run and not _is_amsterdam_midnight():
         print(
@@ -222,15 +215,14 @@ def main(argv: list[str] | None = None) -> int:
                 display_name=entry["display_name"],
                 org=_ORGS.get(entry["adapter"], "random"),
             )
-            player.previous_ids = list(entry.get("previous_ids") or [])
             players.append(player)
     else:
         from dixit_ai.players import default_lineup
 
         players = default_lineup()
 
-    elo = load_elo()
-    ensure_model_entries(elo, players)
+    stats = load_stats()
+    ensure_model_entries(stats, players)
     started = _now_iso_seconds()
 
     try:
@@ -258,35 +250,15 @@ def main(argv: list[str] | None = None) -> int:
                 "winner": None,
                 "turns": 0,
                 "final_scores": {},
-                "elo_deltas": {},
             }
         )
         return 2
 
     ended = _now_iso_seconds()
 
-    # Update ratings (Glicko-2): this game is one rating period.
-    states = {
-        m: (
-            elo["models"][m]["rating"],
-            elo["models"][m]["rd"],
-            elo["models"][m]["vol"],
-        )
-        for m in result.final_scores
-    }
-    new_states = update_ratings(states, result.final_scores)
-    elo_before = {m: round(states[m][0], 2) for m in states}
-    elo_after = {m: round(new_states[m][0], 2) for m in new_states}
-
-    for m, (rating, rd, vol) in new_states.items():
-        entry = elo["models"][m]
-        entry["rating"] = round(rating, 2)
-        entry["rd"] = round(rd, 2)
-        entry["vol"] = round(vol, 6)
-        entry["games"] += 1
-        if m == result.winner:
-            entry["wins"] += 1
-    elo["updated_at"] = ended
+    # Fold this game's final scores into the standings.
+    record_game(stats["models"], result.final_scores, result.winner)
+    stats["updated_at"] = ended
 
     # Build game doc.
     game_doc = {
@@ -298,8 +270,6 @@ def main(argv: list[str] | None = None) -> int:
         "players": result.play_order,
         "turns": [dataclasses.asdict(t) for t in result.turns],
         "final_scores": result.final_scores,
-        "elo_before": elo_before,
-        "elo_after": elo_after,
     }
 
     # Raw audit trail: collect from each player.
@@ -310,7 +280,7 @@ def main(argv: list[str] | None = None) -> int:
                 raw_lines.append(dataclasses.asdict(c))
 
     save_game(game_id=game_id, game_doc=game_doc, raw_lines=raw_lines)
-    save_elo(elo)
+    save_stats(stats)
     append_index(
         {
             "game_id": game_id,
@@ -319,9 +289,6 @@ def main(argv: list[str] | None = None) -> int:
             "winner": result.winner,
             "turns": len(result.turns),
             "final_scores": result.final_scores,
-            "elo_deltas": {
-                m: round(elo_after[m] - elo_before[m], 2) for m in elo_after
-            },
         }
     )
     print(

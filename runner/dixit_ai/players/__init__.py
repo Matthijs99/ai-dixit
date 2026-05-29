@@ -35,7 +35,7 @@ def default_lineup(path: Path | None = None) -> list:
     """Instantiate the configured players. Reads API keys from env.
 
     Adapter classes are imported here (not at module load) so that roster-only
-    consumers — and maintenance commands like ``--recompute-elo`` — don't need
+    consumers — and maintenance commands like ``--recompute-stats`` — don't need
     every provider SDK installed.
     """
     from dixit_ai.players.bytedance import BytedancePlayer
@@ -76,7 +76,5 @@ def default_lineup(path: Path | None = None) -> list:
         if adapter in _THINKING_ADAPTERS and entry.get("thinking"):
             kwargs["thinking"] = True
         player = cls(**kwargs)
-        # Attach previous_ids for the Elo carryover layer to consult.
-        player.previous_ids = list(entry.get("previous_ids") or [])
         players.append(player)
     return players

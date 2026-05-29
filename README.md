@@ -23,7 +23,7 @@ every model is callable — run it (Actions → smoke-test) after editing the ro
 
 - `runner/` — Python game engine + six LLM adapters. Runs nightly in GH Actions.
 - `web/` — Astro static site, rebuilt every time `data/` changes.
-- `data/` — `elo.json`, `index.json`, and one `games/<date>.json` per game.
+- `data/` — `stats.json`, `index.json`, and one `games/<date>.json` per game.
 
 ## Local development
 
@@ -63,6 +63,6 @@ a day:
 
 ```bash
 rm data/games/<date>.json data/games/<date>.raw.jsonl
-git checkout HEAD~1 -- data/elo.json data/index.json   # roll back state
+git checkout HEAD~1 -- data/stats.json data/index.json   # roll back state
 # then either wait for cron or workflow_dispatch the nightly job
 ```
