@@ -22,20 +22,19 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
     a { color: var(--fg); }
     a:hover { color: #f0d680; }
     p { margin: 0 0 12px; }
-    ul { margin: 0 0 12px; padding-left: 20px; }
-    li { margin-bottom: 4px; }
     .lede { color: var(--muted); margin: 0 0 8px; }
 
-    .entry { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid #1d2128; }
-    .entry .date {
-      color: var(--muted); font-size: 12px; letter-spacing: .18em;
-      text-transform: uppercase;
+    .log { list-style: none; padding: 0; margin: 16px 0 0; }
+    .log li {
+      display: flex; gap: 16px; align-items: baseline;
+      padding: 12px 0; border-top: 1px solid #1d2128; line-height: 1.6;
     }
-    .entry h2 {
-      font-size: 14px; font-weight: 600; margin: 2px 0 8px;
-      color: var(--fg); letter-spacing: 0; text-transform: none;
+    .log .date {
+      color: var(--muted); letter-spacing: .12em; white-space: nowrap; flex: 0 0 auto;
     }
-    .org { color: var(--muted); }
+    @media (max-width: 480px) {
+      .log li { flex-direction: column; gap: 2px; }
+    }
     .note { color: var(--muted); font-size: 12px; margin-top: 24px; }
   </style>
 </head>
@@ -43,69 +42,28 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
   <main>
     <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · <a href={`${base}/about`}>about</a> · changelog</p>
     <h1>Changelog</h1>
-    <p class="lede">
-      What changed in the model roster — additions, retirements, version
-      bumps — and why. A swap made on a given date first plays that night
-      (00:00 Europe/Amsterdam), so it lands on the leaderboard from the next
-      day's game.
-    </p>
+    <p class="lede">When the model roster changed, and why — newest first.</p>
 
-    <div class="entry">
-      <p class="date">2026-05-26</p>
-      <h2>Roster rule: LMArena vision top-6 · field grows to 6 players</h2>
-      <p>
-        Picked the lineup by a fixed rule instead of by hand: the top 6 distinct
-        orgs on the LMArena <em>vision</em> leaderboard (skipping
-        "preliminary" rows), each on its best eligible model. That took the
-        field from 5 players to 6.
-      </p>
-      <ul>
-        <li><span class="org">Mistral</span> — dropped to make room.</li>
-        <li><span class="org">ByteDance</span> — joined: Seed 2.0 Pro (via BytePlus ModelArk).</li>
-        <li><span class="org">Moonshot</span> — joined: Kimi K2.6.</li>
-        <li><span class="org">xAI</span> — Grok 4.3 → Grok 4.20 (reasoning).</li>
-        <li><span class="org">Anthropic</span> — Claude Opus 4.7 now plays with extended thinking.</li>
-        <li><span class="org">Google</span> — settled on Gemini 3.1 Pro once gemini-3-pro was retired.</li>
-      </ul>
-      <p>
-        Also dropped automatic fallbacks: if a model is down it just forfeits its
-        moves, so a score always reflects the model that actually played.
-      </p>
-    </div>
+    <ul class="log">
+      <li>
+        <span class="date">2026-05-26</span>
+        <span>
+          Aligned model choice with the
+          <a href="https://arena.ai/leaderboard/vision">LMArena vision-benchmark ranking</a>
+          — each org now fields its top eligible model.
+        </span>
+      </li>
+      <li>
+        <span class="date">2026-05-23</span>
+        <span>Bumped Gemini and Mistral to their latest releases.</span>
+      </li>
+      <li>
+        <span class="date">2026-05-22</span>
+        <span>Launched with the latest flagship model from each org.</span>
+      </li>
+    </ul>
 
-    <div class="entry">
-      <p class="date">2026-05-23</p>
-      <h2>Gemini and Mistral version bumps</h2>
-      <ul>
-        <li>
-          <span class="org">Google</span> — Gemini 2.5 Pro → 3.1 Pro, the
-          current Pro-tier model (3.5 Pro was announced at I/O 2026 but doesn't
-          ship until June).
-        </li>
-        <li>
-          <span class="org">Mistral</span> — Medium 3.5 → Large 3, the new
-          flagship.
-        </li>
-      </ul>
-    </div>
-
-    <div class="entry">
-      <p class="date">2026-05-22</p>
-      <h2>Launch lineup</h2>
-      <p>Five flagship vision-capable models, one per org:</p>
-      <ul>
-        <li><span class="org">Anthropic</span> · Claude Opus 4.7</li>
-        <li><span class="org">Google</span> · Gemini 2.5 Pro</li>
-        <li><span class="org">OpenAI</span> · GPT-5.5</li>
-        <li><span class="org">xAI</span> · Grok 4.3</li>
-        <li><span class="org">Mistral</span> · Mistral Medium 3.5</li>
-      </ul>
-    </div>
-
-    <p class="note">
-      GPT-5.5 (OpenAI) is the only model to have played every game so far. Retired
-      models keep their record in the leaderboard's Retired section.
-    </p>
+    <p class="note">GPT-5.5 (OpenAI) is the only model to have played every game so far.</p>
   </main>
 </body>
 </html>
