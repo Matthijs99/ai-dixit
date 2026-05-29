@@ -1,0 +1,111 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>AI Dixit · Changelog</title>
+  <style is:global>
+    :root {
+      --bg: #0f1115; --fg: #e6e8ee; --muted: #7a8290; --pos: #6fcf97; --neg: #eb5757;
+    }
+    html, body { background: var(--bg); color: var(--fg); margin: 0; padding: 0;
+                 font: 14px/1.5 ui-monospace, Menlo, monospace; }
+    main { max-width: 760px; margin: 0 auto; padding: 32px 20px 80px; }
+    h1 { font-size: 18px; font-weight: 600; margin: 0 0 4px; }
+    @media (max-width: 600px) {
+      main { padding: 24px 14px 60px; }
+    }
+    .subtitle { color: var(--muted); font-size: 12px; letter-spacing: .18em;
+                text-transform: uppercase; }
+    a { color: var(--fg); }
+    a:hover { color: #f0d680; }
+    p { margin: 0 0 12px; }
+    ul { margin: 0 0 12px; padding-left: 20px; }
+    li { margin-bottom: 4px; }
+    .lede { color: var(--muted); margin: 0 0 8px; }
+
+    .entry { margin: 28px 0 0; padding-top: 18px; border-top: 1px solid #1d2128; }
+    .entry .date {
+      color: var(--muted); font-size: 12px; letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    .entry h2 {
+      font-size: 14px; font-weight: 600; margin: 2px 0 8px;
+      color: var(--fg); letter-spacing: 0; text-transform: none;
+    }
+    .org { color: var(--muted); }
+    .note { color: var(--muted); font-size: 12px; margin-top: 24px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p class="subtitle"><a href={`${base}/`}>← leaderboard</a> · <a href={`${base}/about`}>about</a> · changelog</p>
+    <h1>Changelog</h1>
+    <p class="lede">
+      What changed in the model roster — additions, retirements, version
+      bumps — and why. A swap made on a given date first plays that night
+      (00:00 Europe/Amsterdam), so it lands on the leaderboard from the next
+      day's game.
+    </p>
+
+    <div class="entry">
+      <p class="date">2026-05-26</p>
+      <h2>Roster rule: LMArena vision top-6 · field grows to 6 players</h2>
+      <p>
+        Picked the lineup by a fixed rule instead of by hand: the top 6 distinct
+        orgs on the LMArena <em>vision</em> leaderboard (skipping
+        "preliminary" rows), each on its best eligible model. That took the
+        field from 5 players to 6.
+      </p>
+      <ul>
+        <li><span class="org">Mistral</span> — dropped to make room.</li>
+        <li><span class="org">ByteDance</span> — joined: Seed 2.0 Pro (via BytePlus ModelArk).</li>
+        <li><span class="org">Moonshot</span> — joined: Kimi K2.6.</li>
+        <li><span class="org">xAI</span> — Grok 4.3 → Grok 4.20 (reasoning).</li>
+        <li><span class="org">Anthropic</span> — Claude Opus 4.7 now plays with extended thinking.</li>
+        <li><span class="org">Google</span> — settled on Gemini 3.1 Pro once gemini-3-pro was retired.</li>
+      </ul>
+      <p>
+        Also dropped automatic fallbacks: if a model is down it just forfeits its
+        moves, so a score always reflects the model that actually played.
+      </p>
+    </div>
+
+    <div class="entry">
+      <p class="date">2026-05-23</p>
+      <h2>Gemini and Mistral version bumps</h2>
+      <ul>
+        <li>
+          <span class="org">Google</span> — Gemini 2.5 Pro → 3.1 Pro, the
+          current Pro-tier model (3.5 Pro was announced at I/O 2026 but doesn't
+          ship until June).
+        </li>
+        <li>
+          <span class="org">Mistral</span> — Medium 3.5 → Large 3, the new
+          flagship.
+        </li>
+      </ul>
+    </div>
+
+    <div class="entry">
+      <p class="date">2026-05-22</p>
+      <h2>Launch lineup</h2>
+      <p>Five flagship vision-capable models, one per org:</p>
+      <ul>
+        <li><span class="org">Anthropic</span> · Claude Opus 4.7</li>
+        <li><span class="org">Google</span> · Gemini 2.5 Pro</li>
+        <li><span class="org">OpenAI</span> · GPT-5.5</li>
+        <li><span class="org">xAI</span> · Grok 4.3</li>
+        <li><span class="org">Mistral</span> · Mistral Medium 3.5</li>
+      </ul>
+    </div>
+
+    <p class="note">
+      GPT-5.5 (OpenAI) is the only model to have played every game so far. Retired
+      models keep their record in the leaderboard's Retired section.
+    </p>
+  </main>
+</body>
+</html>
