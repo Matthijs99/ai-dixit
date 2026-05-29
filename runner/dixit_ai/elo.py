@@ -49,17 +49,20 @@ def _init_or_inherit(models: dict, player: Any) -> None:
     if prior is not None:
         src = models[prior]
         log.info(
-            "elo: %s inheriting from %s (rating=%.2f, rd=%.2f, games=%d, wins=%d)",
-            player.model_id, prior, src["rating"], src["rd"], src["games"], src["wins"],
+            "elo: %s inheriting rating from %s (rating=%.2f, rd=%.2f)",
+            player.model_id, prior, src["rating"], src["rd"],
         )
+        # Carry over the skill estimate (rating/RD/volatility) for continuity, but
+        # start games/wins fresh: the predecessor keeps (and the leaderboard shows)
+        # its own tally, so counting its games here too would double-count them.
         models[player.model_id] = {
             "display_name": player.display_name,
             "org": player.org,
             "rating": src["rating"],
             "rd": src["rd"],
             "vol": src["vol"],
-            "games": src["games"],
-            "wins": src["wins"],
+            "games": 0,
+            "wins": 0,
         }
     else:
         log.info("elo: initializing %s at %.0f", player.model_id, INITIAL_RATING)
@@ -78,11 +81,12 @@ def _reconcile_retired(models: dict, active_ids: set[str]) -> None:
 def ensure_model_entries(elo: dict, players: Iterable[Any]) -> None:
     """Make sure every player has an entry in elo["models"].
 
-    New players inherit rating/RD/volatility/games/wins from the first matching
-    `previous_ids` entry that is present, else start fresh. The original entry
-    is kept (as a retired record) so historical games keep resolving. Entries
-    absent from the active roster are flagged `retired` so the leaderboard can
-    hide them. Mutates `elo` in place.
+    New players inherit rating/RD/volatility from the first matching
+    `previous_ids` entry that is present (games/wins start fresh, so each id
+    only counts its own games), else start fresh. The original entry is kept
+    (as a retired record) so historical games keep resolving and its own tally
+    stays visible. Entries absent from the active roster are flagged `retired`.
+    Mutates `elo` in place.
     """
     players = list(players)
     models = elo.setdefault("models", {})

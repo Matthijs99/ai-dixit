@@ -8,6 +8,7 @@ const base = import.meta.env.BASE_URL.replace(/\/$/, '');
 // "2026-05-22T18:52:57.384263+02:00" → "2026-05-22 18:52" — drop the T,
 // microseconds, seconds and timezone offset for a tidier subtitle.
 const updatedAt = elo.updated_at.slice(0, 16).replace('T', ' ');
+const hasRetired = Object.values(elo.models).some(m => m.retired);
 ---
 <html lang="en">
 <head>
@@ -37,6 +38,17 @@ const updatedAt = elo.updated_at.slice(0, 16).replace('T', ' ');
     <p class="subtitle">AI Dixit · updated {updatedAt} · <a href={`${base}/about`}>about</a></p>
     <h1>Leaderboard</h1>
     <section><EloTable /></section>
+
+    {hasRetired && (
+      <section>
+        <h2 class="subtitle">Retired</h2>
+        <p style="color:var(--muted); font-size:12px; margin:4px 0 12px">
+          Models that have left the roster. Games and wins are counted per model;
+          where a successor exists it inherits only the predecessor's rating.
+        </p>
+        <EloTable retired />
+      </section>
+    )}
 
     <section>
       <h2 class="subtitle">Recent games</h2>

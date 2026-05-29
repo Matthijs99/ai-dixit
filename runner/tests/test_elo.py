@@ -123,8 +123,12 @@ def test_ensure_entries_carries_over_rating_rd_vol():
     ensure_model_entries(elo, [p])
     new = elo["models"]["new"]
     assert (new["rating"], new["rd"], new["vol"]) == (1623.5, 142.0, 0.055)
-    assert new["games"] == 7 and new["wins"] == 2
+    # Rating/RD/vol carry over for continuity, but games/wins start fresh so the
+    # successor doesn't double-count the predecessor's games.
+    assert new["games"] == 0 and new["wins"] == 0
     assert new["display_name"] == "New"
+    # Predecessor keeps its own tally.
+    assert elo["models"]["old"]["games"] == 7 and elo["models"]["old"]["wins"] == 2
     # Old entry preserved and flagged retired.
     assert elo["models"]["old"].get("retired") is True
     assert "retired" not in new

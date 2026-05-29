@@ -15,7 +15,8 @@ export interface ModelElo {
   games: number;
   wins: number;
   // Set on models no longer in the active roster. Kept in elo.json so past
-  // games still resolve, but hidden from the leaderboard.
+  // games still resolve; shown in a separate "Retired" section on the
+  // leaderboard rather than the main ranking.
   retired?: boolean;
 }
 

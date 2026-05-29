@@ -65,7 +65,7 @@
       "rating": 1588.64,
       "rd": 78.52,
       "vol": 0.060023,
-      "games": 8,
+      "games": 6,
       "wins": 0
     },
     "claude-opus-4-7-thinking": {
@@ -74,8 +74,8 @@
       "rating": 1480.02,
       "rd": 76.58,
       "vol": 0.060111,
-      "games": 8,
-      "wins": 1
+      "games": 3,
+      "wins": 0
     },
     "grok-4.20-beta-0309-reasoning": {
       "display_name": "Grok 4.20 (reasoning)",
@@ -83,8 +83,8 @@
       "rating": 1466.27,
       "rd": 78.77,
       "vol": 0.060061,
-      "games": 8,
-      "wins": 2
+      "games": 3,
+      "wins": 0
     },
     "seed-2-0-pro-260328": {
       "display_name": "Seed 2.0 Pro",
