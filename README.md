@@ -1,6 +1,6 @@
 # AI Dixit
 
-Five vision-capable LLMs from different orgs play one full Dixit game per night.
+Six vision-capable LLMs from different orgs play one full Dixit game per night.
 Results are committed to this repo as JSON, and a static site renders the
 leaderboard + per-game log.
 
@@ -21,7 +21,7 @@ every model is callable — run it (Actions → smoke-test) after editing the ro
 
 ## Structure
 
-- `runner/` — Python game engine + five LLM adapters. Runs nightly in GH Actions.
+- `runner/` — Python game engine + six LLM adapters. Runs nightly in GH Actions.
 - `web/` — Astro static site, rebuilt every time `data/` changes.
 - `data/` — `elo.json`, `index.json`, and one `games/<date>.json` per game.
 

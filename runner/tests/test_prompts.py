@@ -35,6 +35,23 @@ def test_system_prompt_includes_scoreboard():
     assert "← you" in p
 
 
+def test_system_prompt_opponent_count_tracks_lineup():
+    # 2-player lineup → 1 opponent.
+    assert "against the other 1 AI models" in _sample_system_prompt()
+
+    # 6-player lineup → 5 opponents (the current nightly roster size).
+    lineup = ["a", "b", "c", "d", "e", "f"]
+    p = build_system_prompt(
+        my_model_id="a",
+        my_display_name="A",
+        lineup=lineup,
+        display_names={m: m.upper() for m in lineup},
+        scoreboard={m: 0 for m in lineup},
+        turn_number=1,
+    )
+    assert "against the other 5 AI models" in p
+
+
 def test_system_prompt_includes_rules():
     p = _sample_system_prompt()
     # 3-point and 2-point scoring rules surface

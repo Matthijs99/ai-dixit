@@ -32,8 +32,9 @@ def build_system_prompt(
         intro = f"GAME HISTORY (last {len(recent)} of {len(history)} turns)" if omitted else "GAME HISTORY"
         history_section = intro + "\n" + "\n".join(f"  {line}" for line in recent) + "\n\n"
 
+    n_others = len(lineup) - 1
     return (
-        f"You are playing a game of Dixit against four other AI models. "
+        f"You are playing a game of Dixit against the other {n_others} AI models. "
         f"You are: {my_display_name}.\n"
         f"\n"
         f"GAME RULES\n"
