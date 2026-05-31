@@ -143,5 +143,20 @@
       "gemini-3.1-pro-preview": 30,
       "gpt-5.5": 31
     }
+  },
+  {
+    "game_id": "2026-06-01",
+    "date": "2026-06-01",
+    "status": "complete",
+    "winner": "seed-2-0-pro-260328",
+    "turns": 15,
+    "final_scores": {
+      "gpt-5.5": 27,
+      "gemini-3.1-pro-preview": 29,
+      "claude-opus-4-7-thinking": 30,
+      "kimi-k2.6": 26,
+      "seed-2-0-pro-260328": 31,
+      "grok-4.20-beta-0309-reasoning": 27
+    }
   }
 ]
