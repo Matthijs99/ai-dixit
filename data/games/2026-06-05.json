@@ -1,0 +1,623 @@
+{
+  "game_id": "2026-06-05",
+  "status": "complete",
+  "started_at": "2026-06-05T00:31:03+02:00",
+  "ended_at": "2026-06-05T01:11:20+02:00",
+  "seed": "2026-06-05",
+  "players": [
+    "gemini-3.1-pro-preview",
+    "seed-2-0-pro-260328",
+    "grok-4.20-beta-0309-reasoning",
+    "claude-opus-4-7-thinking",
+    "kimi-k2.6",
+    "gpt-5.5"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Pulling an all-nighter",
+      "storyteller_card": 33,
+      "submissions": {
+        "gemini-3.1-pro-preview": 33,
+        "seed-2-0-pro-260328": 87,
+        "grok-4.20-beta-0309-reasoning": 59,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 41,
+        "gpt-5.5": 80
+      },
+      "face_up_order": [
+        59,
+        41,
+        80,
+        87,
+        2,
+        33
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 59,
+        "grok-4.20-beta-0309-reasoning": 41,
+        "claude-opus-4-7-thinking": 59,
+        "kimi-k2.6": 59,
+        "gpt-5.5": 33
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 3,
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 1,
+        "gpt-5.5": 3
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 3,
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 1,
+        "gpt-5.5": 3
+      },
+      "degraded": []
+    },
+    {
+      "turn": 1,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "Waiting in the rain where all roads lead nowhere",
+      "storyteller_card": 63,
+      "submissions": {
+        "seed-2-0-pro-260328": 63,
+        "gemini-3.1-pro-preview": 60,
+        "grok-4.20-beta-0309-reasoning": 48,
+        "claude-opus-4-7-thinking": 42,
+        "kimi-k2.6": 52,
+        "gpt-5.5": 92
+      },
+      "face_up_order": [
+        48,
+        92,
+        42,
+        60,
+        63,
+        52
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 63,
+        "grok-4.20-beta-0309-reasoning": 63,
+        "claude-opus-4-7-thinking": 63,
+        "kimi-k2.6": 63,
+        "gpt-5.5": 63
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 5,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 5,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 3,
+        "gpt-5.5": 5
+      },
+      "degraded": []
+    },
+    {
+      "turn": 2,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "When stories leap off the page",
+      "storyteller_card": 14,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 14,
+        "gemini-3.1-pro-preview": 7,
+        "seed-2-0-pro-260328": 93,
+        "claude-opus-4-7-thinking": 86,
+        "kimi-k2.6": 46,
+        "gpt-5.5": 50
+      },
+      "face_up_order": [
+        7,
+        93,
+        46,
+        50,
+        14,
+        86
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 50,
+        "seed-2-0-pro-260328": 7,
+        "claude-opus-4-7-thinking": 7,
+        "kimi-k2.6": 14,
+        "gpt-5.5": 7
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 3,
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 0,
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 3,
+        "gpt-5.5": 1
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 8,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 6,
+        "gpt-5.5": 6
+      },
+      "degraded": []
+    },
+    {
+      "turn": 3,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Roots holding the world above the deep",
+      "storyteller_card": 12,
+      "submissions": {
+        "claude-opus-4-7-thinking": 12,
+        "gemini-3.1-pro-preview": 17,
+        "seed-2-0-pro-260328": 8,
+        "grok-4.20-beta-0309-reasoning": 32,
+        "kimi-k2.6": 30,
+        "gpt-5.5": 19
+      },
+      "face_up_order": [
+        12,
+        32,
+        30,
+        19,
+        17,
+        8
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 19,
+        "seed-2-0-pro-260328": 32,
+        "grok-4.20-beta-0309-reasoning": 12,
+        "kimi-k2.6": 12,
+        "gpt-5.5": 32
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 3,
+        "gemini-3.1-pro-preview": 0,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 5,
+        "kimi-k2.6": 3,
+        "gpt-5.5": 1
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 8,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 13,
+        "claude-opus-4-7-thinking": 5,
+        "kimi-k2.6": 9,
+        "gpt-5.5": 7
+      },
+      "degraded": []
+    },
+    {
+      "turn": 4,
+      "storyteller": "kimi-k2.6",
+      "clue": "Trading water for sky, one drop at a time.",
+      "storyteller_card": 83,
+      "submissions": {
+        "kimi-k2.6": 83,
+        "gemini-3.1-pro-preview": 11,
+        "seed-2-0-pro-260328": 39,
+        "grok-4.20-beta-0309-reasoning": 73,
+        "claude-opus-4-7-thinking": 20,
+        "gpt-5.5": 66
+      },
+      "face_up_order": [
+        20,
+        73,
+        11,
+        83,
+        66,
+        39
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 83,
+        "seed-2-0-pro-260328": 83,
+        "grok-4.20-beta-0309-reasoning": 83,
+        "claude-opus-4-7-thinking": 83,
+        "gpt-5.5": 83
+      },
+      "scores_delta": {
+        "kimi-k2.6": 0,
+        "gemini-3.1-pro-preview": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 10,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 15,
+        "claude-opus-4-7-thinking": 7,
+        "kimi-k2.6": 9,
+        "gpt-5.5": 9
+      },
+      "degraded": []
+    },
+    {
+      "turn": 5,
+      "storyteller": "gpt-5.5",
+      "clue": "The night shift hangs the sky",
+      "storyteller_card": 28,
+      "submissions": {
+        "gpt-5.5": 28,
+        "gemini-3.1-pro-preview": 77,
+        "seed-2-0-pro-260328": 78,
+        "grok-4.20-beta-0309-reasoning": 98,
+        "claude-opus-4-7-thinking": 10,
+        "kimi-k2.6": 76
+      },
+      "face_up_order": [
+        10,
+        98,
+        76,
+        28,
+        78,
+        77
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 28,
+        "seed-2-0-pro-260328": 28,
+        "grok-4.20-beta-0309-reasoning": 77,
+        "claude-opus-4-7-thinking": 77,
+        "kimi-k2.6": 77
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "gemini-3.1-pro-preview": 6,
+        "seed-2-0-pro-260328": 3,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "claude-opus-4-7-thinking": 0,
+        "kimi-k2.6": 0
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 16,
+        "seed-2-0-pro-260328": 5,
+        "grok-4.20-beta-0309-reasoning": 15,
+        "claude-opus-4-7-thinking": 7,
+        "kimi-k2.6": 9,
+        "gpt-5.5": 12
+      },
+      "degraded": []
+    },
+    {
+      "turn": 6,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "The morning commute can wait.",
+      "storyteller_card": 82,
+      "submissions": {
+        "gemini-3.1-pro-preview": 82,
+        "seed-2-0-pro-260328": 75,
+        "grok-4.20-beta-0309-reasoning": 38,
+        "claude-opus-4-7-thinking": 91,
+        "kimi-k2.6": 55,
+        "gpt-5.5": 96
+      },
+      "face_up_order": [
+        82,
+        91,
+        96,
+        55,
+        38,
+        75
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 82,
+        "grok-4.20-beta-0309-reasoning": 82,
+        "claude-opus-4-7-thinking": 82,
+        "kimi-k2.6": 82,
+        "gpt-5.5": 82
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 16,
+        "seed-2-0-pro-260328": 7,
+        "grok-4.20-beta-0309-reasoning": 17,
+        "claude-opus-4-7-thinking": 9,
+        "kimi-k2.6": 11,
+        "gpt-5.5": 14
+      },
+      "degraded": []
+    },
+    {
+      "turn": 7,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "They grew right up over the rooftops.",
+      "storyteller_card": 53,
+      "submissions": {
+        "seed-2-0-pro-260328": 53,
+        "gemini-3.1-pro-preview": 51,
+        "grok-4.20-beta-0309-reasoning": 29,
+        "claude-opus-4-7-thinking": 3,
+        "kimi-k2.6": 90,
+        "gpt-5.5": 58
+      },
+      "face_up_order": [
+        58,
+        51,
+        3,
+        53,
+        29,
+        90
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 53,
+        "grok-4.20-beta-0309-reasoning": 53,
+        "claude-opus-4-7-thinking": 53,
+        "kimi-k2.6": 53,
+        "gpt-5.5": 53
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "gemini-3.1-pro-preview": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 18,
+        "seed-2-0-pro-260328": 7,
+        "grok-4.20-beta-0309-reasoning": 19,
+        "claude-opus-4-7-thinking": 11,
+        "kimi-k2.6": 13,
+        "gpt-5.5": 16
+      },
+      "degraded": []
+    },
+    {
+      "turn": 8,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Bringing down the stars",
+      "storyteller_card": 43,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 43,
+        "gemini-3.1-pro-preview": 21,
+        "seed-2-0-pro-260328": 1,
+        "claude-opus-4-7-thinking": 44,
+        "kimi-k2.6": 95,
+        "gpt-5.5": 16
+      },
+      "face_up_order": [
+        44,
+        95,
+        43,
+        16,
+        1,
+        21
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 43,
+        "seed-2-0-pro-260328": 44,
+        "claude-opus-4-7-thinking": 43,
+        "kimi-k2.6": 44,
+        "gpt-5.5": 43
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 3,
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 0,
+        "claude-opus-4-7-thinking": 5,
+        "kimi-k2.6": 0,
+        "gpt-5.5": 3
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 21,
+        "seed-2-0-pro-260328": 7,
+        "grok-4.20-beta-0309-reasoning": 22,
+        "claude-opus-4-7-thinking": 16,
+        "kimi-k2.6": 13,
+        "gpt-5.5": 19
+      },
+      "degraded": []
+    },
+    {
+      "turn": 9,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "When patience fails, cut your own path.",
+      "storyteller_card": 67,
+      "submissions": {
+        "claude-opus-4-7-thinking": 67,
+        "gemini-3.1-pro-preview": 27,
+        "seed-2-0-pro-260328": 37,
+        "grok-4.20-beta-0309-reasoning": 23,
+        "kimi-k2.6": 31,
+        "gpt-5.5": 88
+      },
+      "face_up_order": [
+        88,
+        67,
+        27,
+        31,
+        23,
+        37
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 67,
+        "seed-2-0-pro-260328": 67,
+        "grok-4.20-beta-0309-reasoning": 67,
+        "kimi-k2.6": 67,
+        "gpt-5.5": 67
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "gemini-3.1-pro-preview": 2,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 23,
+        "seed-2-0-pro-260328": 9,
+        "grok-4.20-beta-0309-reasoning": 24,
+        "claude-opus-4-7-thinking": 16,
+        "kimi-k2.6": 15,
+        "gpt-5.5": 21
+      },
+      "degraded": []
+    },
+    {
+      "turn": 10,
+      "storyteller": "kimi-k2.6",
+      "clue": "When the sidewalk grows its own bedtime story.",
+      "storyteller_card": 25,
+      "submissions": {
+        "kimi-k2.6": 25,
+        "gemini-3.1-pro-preview": 100,
+        "seed-2-0-pro-260328": 85,
+        "grok-4.20-beta-0309-reasoning": 49,
+        "claude-opus-4-7-thinking": 81,
+        "gpt-5.5": 47
+      },
+      "face_up_order": [
+        100,
+        49,
+        81,
+        85,
+        47,
+        25
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 25,
+        "seed-2-0-pro-260328": 25,
+        "grok-4.20-beta-0309-reasoning": 47,
+        "claude-opus-4-7-thinking": 25,
+        "gpt-5.5": 25
+      },
+      "scores_delta": {
+        "kimi-k2.6": 3,
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 3,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "claude-opus-4-7-thinking": 3,
+        "gpt-5.5": 4
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 26,
+        "seed-2-0-pro-260328": 12,
+        "grok-4.20-beta-0309-reasoning": 24,
+        "claude-opus-4-7-thinking": 19,
+        "kimi-k2.6": 18,
+        "gpt-5.5": 25
+      },
+      "degraded": []
+    },
+    {
+      "turn": 11,
+      "storyteller": "gpt-5.5",
+      "clue": "The rent is astronomical",
+      "storyteller_card": 71,
+      "submissions": {
+        "gpt-5.5": 71,
+        "gemini-3.1-pro-preview": 5,
+        "seed-2-0-pro-260328": 72,
+        "grok-4.20-beta-0309-reasoning": 26,
+        "claude-opus-4-7-thinking": 99,
+        "kimi-k2.6": 6
+      },
+      "face_up_order": [
+        72,
+        5,
+        99,
+        71,
+        26,
+        6
+      ],
+      "votes": {
+        "gemini-3.1-pro-preview": 71,
+        "seed-2-0-pro-260328": 99,
+        "grok-4.20-beta-0309-reasoning": 99,
+        "claude-opus-4-7-thinking": 71,
+        "kimi-k2.6": 71
+      },
+      "scores_delta": {
+        "gpt-5.5": 3,
+        "gemini-3.1-pro-preview": 3,
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "claude-opus-4-7-thinking": 5,
+        "kimi-k2.6": 3
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 29,
+        "seed-2-0-pro-260328": 12,
+        "grok-4.20-beta-0309-reasoning": 24,
+        "claude-opus-4-7-thinking": 24,
+        "kimi-k2.6": 21,
+        "gpt-5.5": 28
+      },
+      "degraded": []
+    },
+    {
+      "turn": 12,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": "Cross-examining the classics.",
+      "storyteller_card": 64,
+      "submissions": {
+        "gemini-3.1-pro-preview": 64,
+        "seed-2-0-pro-260328": 40,
+        "grok-4.20-beta-0309-reasoning": 74,
+        "claude-opus-4-7-thinking": 65,
+        "kimi-k2.6": 18,
+        "gpt-5.5": 81
+      },
+      "face_up_order": [
+        74,
+        65,
+        18,
+        81,
+        40,
+        64
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 64,
+        "grok-4.20-beta-0309-reasoning": 64,
+        "claude-opus-4-7-thinking": 64,
+        "kimi-k2.6": 64,
+        "gpt-5.5": 64
+      },
+      "scores_delta": {
+        "gemini-3.1-pro-preview": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "claude-opus-4-7-thinking": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2
+      },
+      "scores_total": {
+        "gemini-3.1-pro-preview": 29,
+        "seed-2-0-pro-260328": 14,
+        "grok-4.20-beta-0309-reasoning": 26,
+        "claude-opus-4-7-thinking": 26,
+        "kimi-k2.6": 23,
+        "gpt-5.5": 30
+      },
+      "degraded": []
+    }
+  ],
+  "final_scores": {
+    "gemini-3.1-pro-preview": 29,
+    "seed-2-0-pro-260328": 14,
+    "grok-4.20-beta-0309-reasoning": 26,
+    "claude-opus-4-7-thinking": 26,
+    "kimi-k2.6": 23,
+    "gpt-5.5": 30
+  }
+}
