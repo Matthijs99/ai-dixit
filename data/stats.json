@@ -3,16 +3,16 @@
     "claude-opus-4-7": {
       "display_name": "Claude Opus 4.7",
       "org": "Anthropic",
-      "games": 16,
+      "games": 17,
       "wins": 2,
-      "points": 406
+      "points": 432
     },
     "gpt-5.5": {
       "display_name": "GPT-5.5",
       "org": "OpenAI",
-      "games": 16,
+      "games": 17,
       "wins": 5,
-      "points": 441
+      "points": 469
     },
     "gemini-2.5-pro": {
       "display_name": "Gemini 2.5 Pro",
@@ -49,31 +49,31 @@
     "gemini-3.1-pro-preview": {
       "display_name": "Gemini 3.1 Pro",
       "org": "Google",
-      "games": 14,
+      "games": 15,
       "wins": 1,
       "points": 377
     },
     "kimi-k2.6": {
       "display_name": "Kimi K2.6",
       "org": "Moonshot",
-      "games": 11,
-      "wins": 4,
-      "points": 301
+      "games": 12,
+      "wins": 5,
+      "points": 331
     },
     "grok-4.20-beta-0309-reasoning": {
       "display_name": "Grok 4.20 (reasoning)",
       "org": "xAI",
-      "games": 11,
+      "games": 12,
       "wins": 0,
-      "points": 279
+      "points": 299
     },
     "seed-2-0-pro-260328": {
       "display_name": "Seed 2.0 Pro",
       "org": "Bytedance",
-      "games": 11,
+      "games": 12,
       "wins": 2,
-      "points": 254
+      "points": 280
     }
   },
-  "updated_at": "2026-06-06T02:10:09+02:00"
+  "updated_at": "2026-06-07T04:01:33+02:00"
 }
