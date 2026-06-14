@@ -1,0 +1,829 @@
+{
+  "game_id": "2026-06-14",
+  "status": "complete",
+  "started_at": "2026-06-14T00:23:53+02:00",
+  "ended_at": "2026-06-14T04:00:29+02:00",
+  "seed": "2026-06-14",
+  "players": [
+    "seed-2-0-pro-260328",
+    "grok-4.20-beta-0309-reasoning",
+    "kimi-k2.6",
+    "gpt-5.5",
+    "gemini-3.1-pro-preview",
+    "claude-opus-4-7-thinking"
+  ],
+  "turns": [
+    {
+      "turn": 0,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "She found quiet up high while the laundry dried.",
+      "storyteller_card": 73,
+      "submissions": {
+        "seed-2-0-pro-260328": 73,
+        "grok-4.20-beta-0309-reasoning": 43,
+        "kimi-k2.6": 21,
+        "gpt-5.5": 72,
+        "claude-opus-4-7-thinking": 40
+      },
+      "face_up_order": [
+        73,
+        21,
+        72,
+        43,
+        40
+      ],
+      "votes": {
+        "grok-4.20-beta-0309-reasoning": 73,
+        "kimi-k2.6": 73,
+        "gpt-5.5": 73,
+        "claude-opus-4-7-thinking": 73
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 2
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 1,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Castles in the air",
+      "storyteller_card": 99,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 99,
+        "seed-2-0-pro-260328": 62,
+        "kimi-k2.6": 1,
+        "gpt-5.5": 74,
+        "claude-opus-4-7-thinking": 71
+      },
+      "face_up_order": [
+        74,
+        71,
+        62,
+        1,
+        99
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 99,
+        "kimi-k2.6": 99,
+        "gpt-5.5": 99,
+        "claude-opus-4-7-thinking": 99
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 0,
+        "seed-2-0-pro-260328": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 4,
+        "gpt-5.5": 4,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 4
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 2,
+      "storyteller": "kimi-k2.6",
+      "clue": "Where the obsolete go to dream in blue.",
+      "storyteller_card": 49,
+      "submissions": {
+        "kimi-k2.6": 49,
+        "seed-2-0-pro-260328": 76,
+        "grok-4.20-beta-0309-reasoning": 42,
+        "gpt-5.5": 41,
+        "claude-opus-4-7-thinking": 20
+      },
+      "face_up_order": [
+        20,
+        42,
+        41,
+        76,
+        49
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 49,
+        "grok-4.20-beta-0309-reasoning": 49,
+        "gpt-5.5": 49,
+        "claude-opus-4-7-thinking": 49
+      },
+      "scores_delta": {
+        "kimi-k2.6": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 4,
+        "grok-4.20-beta-0309-reasoning": 4,
+        "kimi-k2.6": 4,
+        "gpt-5.5": 6,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 6
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 3,
+      "storyteller": "gpt-5.5",
+      "clue": "The red silence stayed behind.",
+      "storyteller_card": 68,
+      "submissions": {
+        "gpt-5.5": 68,
+        "seed-2-0-pro-260328": 97,
+        "grok-4.20-beta-0309-reasoning": 13,
+        "kimi-k2.6": 7,
+        "claude-opus-4-7-thinking": 91
+      },
+      "face_up_order": [
+        97,
+        7,
+        68,
+        91,
+        13
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 68,
+        "grok-4.20-beta-0309-reasoning": 68,
+        "kimi-k2.6": 68,
+        "claude-opus-4-7-thinking": 68
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 6,
+        "grok-4.20-beta-0309-reasoning": 6,
+        "kimi-k2.6": 6,
+        "gpt-5.5": 6,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 8
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 4,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": null,
+      "storyteller_card": null,
+      "submissions": {},
+      "face_up_order": [],
+      "votes": {},
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "kimi-k2.6": 0,
+        "gpt-5.5": 0,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 6,
+        "grok-4.20-beta-0309-reasoning": 6,
+        "kimi-k2.6": 6,
+        "gpt-5.5": 6,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 8
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:storytell:forfeit"
+      ]
+    },
+    {
+      "turn": 5,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "The lantern-bearer keeps an appointment with dusk.",
+      "storyteller_card": 90,
+      "submissions": {
+        "claude-opus-4-7-thinking": 90,
+        "seed-2-0-pro-260328": 61,
+        "grok-4.20-beta-0309-reasoning": 70,
+        "kimi-k2.6": 30,
+        "gpt-5.5": 93
+      },
+      "face_up_order": [
+        90,
+        93,
+        61,
+        30,
+        70
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 90,
+        "grok-4.20-beta-0309-reasoning": 61,
+        "kimi-k2.6": 90,
+        "gpt-5.5": 90
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 3,
+        "seed-2-0-pro-260328": 4,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "kimi-k2.6": 3,
+        "gpt-5.5": 3,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 10,
+        "grok-4.20-beta-0309-reasoning": 6,
+        "kimi-k2.6": 9,
+        "gpt-5.5": 9,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 11
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 6,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "He clung tight to golden leaves, dangling over the moonlit dark.",
+      "storyteller_card": 95,
+      "submissions": {
+        "seed-2-0-pro-260328": 95,
+        "grok-4.20-beta-0309-reasoning": 87,
+        "kimi-k2.6": 59,
+        "gpt-5.5": 79,
+        "claude-opus-4-7-thinking": 2
+      },
+      "face_up_order": [
+        59,
+        87,
+        2,
+        95,
+        79
+      ],
+      "votes": {
+        "grok-4.20-beta-0309-reasoning": 95,
+        "kimi-k2.6": 95,
+        "gpt-5.5": 95,
+        "claude-opus-4-7-thinking": 95
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 10,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "kimi-k2.6": 11,
+        "gpt-5.5": 11,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 13
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 7,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Lullaby of the deep",
+      "storyteller_card": 11,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 11,
+        "seed-2-0-pro-260328": 26,
+        "kimi-k2.6": 25,
+        "gpt-5.5": 83,
+        "claude-opus-4-7-thinking": 8
+      },
+      "face_up_order": [
+        11,
+        8,
+        25,
+        83,
+        26
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 11,
+        "kimi-k2.6": 11,
+        "gpt-5.5": 11,
+        "claude-opus-4-7-thinking": 11
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 0,
+        "seed-2-0-pro-260328": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 12,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "kimi-k2.6": 13,
+        "gpt-5.5": 13,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 15
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 8,
+      "storyteller": "kimi-k2.6",
+      "clue": "A warm table deep below the freezing sky.",
+      "storyteller_card": 19,
+      "submissions": {
+        "kimi-k2.6": 19,
+        "seed-2-0-pro-260328": 80,
+        "grok-4.20-beta-0309-reasoning": 52,
+        "gpt-5.5": 16,
+        "claude-opus-4-7-thinking": 3
+      },
+      "face_up_order": [
+        19,
+        16,
+        52,
+        80,
+        3
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 19,
+        "grok-4.20-beta-0309-reasoning": 19,
+        "gpt-5.5": 19,
+        "claude-opus-4-7-thinking": 19
+      },
+      "scores_delta": {
+        "kimi-k2.6": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 14,
+        "grok-4.20-beta-0309-reasoning": 10,
+        "kimi-k2.6": 13,
+        "gpt-5.5": 15,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 17
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 9,
+      "storyteller": "gpt-5.5",
+      "clue": "Low tide, high ambitions.",
+      "storyteller_card": 65,
+      "submissions": {
+        "gpt-5.5": 65,
+        "seed-2-0-pro-260328": 17,
+        "grok-4.20-beta-0309-reasoning": 89,
+        "kimi-k2.6": 10,
+        "claude-opus-4-7-thinking": 39
+      },
+      "face_up_order": [
+        17,
+        10,
+        39,
+        65,
+        89
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 65,
+        "grok-4.20-beta-0309-reasoning": 65,
+        "kimi-k2.6": 65,
+        "claude-opus-4-7-thinking": 65
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 16,
+        "grok-4.20-beta-0309-reasoning": 12,
+        "kimi-k2.6": 15,
+        "gpt-5.5": 15,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 19
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 10,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": null,
+      "storyteller_card": null,
+      "submissions": {},
+      "face_up_order": [],
+      "votes": {},
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "kimi-k2.6": 0,
+        "gpt-5.5": 0,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 16,
+        "grok-4.20-beta-0309-reasoning": 12,
+        "kimi-k2.6": 15,
+        "gpt-5.5": 15,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 19
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:storytell:forfeit"
+      ]
+    },
+    {
+      "turn": 11,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Cathedrals older than prayer.",
+      "storyteller_card": 51,
+      "submissions": {
+        "claude-opus-4-7-thinking": 51,
+        "seed-2-0-pro-260328": 77,
+        "grok-4.20-beta-0309-reasoning": 23,
+        "kimi-k2.6": 35,
+        "gpt-5.5": 46
+      },
+      "face_up_order": [
+        51,
+        23,
+        46,
+        35,
+        77
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 51,
+        "grok-4.20-beta-0309-reasoning": 51,
+        "kimi-k2.6": 51,
+        "gpt-5.5": 51
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 18,
+        "grok-4.20-beta-0309-reasoning": 14,
+        "kimi-k2.6": 17,
+        "gpt-5.5": 17,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 19
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 12,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "He made an ocean for the ship that lived only in his afternoon daydream.",
+      "storyteller_card": 66,
+      "submissions": {
+        "seed-2-0-pro-260328": 66,
+        "grok-4.20-beta-0309-reasoning": 12,
+        "kimi-k2.6": 88,
+        "gpt-5.5": 55,
+        "claude-opus-4-7-thinking": 44
+      },
+      "face_up_order": [
+        44,
+        66,
+        55,
+        12,
+        88
+      ],
+      "votes": {
+        "grok-4.20-beta-0309-reasoning": 66,
+        "kimi-k2.6": 66,
+        "gpt-5.5": 66,
+        "claude-opus-4-7-thinking": 66
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 18,
+        "grok-4.20-beta-0309-reasoning": 16,
+        "kimi-k2.6": 19,
+        "gpt-5.5": 19,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 21
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 13,
+      "storyteller": "grok-4.20-beta-0309-reasoning",
+      "clue": "Shining light on the moon's facade",
+      "storyteller_card": 78,
+      "submissions": {
+        "grok-4.20-beta-0309-reasoning": 78,
+        "seed-2-0-pro-260328": 9,
+        "kimi-k2.6": 92,
+        "gpt-5.5": 86,
+        "claude-opus-4-7-thinking": 28
+      },
+      "face_up_order": [
+        86,
+        78,
+        28,
+        9,
+        92
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 78,
+        "kimi-k2.6": 78,
+        "gpt-5.5": 78,
+        "claude-opus-4-7-thinking": 78
+      },
+      "scores_delta": {
+        "grok-4.20-beta-0309-reasoning": 0,
+        "seed-2-0-pro-260328": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 20,
+        "grok-4.20-beta-0309-reasoning": 16,
+        "kimi-k2.6": 21,
+        "gpt-5.5": 21,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 23
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 14,
+      "storyteller": "kimi-k2.6",
+      "clue": "She set the kettle where the roads forget their names.",
+      "storyteller_card": 60,
+      "submissions": {
+        "kimi-k2.6": 60,
+        "seed-2-0-pro-260328": 6,
+        "grok-4.20-beta-0309-reasoning": 38,
+        "gpt-5.5": 96,
+        "claude-opus-4-7-thinking": 63
+      },
+      "face_up_order": [
+        60,
+        63,
+        38,
+        96,
+        6
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 60,
+        "grok-4.20-beta-0309-reasoning": 63,
+        "gpt-5.5": 60,
+        "claude-opus-4-7-thinking": 60
+      },
+      "scores_delta": {
+        "kimi-k2.6": 3,
+        "seed-2-0-pro-260328": 3,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "gpt-5.5": 3,
+        "claude-opus-4-7-thinking": 4,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 23,
+        "grok-4.20-beta-0309-reasoning": 16,
+        "kimi-k2.6": 24,
+        "gpt-5.5": 24,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 27
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 15,
+      "storyteller": "gpt-5.5",
+      "clue": "The forest held its breath for the passing thought.",
+      "storyteller_card": 8,
+      "submissions": {
+        "gpt-5.5": 8,
+        "seed-2-0-pro-260328": 47,
+        "grok-4.20-beta-0309-reasoning": 27,
+        "kimi-k2.6": 37,
+        "claude-opus-4-7-thinking": 58
+      },
+      "face_up_order": [
+        58,
+        8,
+        27,
+        37,
+        47
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 8,
+        "grok-4.20-beta-0309-reasoning": 8,
+        "kimi-k2.6": 8,
+        "claude-opus-4-7-thinking": 8
+      },
+      "scores_delta": {
+        "gpt-5.5": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 25,
+        "grok-4.20-beta-0309-reasoning": 18,
+        "kimi-k2.6": 26,
+        "gpt-5.5": 24,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 29
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 16,
+      "storyteller": "gemini-3.1-pro-preview",
+      "clue": null,
+      "storyteller_card": null,
+      "submissions": {},
+      "face_up_order": [],
+      "votes": {},
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 0,
+        "kimi-k2.6": 0,
+        "gpt-5.5": 0,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 25,
+        "grok-4.20-beta-0309-reasoning": 18,
+        "kimi-k2.6": 26,
+        "gpt-5.5": 24,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 29
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:storytell:forfeit"
+      ]
+    },
+    {
+      "turn": 17,
+      "storyteller": "claude-opus-4-7-thinking",
+      "clue": "Checkmate at the edge of the world.",
+      "storyteller_card": 36,
+      "submissions": {
+        "claude-opus-4-7-thinking": 36,
+        "seed-2-0-pro-260328": 32,
+        "grok-4.20-beta-0309-reasoning": 33,
+        "kimi-k2.6": 54,
+        "gpt-5.5": 64
+      },
+      "face_up_order": [
+        36,
+        32,
+        33,
+        64,
+        54
+      ],
+      "votes": {
+        "seed-2-0-pro-260328": 36,
+        "grok-4.20-beta-0309-reasoning": 36,
+        "kimi-k2.6": 36,
+        "gpt-5.5": 36
+      },
+      "scores_delta": {
+        "claude-opus-4-7-thinking": 0,
+        "seed-2-0-pro-260328": 2,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 27,
+        "grok-4.20-beta-0309-reasoning": 20,
+        "kimi-k2.6": 28,
+        "gpt-5.5": 26,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 29
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    },
+    {
+      "turn": 18,
+      "storyteller": "seed-2-0-pro-260328",
+      "clue": "Sometimes the shortest path is not the one they built.",
+      "storyteller_card": 67,
+      "submissions": {
+        "seed-2-0-pro-260328": 67,
+        "grok-4.20-beta-0309-reasoning": 18,
+        "kimi-k2.6": 63,
+        "gpt-5.5": 75,
+        "claude-opus-4-7-thinking": 23
+      },
+      "face_up_order": [
+        75,
+        67,
+        63,
+        18,
+        23
+      ],
+      "votes": {
+        "grok-4.20-beta-0309-reasoning": 67,
+        "kimi-k2.6": 67,
+        "gpt-5.5": 67,
+        "claude-opus-4-7-thinking": 67
+      },
+      "scores_delta": {
+        "seed-2-0-pro-260328": 0,
+        "grok-4.20-beta-0309-reasoning": 2,
+        "kimi-k2.6": 2,
+        "gpt-5.5": 2,
+        "claude-opus-4-7-thinking": 2,
+        "gemini-3.1-pro-preview": 0
+      },
+      "scores_total": {
+        "seed-2-0-pro-260328": 27,
+        "grok-4.20-beta-0309-reasoning": 22,
+        "kimi-k2.6": 30,
+        "gpt-5.5": 28,
+        "gemini-3.1-pro-preview": 0,
+        "claude-opus-4-7-thinking": 31
+      },
+      "degraded": [
+        "gemini-3.1-pro-preview:pick:forfeit"
+      ]
+    }
+  ],
+  "final_scores": {
+    "seed-2-0-pro-260328": 27,
+    "grok-4.20-beta-0309-reasoning": 22,
+    "kimi-k2.6": 30,
+    "gpt-5.5": 28,
+    "gemini-3.1-pro-preview": 0,
+    "claude-opus-4-7-thinking": 31
+  }
+}
