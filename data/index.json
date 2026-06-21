@@ -443,5 +443,20 @@
       "grok-4.20-beta-0309-reasoning": 22,
       "kimi-k2.6": 22
     }
+  },
+  {
+    "game_id": "2026-06-21",
+    "date": "2026-06-21",
+    "status": "complete",
+    "winner": "kimi-k2.6",
+    "turns": 17,
+    "final_scores": {
+      "seed-2-0-pro-260328": 24,
+      "grok-4.20-beta-0309-reasoning": 24,
+      "claude-opus-4-7-thinking": 24,
+      "kimi-k2.6": 31,
+      "gpt-5.5": 26,
+      "gemini-3.1-pro-preview": 0
+    }
   }
 ]
